@@ -1,0 +1,116 @@
+{% extends 'layout.html.twig' %}
+{% block stylesheets %}
+    {{ encore_entry_link_tags('entrepriseIndex') }}
+{% endblock %}
+{% block javascripts %}
+    {{ encore_entry_script_tags('entrepriseIndex') }}
+    <script>
+        function batimentsSearch() {
+            var input, filter, table, tr, td, i, txtValue;
+            input = document.getElementById("batimentsInput");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("batimentsTable");
+            tr = table.getElementsByTagName("tr");
+            for (i = 0; i < tr.length; i++) {
+              td = tr[i].getElementsByTagName("td")[0];
+              if (td) {
+                txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                  tr[i].style.display = "";
+                } else {
+                  tr[i].style.display = "none";
+                }
+              }       
+            }
+        }
+    </script>
+{% endblock %}
+{% block body %}
+    {% if app.user %}
+    <div class="batiments">
+        <div class="row">
+            <nav class="navbar navbar-dark bg-dark justify-content-between rounded">
+            {% if app.user.role =="Admin" %}
+                <a class="btn btn-outline-light add" href="{{path('batiment_new')}}" >Ajouter</a>
+            {% endif %}
+                <div class="mr-sm-2"></div>
+                <input type="text" id="batimentsInput" onkeyup="batimentsSearch()" placeholder=" Rechercher un bâtiment" class="my-2 my-sm-0 rounded"> 
+            </nav>
+        </div>
+        <div class="row">
+            <table class="table table-striped rounded" id="batimentsTable">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Nom</th>
+                        <th scope="col">Nombre d'étages</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Type de bâtiment</th>
+                        <th scope="col">Etat</th>
+                        <th scope="col">Accès handicapé</th>
+                        <th scope="col">Longitude</th>
+                        <th scope="col">Latitude</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for batiment in batiments %}
+                        <tr>
+                            <td>{{batiment.Nom}}</td>
+                            <td>{{batiment.Nbetage}}</td>
+                            <td>{{batiment.Description}}</td>
+                            <td>{{batiment.TypeBatiment}}</td>
+                            {% if batiment.etat %}
+                                <td>Publié</td>
+                            {% else %}
+                                <td>Non Publié</td>
+                            {% endif %}
+                            {% if batiment.acceshandicape %}
+                                <td>Oui</td>
+                            {% else %}
+                                <td>Non</td>
+                            {% endif %}
+                            <td>{{batiment.Longitude}}</td>
+                            <td>{{batiment.Latitude}}</td>
+                            <td>
+                                <div class="btn-group action">
+                                  <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Action
+                                  </button>
+                                  <div class="dropdown-menu dropdown-menu-right">              
+                                                {# <a class="dropdown-item btn rounded" href="{{path('entreprise_show',{'id':entreprise.id})}}">Voir</a> #}
+                                                <a class="dropdown-item btn rounded" href="{{path('batiment_add_bureau',{'id':batiment.id})}}">Ajouter un bureau</a>
+                                                {% if app.user.role =="Admin" %}
+                                                {# <a class="dropdown-item btn rounded" href="{{path('entreprise_edit',{'id':entreprise.id})}}">Modifier</a> #}
+                                                <a class="dropdown-item btn rounded" onclick="return confirm('Êtes vous sûr de vouloir supprimer cet élèment?')" href="{{path('batiment_delete',{'id':batiment.id})}}">Supprimer</a>
+                                                {% endif %}
+                                  </div>
+                                </div>
+                            </td>
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th scope="col">Numéro</th>
+                                    <th scope="col">Adresse</th>
+                                    <th scope="col">Etage</th>
+                                    <th scope="col">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for bureau in batiment.Bureaux %}
+                                    <tr>
+                                        <td>{{bureau.Numero}}</td>
+                                        <td>{{bureau.Adresse}}</td>
+                                        <td>{{bureau.etage}}</td>
+                                        <td><a onclick="return confirm('Êtes vous sûr de vouloir supprimer cet élèment?')" href="{{path('batiment_delete_bureau',{'id_bur':bureau.id})}}">Supprimer</a></td>
+                                    </tr>
+                                {% endfor %}
+                           </tbody>
+                        </tr>
+                        
+                    </tbody>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+    {% else %}
+    {% endif %}
+{% endblock %}

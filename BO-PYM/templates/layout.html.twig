@@ -1,0 +1,41 @@
+{% block stylesheets %}
+    {{ encore_entry_link_tags('layout') }}
+{% endblock %}
+{% block javascripts %}
+    {{ encore_entry_script_tags('layout') }}
+{% endblock %}
+{% block title %}<title>PYM 3D</title>{% endblock %}
+{% if app.user %}
+<div class="layout">
+    <nav class="navbar navbar-expand-lg layout-navbar navbar-dark bg-dark col-12">
+        <a class="navbar-brand title-layout-navbar" href="{{ path('auth_connexion')}}">Pôle Yvon Morandat</a>
+        <div class="mr-auto mt-2 mt-lg-0"></div>
+        <div class="my-2 my-lg-0 user-edit">
+            <a href="{{ path('user_edit')}}" class="edit">Modifier Mon profil</a>
+        </div>
+        <div class="header-border"></div>
+        <div class="my-2 my-lg-0 user-logout">
+            <a href="{{ path('auth_deconnexion')}}" class="logout">Se déconnecter</a>
+        </div>
+    </nav>
+    <div class="row">
+            <div class="sidebar">
+                    <a class="list-group-item rounded-0" href="{{ path('entreprises')}}">Gestion des entreprises</a>
+                    <a class="list-group-item rounded-0" href="{{path('batiments')}}">Gestion des bâtiments</a>
+                    <a class="list-group-item rounded-0" href="">Gestion du domaine</a>
+                    <a class="list-group-item rounded-0" href="{{ path('users')}}">Gestion des utilisateurs</a>
+                    <a class="list-group-item rounded-0" href="{{ path('reference_table')}}">Gestion Postes,Activité</a>
+            </div>
+        <div class="body-page">
+        <body>
+            {% block body %}          
+            {% endblock %}
+        </body>
+        </div>   
+    </div>
+</div>
+
+{% else %}
+    {% block bodyauth %} {% endblock %}
+{% endif %}
+

@@ -1,0 +1,146 @@
+{% extends 'layout.html.twig' %}
+{% block stylesheets %}
+    {{ encore_entry_link_tags('entrepriseShow') }}
+{% endblock %}
+{% block javascripts %}
+    {{ encore_entry_script_tags('entrepriseShow') }}
+    <script>
+        function contactsSearch() {
+            var input, filter, table, tr, td, i, txtValue;
+            input = document.getElementById("contactsInput");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("contactsTable");
+            tr = table.getElementsByTagName("tr");
+            for (i = 0; i < tr.length; i++) {
+              td = tr[i].getElementsByTagName("td")[0];
+              if (td) {
+                txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                  tr[i].style.display = "";
+                } else {
+                  tr[i].style.display = "none";
+                }
+              }       
+            }
+        }
+    </script>
+{% endblock %}
+
+{% block body %}
+    {% if app.user %}
+    <div class="container">
+        <div class="row">
+            <div  class="entreprise">
+                <div class="card justify-content-between">
+                    <div class="card-header">
+                        {{entreprise.Nom}}
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-1"></div>
+                            <div class="col-4">
+                                <ul class="list-group">
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                      Site internet
+                                      <span class="badge badge-primary badge-pill">{{entreprise.SiteInternet}}</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                      Nombre de salariés
+                                      <span class="badge badge-primary badge-pill">{{entreprise.NbSalaries}}</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                      Numéro de téléphone
+                                      <span class="badge badge-primary badge-pill">{{entreprise.Telephone}}</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                      Adresse e-mail
+                                      <span class="badge badge-primary badge-pill">{{entreprise.Mail}}</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-start">
+                                        Activité
+                                        <p>                                        
+                                        {% for activite in activites %}
+                                            {{activite.Nom}}
+                                            {% if app.user.role =="Admin" %}
+                                                <a type="button" onclick="return confirm('Êtes vous sûr de vouloir supprimer cet élèment?')" href="{{path('entreprise_delete_activite',{'id_ent':entreprise.id,'activite':activite.Nom})}}" class="btn">X</a>
+                                            {% endif %}
+                                        {% endfor %}
+                                        </p>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col-3"></div>
+                            <span class="col-3 logo">
+                                <img src="{{asset('uploads/logos/' ~ file) }}"/>
+                            </span>
+                            <div class="col-1"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="contacts">
+                <div class="row">
+                    <nav class="navbar navbar-dark bg-dark justify-content-between rounded">
+                    {% if app.user.role =="Admin" %}
+                        <a class="btn btn-outline-light add" href="{{path('entreprise_add_contact',{'id':entreprise.id})}}" >Ajouter un contact</a>
+                    {% endif %}
+                        <div class="mr-sm-2"></div>
+                        <input type="text" id="contactsInput" onkeyup="contactsSearch()" placeholder=" Rechercher un contact" class="my-2 my-sm-0 rounded"> 
+                    </nav>
+                </div>
+                <div class="row">
+                    <table class="table table-striped rounded" id="contactsTable">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th scope="col">Nom</th>
+                                <th scope="col">Prénom</th>
+                                <th scope="col">Adresse e-mail</th>
+                                <th scope="col">Numéro de téléphone</th>
+                                <th scope="col">Poste</th>
+                                {% if app.user.role =="Admin" %}
+                                <th scope="col">Action</th>
+                                {% endif %}
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {% for contact in contacts %}
+                                <tr>    
+                                    <td>{{contact.Nom}}</td>
+                                    <td>{{contact.Prenom}}</td>
+                                    <td>{{contact.Mail}}</td>
+                                    <td>{{contact.Telephone}}</td>
+                                    <td>
+                                        {% for postes in contact.poste %}
+                                        {{postes.Nom}}
+                                        {% if app.user.role =="Admin" %}
+                                        <a href="{{path('entreprise_delete_poste',{'id_ent':entreprise.id,'id_cont':contact.id,'poste':postes.Nom})}}" onclick="return confirm('Êtes vous sûr de vouloir supprimer cet élèment?')" type="button">X</a>
+                                        {% endif %}
+                                    {% endfor %}
+                                    </td>
+                                    
+                                      {% if app.user.role =="Admin" %}
+                                    <td>
+                                        <div class="btn-group action">
+                                          <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            Action
+                                          </button>
+                                          <div class="dropdown-menu dropdown-menu-right">                                                                 
+                                                        <a class="dropdown-item btn rounded" href="{{path('entreprise_edit_contact',{'id_ent':entreprise.id,'id_cont':contact.id})}}">Modifier</a>
+                                                        <a class="dropdown-item btn rounded" onclick="return confirm('Êtes vous sûr de vouloir supprimer cet élèment?')" href="{{path('entreprise_delete_contact',{'id_ent':entreprise.id,'id_cont':contact.id})}}">Supprimer</a>         
+                                          </div>
+                                        </div>
+                                    </td>
+                                    {% endif %}
+                                </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% else %}
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,5 @@
+@import "../../../styles.scss";
+.searchbar[type=text]:focus:not([readonly]){
+    border : 1px solid $semag-color-tertiary;
+    box-shadow: 0 0 0 1px $semag-color-tertiary;
+}

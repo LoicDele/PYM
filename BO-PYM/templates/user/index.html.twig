@@ -1,0 +1,80 @@
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+    {{ encore_entry_link_tags('userIndex') }}
+{% endblock %}
+{% block javascripts %}
+    {{ encore_entry_script_tags('userIndex') }}
+    <script>
+        function usersSearch() {
+            var input, filter, table, tr, td, i, txtValue;
+            input = document.getElementById("usersInput");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("usersTable");
+            tr = table.getElementsByTagName("tr");
+            for (i = 0; i < tr.length; i++) {
+              td = tr[i].getElementsByTagName("td")[0];
+              if (td) {
+                txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                  tr[i].style.display = "";
+                } else {
+                  tr[i].style.display = "none";
+                }
+              }       
+            }
+        }
+    </script>
+{% endblock %}
+{% block body %}
+    {% if app.user %}
+    <div class="users">
+        <div class="row">
+            <nav class="navbar navbar-dark bg-dark justify-content-between rounded">
+            {% if app.user.role =="Admin" %}
+                <a class="btn btn-outline-light add" href="{{path('add_user')}}" >Ajouter</a>
+            {% endif %}
+                <div class="mr-sm-2"></div>
+                <input type="text" id="usersInput" onkeyup="usersSearch()" placeholder="Rechercher un utilisateur" class="my-2 my-sm-0 rounded"> 
+            </nav>
+        </div>
+        <div class="row">
+            <table class="table table-striped rounded" id="usersTable">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">identifiant</th>
+                        <th scope="col">Adresse e-mail</th>
+                        <th scope="col">Rôle</th>
+                        {% if app.user.role =="Admin" %}
+                        <th scope="col">Action</th>
+                        {% endif %}
+                    </tr>
+                </thead>
+                <tbody>
+                {% for user in users %}
+                        <tr>   
+                            <td scope="row">{{user.username}}</td>
+                            <td scope="row">{{user.email}}</td>
+                            <td scope="row">{{user.role}}</td>
+                            {% if app.user.role =="Admin" %}
+                                    <td>
+                                        <div class="btn-group action">
+                                          <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            Action
+                                          </button>
+                                          <div class="dropdown-menu dropdown-menu-right">
+                                            <a class="dropdown-item btn rounded" href="{{path('user_edit_other',{'id':user.id})}}">Modifier</a>
+                                            <a class="dropdown-item btn rounded" onclick="return confirm('Êtes vous sûr de vouloir supprimer cet élèment?')" href="{{path('user_delete',{'id':user.id})}}">Supprimer</a>
+                                          </div>
+                                        </div>
+                                    </td>
+                                {% endif %}
+                        </tr>
+                    {% endfor %}
+                    
+                    </tbody>
+            </table>
+        </div>
+    </div>
+    {% else %}
+    {% endif %}
+{% endblock %}

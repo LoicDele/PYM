@@ -1,0 +1,15 @@
+.header{
+    z-index: 1;
+    width: 100%;
+    position: relative;
+}
+.view{
+    z-index: 0;
+    position: relative;
+}
+
+.data{
+  z-index: 2;
+  position: relative;
+}
+@import "../styles.scss";

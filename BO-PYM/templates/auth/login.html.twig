@@ -1,0 +1,24 @@
+{% extends "base.html.twig" %}
+{% block title %}<title>PYM 3D</title>{% endblock %}
+{% block stylesheets %}
+    {{ encore_entry_link_tags('login') }}  
+{% endblock %}
+{% block javascripts %}
+    {{ encore_entry_script_tags('login') }}
+{% endblock %}
+{% block bodyauth %}
+    {% if not app.user %}           
+    <body class="login" cz-shortcut-listen="true">
+        <form class="form-signin" action="{{path('auth_connexion')}}" method="post">
+            <img class="mb4" src="{{asset('Logo_emse.png') }}" alt="" width="150" height="150">
+            <div class="h3 mb-3 font-weight-normal">Connexion</div>
+            <input required="" autofocus="" name="_username" type="email" class="form-control" id="inputEmail" placeholder="Adresse e-mail">
+            <input required="" autofocus=""  name="_password" type="password" class="form-control" id="inputPassword" placeholder="Mot de passe">
+            <button type="submit" class="btn btl-lg btn-primary btn-block btn-login">Se connecter</button>
+            <a href="{{ path('auth_resetpassword')}}" class="forgot"> Mot de passe oublié</a>
+        </form>
+    </body>
+    {% else %}
+    
+    {% endif %}
+{% endblock %}

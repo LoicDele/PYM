@@ -1,0 +1,109 @@
+{% extends 'layout.html.twig' %}
+
+{% block javascripts %}
+    {% if test==1 %}
+        <script src="babylon.custom(1).js"></script>
+        <script src="script.js"></script>
+    {% endif %}
+{% endblock %}
+
+{% block stylesheets %}
+{{ encore_entry_link_tags('entrepriseIndex') }}
+<style>
+    #renderCanvas {
+        width   : 1000px;
+        height  : 500px;
+        touch-action: none;
+    }
+</style>
+{% endblock %}
+
+{% block body %}
+    {% if test==0 %}
+        {{form_start(form)}}
+            {{ form_row(form.Nom )}}
+            {{ form_row(form.Nb_etage )}}
+            {{ form_row(form.Description )}}
+            {{ form_row(form.TypeBatiment,{'id':'TypeBatiment'} )}}
+            {{ form_row(form.Etat )}}
+            {{ form_row(form.Acces_handicape)}}
+            <a href="{{path('batiments')}}">Annuler</a>
+            <button type="submit">Ajouter</button>
+        {{form_end(form)}}
+ 
+    {% elseif test==1 %}
+    
+        {% if batiment.TypeBatiment =="Batiment" %}
+        {{form_start(form)}}
+            {{form_row(form.Representation3D,{'id':'Representation3D'})}}
+            <canvas id="renderCanvas" style="display:none"></canvas>
+            {{form_row(form.Longitude,{'id':'Longitude'})}}
+            {{form_row(form.Latitude,{'id':'Latitude'})}}
+            {{form_row(form.Angle,{'id':'Angle'})}}
+            {{form_row(form.Echelle,{'id':'Echelle'})}}
+            {{form_row(form._token) }}
+            <a href="{{path('batiments')}}">Annuler</a>
+            <button type="submit">Ajouter</button>
+            {{form_end(form)}}
+        {% endif %}
+        {% if batiment.TypeBatiment=="Forme Paramétrique" %}
+        {{form_start(form)}}
+            {{form_row(form.FormeParametrique,{'id':'FormeParametrique'})}}
+            <canvas id="renderCanvas" style="display:none"></canvas>
+            {{form_row(form.Longitude,{'id':'Longitude'})}}
+            {{form_row(form.Latitude,{'id':'Latitude'})}}
+            {{form_row(form.Angle,{'id':'Angle'})}}
+            {{form_row(form.Echelle,{'id':'Echelle'})}}
+            {{form_row(form.Longueur,{'id':'Longueur'})}}
+            {{form_row(form.Largeur,{'id':'Largeur'})}}
+            {{form_row(form.Hauteur,{'id':'Hauteur'})}}
+            {{form_row(form.Rayon,{'id':'Rayon'})}}
+            {{form_row(form._token) }}
+            <a href="{{path('batiments')}}">Annuler</a>
+            <button type="submit">Ajouter</button>
+            {{form_end(form)}}
+        {% endif %}
+        {% if batiment.TypeBatiment=="IRVE" %}
+        <div id='IRVE' hidden>
+        </div>
+        {{form_start(form)}}
+            <canvas id="renderCanvas" style="display:none"></canvas>
+            {{form_row(form.Longitude,{'id':'Longitude'})}}
+            {{form_row(form.Latitude,{'id':'Latitude'})}}
+            {{form_row(form.Angle,{'id':'Angle'})}}
+            {{form_row(form.Echelle,{'id':'Echelle'})}}
+            {{form_row(form._token) }}
+            <a href="{{path('batiments')}}">Annuler</a>
+            <button type="submit">Ajouter</button>
+            {{form_end(form)}}
+        {% endif %}
+        {% if batiment.TypeBatiment=="PAV" %}
+        <div id='PAV' hidden>
+        </div>
+        {{form_start(form)}}
+            <canvas id="renderCanvas" style="display:none"></canvas>
+            {{form_row(form.Longitude,{'id':'Longitude'})}}
+            {{form_row(form.Latitude,{'id':'Latitude'})}}
+            {{form_row(form.Angle,{'id':'Angle'})}}
+            {{form_row(form.Echelle,{'id':'Echelle'})}}
+            {{form_row(form._token) }}
+            <a href="{{path('batiments')}}">Annuler</a>
+            <button type="submit">Ajouter</button>
+            {{form_end(form)}}
+        {% endif %}
+        {% if batiment.TypeBatiment=="Arret de bus" %}
+        <div id='Arret de bus' hidden>
+        </div>
+        {{form_start(form)}}
+            <canvas id="renderCanvas" style="display:none"></canvas>
+            {{form_row(form.Longitude,{'id':'Longitude'})}}
+            {{form_row(form.Latitude,{'id':'Latitude'})}}
+            {{form_row(form.Angle,{'id':'Angle'})}}
+            {{form_row(form.Echelle,{'id':'Echelle'})}}
+            {{form_row(form._token) }}
+            <a href="{{path('batiments')}}">Annuler</a>
+            <button type="submit">Ajouter</button>
+            {{form_end(form)}}
+        {% endif %}
+    {% endif %}
+{% endblock %}

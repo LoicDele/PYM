@@ -1,0 +1,71 @@
+.contacts .navbar{
+    margin-top: 500px;
+    margin-bottom: 20px;
+    width: 75%;
+    position: fixed;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.contacts input{
+    color: white;
+    background: transparent;
+    padding: 6px 20px 6px 30px;
+    border: 2px solid #ffffff;
+}
+
+.contacts table{
+    margin-top: 600px;
+    height: auto;
+    position: fixed;
+    width: 75%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.contacts th{
+    text-align: center;
+}
+
+.contacts td{
+    text-align: center;
+}
+
+.entreprise .card{
+    width: 75%;
+    position: fixed;
+    height: auto;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.entreprise .card-header{
+    text-align: center;
+    background: #343a40;
+    color: white;
+
+}
+
+.entreprise .card-body{
+    margin-top: 20px;
+    
+}
+
+.entreprise .list-group{
+    border: 2px solid #343a40;
+}
+
+.entreprise img{
+    border-radius: 8px;
+    height: 200px;
+    width: 200px;
+}
+
+.dropdown-menu a{
+    text-align: center;
+    
+}
+.dropdown-menu a:hover{
+    background: #343a40;
+    color: white;
+}
+@import '../../node_modules/bootstrap/dist/css/bootstrap.css';
+@import './layout.css';

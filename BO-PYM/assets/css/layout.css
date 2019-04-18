@@ -1,0 +1,79 @@
+body{
+    background: whitesmoke;
+    font-family: 'Roboto', sans-serif;
+}
+
+.title-layout-navbar{
+    color: white;
+}
+
+.title-layout-navbar:hover{
+    color: red;
+}
+
+.header-border{
+    background: white;
+    height: 30px;
+    width: 2px;
+    margin-right: 20px;
+    margin-left: 20px;
+}
+.user-edit{
+    margin-right: 20px;
+}
+
+.edit{
+    color:white;
+    text-decoration: none;
+    display: block;
+}
+
+.edit:hover{
+    color:red;
+    text-decoration: none;
+}
+
+.user-logout{
+    margin-right: 10px;
+    margin-left: 20px;
+    text-decoration: none;
+    display: block;
+}
+
+.logout {
+    color : white;
+}
+
+.logout:hover{
+    color:red;
+    text-decoration: none;
+}
+
+.sidebar{
+    border-right: 3px solid #343a40;
+    background: lightgray;
+    height: 100%;
+    position: fixed;
+    width: 15%;
+    
+}
+
+.sidebar a{
+    text-align: center;
+    color: #343a40;
+    background: lightgray;
+    display: block;
+    text-decoration: none;
+    border: none;
+}
+
+.sidebar a:hover{
+    color: white;
+    background: #343a40;
+}
+
+.body-page{
+    margin-left: 20%;
+}
+
+@import '../../node_modules/bootstrap/dist/css/bootstrap.css';

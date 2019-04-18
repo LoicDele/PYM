@@ -1,0 +1,23 @@
+<!-- Modal content-->
+<div class="modal-entreprise rounded">
+  <div class="modal-header col-12">
+    <div class="col-1"></div>
+    <div class="modal-title col-10">
+      <img src="assets/icon/1259px-Twitter_Bird.svg.png" id="logo" class="img-fluid" alt="Responsive image" height="50%" width="50%">
+      <h3 class="strong">{{entreprise.nom}}</h3>
+    </div>
+    <a class="close col-1" data-dismiss="modal" aria-label="Close" [routerLink]="['']"
+      routerLinkActive="router-link-active">
+      <span aria-hidden="true">&times;</span>
+    </a>
+  </div>
+  <div class="modal-body">
+    <ul class="list-group">
+      <li class="list-group-item">Adresse e-mail: {{entreprise.mail}}</li>
+      <li class="list-group-item">Site internet: {{entreprise.site_internet}}</li>
+      <li class="list-group-item">Nombre de salariés: {{entreprise.nb_salaries}}</li>
+      <li class="list-group-item">Numéro de téléphone: {{entreprise.telephone}}</li>
+    </ul>
+    <app-contact-view [idEnt]="idEnt"></app-contact-view>
+  </div>
+</div>

@@ -1,0 +1,83 @@
+{% extends 'layout.html.twig' %}
+{% block stylesheets %}
+    {{ encore_entry_link_tags('entrepriseIndex') }}
+{% endblock %}
+{% block javascripts %}
+    {{ encore_entry_script_tags('entrepriseIndex') }}
+    <script>
+        function entreprisesSearch() {
+            var input, filter, table, tr, td, i, txtValue;
+            input = document.getElementById("entreprisesInput");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("entreprisesTable");
+            tr = table.getElementsByTagName("tr");
+            for (i = 0; i < tr.length; i++) {
+              td = tr[i].getElementsByTagName("td")[0];
+              if (td) {
+                txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                  tr[i].style.display = "";
+                } else {
+                  tr[i].style.display = "none";
+                }
+              }       
+            }
+        }
+    </script>
+{% endblock %}
+{% block body %}
+    {% if app.user %}
+    <div class="entreprises">
+        <div class="row">
+            <nav class="navbar navbar-dark bg-dark justify-content-between rounded">
+            {% if app.user.role =="Admin" %}
+                <a class="btn btn-outline-light add" href="{{path('entreprise_new')}}" >Ajouter</a>
+            {% endif %}
+                <div class="mr-sm-2"></div>
+                <input type="text" id="entreprisesInput" onkeyup="entreprisesSearch()" placeholder=" Rechercher une entreprise" class="my-2 my-sm-0 rounded"> 
+            </nav>
+        </div>
+        <div class="row">
+            <table class="table table-striped rounded" id="entreprisesTable">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Nom</th>
+                        <th scope="col">Site internet</th>
+                        <th scope="col">Nombre de salariés</th>
+                        <th scope="col">Numéro de téléphone</th>
+                        <th scope="col">Adresse e-mail</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for entreprise in entreprises %}
+                        <tr>
+                            <td>{{entreprise.Nom}}</td>
+                            <td>{{entreprise.SiteInternet}}</td>
+                            <td>{{entreprise.NbSalaries}}</td>
+                            <td>{{entreprise.Telephone}}</td>
+                            <td>{{entreprise.Mail}}</td>
+                            <td>
+                                <div class="btn-group action">
+                                  <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Action
+                                  </button>
+                                  <div class="dropdown-menu dropdown-menu-right">              
+                                                <a class="dropdown-item btn rounded" href="{{path('entreprise_show',{'id':entreprise.id})}}">Voir</a>
+                                                {% if app.user.role =="Admin" %}
+                                                <a class="dropdown-item btn rounded" href="{{path('entreprise_edit',{'id':entreprise.id})}}">Modifier</a>
+                                                <a class="dropdown-item btn rounded" onclick="return confirm('Êtes vous sûr de vouloir supprimer cet élèment?')" href="{{path('entreprise_delete',{'id':entreprise.id})}}">Supprimer</a>
+                                                {% endif %}
+                                  </div>
+                                </div>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    
+                </tbody>
+            </table>
+        </div>
+    </div>
+    {% else %}
+    {% endif %}
+{% endblock %}

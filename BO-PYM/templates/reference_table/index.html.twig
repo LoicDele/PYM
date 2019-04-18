@@ -1,0 +1,152 @@
+{% extends 'layout.html.twig' %}
+{% block stylesheets %}
+{{ encore_entry_link_tags('entrepriseShow') }}
+{% endblock %}
+{% block javascripts %}
+{{ encore_entry_script_tags('entrepriseShow') }}
+<script>
+    function activitesSearch() {
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("activitesInput");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("activitesTable");
+        tr = table.getElementsByTagName("tr");
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[0];
+            if (td) {
+                txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+
+    function postesSearch() {
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("postesInput");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("postesTable");
+        tr = table.getElementsByTagName("tr");
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[0];
+            if (td) {
+                txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+</script>
+{% endblock %}
+
+{% block body %}
+{% if app.user %}
+<div class="row">
+    <div class="Activites">
+        <div class="row">
+            <nav class="navbar navbar-dark bg-dark justify-content-between rounded">
+                <a class="btn btn-outline-light add" href="{{ path('add_activite')}}">Ajouter une activite</a>
+                <div class="mr-sm-2"></div>
+                <input type="text" id="activitesInput" onkeyup="activitesSearch()" placeholder=" Rechercher une activite"
+                    class="my-2 my-sm-0 rounded">
+            </nav>
+        </div>
+        <div class="row">
+            <table class="table table-striped rounded" id="activitesTable">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Nom</th>
+                        {% if app.user.role =="Admin" %}
+                        <th scope="col">Action</th>
+                        {% endif %}
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for activite in activites %}
+                    <tr>
+                        <th>{{activite.id}}</th>
+                        <td>{{activite.Nom}}</td>
+                        {% if app.user.role =="Admin" %}
+                        <td>
+                            <div class="btn-group action">
+                                <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown"
+                                    aria-haspopup="true" aria-expanded="false">
+                                    Action
+                                </button>
+                                <div class="dropdown-menu dropdown-menu-right">
+                                    <a class="dropdown-item" type="button" href="{{path('delete_activite',{'id':activite.id})}}"
+                                        type="button">Supprimer</a>
+                                </div>
+                            </div>
+        </div>
+        </td>
+        {% endif %}
+        </tr>
+        {% endfor %}
+        </tbody>
+        </table>
+    </div>
+</div>
+</div>
+
+
+
+<div class="row">
+    <div class="Postes">
+        <div class="row">
+            <nav class="navbar navbar-dark bg-dark justify-content-between rounded">
+                <a class="btn btn-outline-light add" href="{{ path('add_poste')}}">Ajouter un poste</a>
+                <div class="mr-sm-2"></div>
+                <input type="text" id="postesInput" onkeyup="postesSearch()" placeholder=" Rechercher un poste" class="my-2 my-sm-0 rounded">
+            </nav>
+        </div>
+        <div class="row">
+            <table class="table table-striped rounded" id="postesTable">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Nom</th>
+                        {% if app.user.role =="Admin" %}
+                        <th scope="col">Action</th>
+                        {% endif %}
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for poste in postes %}
+                    <tr>
+                        <th>{{poste.id}}</th>
+                        <td>{{poste.Nom}}</td>
+                        {% if app.user.role =="Admin" %}
+                        <td>
+                            <div class="btn-group action">
+                                <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown"
+                                    aria-haspopup="true" aria-expanded="false">
+                                    Action
+                                </button>
+                                <div class="dropdown-menu dropdown-menu-right">
+                                    <a class="dropdown-item" type="button" href="{{path('delete_poste',{'id':poste.id})}}"
+                                        type="button">Supprimer</a>
+                                </div>
+                            </div>
+        </div>
+        </td>
+        {% endif %}
+        </tr>
+        {% endfor %}
+        </tbody>
+        </table>
+    </div>
+</div>
+</div>
+
+{% else %}
+
+{% endif %}
+{% endblock %}

@@ -1,0 +1,40 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" [routerLink]="['']" routerLinkActive="router-link-active">Pôle Yvon Morandat</a>
+  <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId"
+    aria-controls="collapsibleNavId" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="collapsibleNavId">
+    <ul class="nav navbar-nav mr-auto mt-2 mt-lg-0 navbar-right">
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="dropdownBat" data-toggle="dropdown" aria-haspopup="true"
+          aria-expanded="false">Bâtiments</a>
+        <div class="dropdown-menu" aria-labelledby="dropdownBat">
+          <a [routerLink]="['/batiment', elt.id]" routerLinkActive="router-link-active"
+          class="dropdown-item dropdown-picture" *ngFor="let elt of batiments">{{elt.nom}}</a>
+        </div>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="dropdownEnt" data-toggle="dropdown" aria-haspopup="true"
+          aria-expanded="false">Entreprises</a>
+        <div class="dropdown-menu" aria-labelledby="dropdownEnt">
+          <a [routerLink]="['/entreprise', elt.id]" routerLinkActive="router-link-active"
+            class="dropdown-item dropdown-picture" *ngFor="let elt of entreprises">{{elt.nom}}</a>
+        </div>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="dropdownEqui" data-toggle="dropdown" aria-haspopup="true"
+          aria-expanded="false">Equipements</a>
+        <div class="dropdown-menu" aria-labelledby="dropdownEqui">
+          <a href="" class="dropdown-item dropdown-picture">Arrêt de bus</a>
+          <a href="" class="dropdown-item dropdown-picture">IRVE</a>
+          <a href="" class="dropdown-item dropdown-picture">PAV</a>
+        </div>
+      </li>
+    </ul>
+    <form class="form-inline my-2 my-lg-0 ">
+      <input class="form-control mr-sm-2 searchbar" type="text" id="searchEnt" placeholder="rechercher une entreprise">
+      <button class="btn btn-semag my-2 my-sm-0" type="submit">Rechercher</button>
+    </form>
+  </div>
+</nav>

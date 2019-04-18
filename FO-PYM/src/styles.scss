@@ -1,0 +1,12 @@
+/* You can add global styles to this file, and also import other style files */
+$semag-color-primary: #f03844;
+$semag-color-secondary: #c82147;
+$semag-color-tertiary: #731034;
+
+$font-family-base: Roboto, Heltevica, sans-serif;
+
+.btn-semag{
+    background-color: $semag-color-tertiary;
+    color: white;
+    border-color: $semag-color-tertiary;
+}
