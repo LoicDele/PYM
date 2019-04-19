@@ -59,7 +59,7 @@ export class SemagViewComponent implements OnInit {
   }
 
   createScene(): void {
-    var PARAM_URL = "../../assets/objets/";
+    var PARAM_URL = "http://localhost/sharedfolder/modeles/";
     // Mouse over animations
     function makeOverOut(mesh: any, x: any, y: any, z: any) {
       mesh.actionManager.registerAction(new BABYLON.SetValueAction(BABYLON.ActionManager.OnPointerOutTrigger, mesh.material, "emissiveColor", mesh.material.emissiveColor));
@@ -105,7 +105,7 @@ export class SemagViewComponent implements OnInit {
     let ground = BABYLON.MeshBuilder.CreateGround('ground1',
       { width: 350, height: 350, subdivisions: 20 }, this._scene);
 
-    BABYLON.SceneLoader.ImportMesh("", PARAM_URL, "domaine.babylon", this._scene, function(object) {
+    BABYLON.SceneLoader.ImportMesh("", "../../assets/objets/", "domaine.babylon", this._scene, function(object) {
       // You can apply properties to object.
       object[0].scaling = new BABYLON.Vector3(0.30, 0.30, 0.30);
       object[0].setPositionWithLocalVector(new BABYLON.Vector3(0, 0, 0));
@@ -155,7 +155,9 @@ export class SemagViewComponent implements OnInit {
           }
         }
         if(afficher){
-          this._scene.meshes[this._scene.meshes.length-1].material = new BABYLON.StandardMaterial(bat.nom, this._scene);
+          var texture = new BABYLON.StandardMaterial(bat.nom,this._scene);
+          texture.emissiveColor = new BABYLON.Color3(0,0,1);
+          this._scene.meshes[this._scene.meshes.length-1].material = texture;
           this._scene.meshes[this._scene.meshes.length-1].actionManager = new BABYLON.ActionManager(this._scene);
           pos(this._scene.meshes[this._scene.meshes.length-1], bat.x, bat.y, altitude, bat.scale, bat.angle);
           makeOverOut(this._scene.meshes[this._scene.meshes.length-1], bat.scale, bat.scale, bat.scale);
