@@ -15,6 +15,11 @@ export class SemagHeaderComponent implements OnInit {
   batiments: Batiment[] = [];
   subscriptionEntreprise: Subscription;
   subscriptionBatiment: Subscription;
+  show: boolean = false;
+
+  toggleCollapse(){
+    this.show = !this.show;
+  }
   constructor(private entrepriseService: EntrepriseService, private batimentService: BatimentService) {
 
   }
