@@ -56,11 +56,13 @@ class BatimentType extends AbstractType
         $formModifier = function(FormInterface $form, TypeBatiment $type=null){
             if ($type=="Batiment"){
                 $form->add('Representation3D',FileType::class,[
-                    'label'=>'Modèle 3D'
+                    'label'=>'Modèle 3D',
+                    'data_class'=>null
                 ]);
                 $form->add('Echelle',RangeType::class,[
                     'attr'=>['min'=>1,'max'=>3,'step'=>0.1],
-                    'label'=>'Echelle'
+                    'label'=>'Echelle',
+                    'empty_data'=>'1'
                 ]);
             }
             if ($type=="Forme Paramétrique"){
@@ -83,6 +85,7 @@ class BatimentType extends AbstractType
                     'label'=>'Rayon'
                 ]);
                 $form->add('Echelle',HiddenType::class,[
+                    'attr'=>['min'=>1,'max'=>3,'step'=>0.1],
                     'label'=>'Echelle',
                     'empty_data'=>'1'
                 ]);
@@ -90,20 +93,24 @@ class BatimentType extends AbstractType
             if ((($type=="IRVE") or ($type=="PAV"))or ($type=="Arret de bus")){
                 $form->add('Echelle',RangeType::class,[
                     'attr'=>['min'=>1,'max'=>3,'step'=>0.1,'value'=>'2'],
-                    'label'=>'Echelle'
+                    'label'=>'Echelle',
+                    'empty_data'=>'1'
                 ]);
             }
             $form->add('Longitude',RangeType::class,[
                 'attr'=>['min'=>-100,'max'=>100,'step'=>1,'value'=>'1'],
-                'label'=>'Longitude'
+                'label'=>'Longitude',
+                'empty_data'=>'0'
             ]);
             $form->add('Latitude',RangeType::class,[
                 'attr'=>['min'=>-100,'max'=>100,'step'=>1,'value'=>'1'],
-                'label'=>'Latitude'
+                'label'=>'Latitude',
+                'empty_data'=>'0'
             ]);
             $form->add('Angle',RangeType::class,[
                 'attr'=>['min'=>0,'max'=>2*pi(),'step'=>pi()/12,'value'=>pi()],
-                'label'=>'Angle'
+                'label'=>'Angle',
+                'empty_data'=>pi()
             ]);
         };
 

@@ -80,7 +80,7 @@
                                                 {# <a class="dropdown-item btn rounded" href="{{path('entreprise_show',{'id':entreprise.id})}}">Voir</a> #}
                                                 <a class="dropdown-item btn rounded" href="{{path('batiment_add_bureau',{'id':batiment.id})}}">Ajouter un bureau</a>
                                                 {% if app.user.role =="Admin" %}
-                                                {# <a class="dropdown-item btn rounded" href="{{path('entreprise_edit',{'id':entreprise.id})}}">Modifier</a> #}
+                                                <a class="dropdown-item btn rounded" href="{{path('batiment_edit',{'id':batiment.id})}}">Modifier</a>
                                                 <a class="dropdown-item btn rounded" onclick="return confirm('Êtes vous sûr de vouloir supprimer cet élèment?')" href="{{path('batiment_delete',{'id':batiment.id})}}">Supprimer</a>
                                                 {% endif %}
                                   </div>

@@ -19,7 +19,9 @@
 {% endblock %}
 
 {% block body %}
+
     {% if test==0 %}
+    <div id='step1'>
         {{form_start(form)}}
             {{ form_row(form.Nom )}}
             {{ form_row(form.Nb_etage )}}
@@ -30,9 +32,9 @@
             <a href="{{path('batiments')}}">Annuler</a>
             <button type="submit">Ajouter</button>
         {{form_end(form)}}
- 
-    {% elseif test==1 %}
-    
+    </div>
+    {% else %}
+
         {% if batiment.TypeBatiment =="Batiment" %}
         {{form_start(form)}}
             {{form_row(form.Representation3D,{'id':'Representation3D'})}}
@@ -46,6 +48,7 @@
             <button type="submit">Ajouter</button>
             {{form_end(form)}}
         {% endif %}
+
         {% if batiment.TypeBatiment=="Forme Paramétrique" %}
         {{form_start(form)}}
             {{form_row(form.FormeParametrique,{'id':'FormeParametrique'})}}
@@ -63,6 +66,7 @@
             <button type="submit">Ajouter</button>
             {{form_end(form)}}
         {% endif %}
+
         {% if batiment.TypeBatiment=="IRVE" %}
         <div id='IRVE' hidden>
         </div>
@@ -77,6 +81,7 @@
             <button type="submit">Ajouter</button>
             {{form_end(form)}}
         {% endif %}
+
         {% if batiment.TypeBatiment=="PAV" %}
         <div id='PAV' hidden>
         </div>
@@ -91,6 +96,7 @@
             <button type="submit">Ajouter</button>
             {{form_end(form)}}
         {% endif %}
+
         {% if batiment.TypeBatiment=="Arret de bus" %}
         <div id='Arret de bus' hidden>
         </div>
@@ -105,5 +111,7 @@
             <button type="submit">Ajouter</button>
             {{form_end(form)}}
         {% endif %}
+
     {% endif %}
+
 {% endblock %}
