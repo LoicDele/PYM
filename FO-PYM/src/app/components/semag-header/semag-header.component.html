@@ -1,17 +1,17 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" [routerLink]="['']" routerLinkActive="router-link-active">Pôle Yvon Morandat</a>
-  <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId"
-    aria-controls="collapsibleNavId" aria-expanded="false" aria-label="Toggle navigation">
+  <a class="navbar-brand" href="" routerLinkActive="router-link-active">Pôle Yvon Morandat</a>
+  <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" aria-controls="collapsibleNavId"
+          aria-expanded="false" aria-label="Toggle navigation" (click)="toggleCollapse()">
     <span class="navbar-toggler-icon"></span>
   </button>
-  <div class="collapse navbar-collapse" id="collapsibleNavId">
+  <div class="collapse navbar-collapse" [class.show]="show">
     <ul class="nav navbar-nav mr-auto mt-2 mt-lg-0 navbar-right">
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="dropdownBat" data-toggle="dropdown" aria-haspopup="true"
           aria-expanded="false">Bâtiments</a>
         <div class="dropdown-menu" aria-labelledby="dropdownBat">
           <a [routerLink]="['/batiment', elt.id]" routerLinkActive="router-link-active"
-          class="dropdown-item dropdown-picture" *ngFor="let elt of batiments">{{elt.nom}}</a>
+          class="dropdown-item dropdown-picture" *ngFor="let elt of batiments" (click)="toggleCollapse()">{{elt.nom}}</a>
         </div>
       </li>
       <li class="nav-item dropdown">
@@ -19,7 +19,7 @@
           aria-expanded="false">Entreprises</a>
         <div class="dropdown-menu" aria-labelledby="dropdownEnt">
           <a [routerLink]="['/entreprise', elt.id]" routerLinkActive="router-link-active"
-            class="dropdown-item dropdown-picture" *ngFor="let elt of entreprises">{{elt.nom}}</a>
+            class="dropdown-item dropdown-picture" *ngFor="let elt of entreprises" (click)="toggleCollapse()">{{elt.nom}}</a>
         </div>
       </li>
       <li class="nav-item dropdown">

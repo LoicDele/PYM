@@ -429,8 +429,9 @@ class EntrepriseController extends AbstractController
     */
     public function SendAllEntrepriseAction(){
         $entreprises = $this->getDoctrine()->getRepository(Entreprise::class)->findAll();
+        $arrayCollection = array();
         foreach($entreprises as $item) {
-            $arrayCollection[] = array(
+            array_push($arrayCollection, array(
                 'id' => $item->getId(),
                 'nom' => $item->getNom(),
                 'site_internet' => $item->getSiteInternet(),
@@ -438,7 +439,7 @@ class EntrepriseController extends AbstractController
                 'telephone' => $item->getTelephone(),
                 'mail' => $item->getMail(),
                 'logo' => $item->getLogo()
-            );
+            ));
         }
         $response = new JsonResponse($arrayCollection);
         $response->headers->set('Content-Type', 'application/json');
@@ -451,15 +452,16 @@ class EntrepriseController extends AbstractController
     */
     public function SendAllContactAction(){
         $contacts = $this->getDoctrine()->getRepository(Contact::class)->findAll();
+        $arrayCollection = array();
         foreach($contacts as $item) {
-            $arrayCollection[] = array(
+            array_push($arrayCollection, array(
                 'id' => $item->getId(),
                 'nom' => $item->getNom(),
                 'prenom' => $item->getPrenom(),
                 'telephone' => $item->getTelephone(),
                 'mail' => $item->getMail(),
                 'idEntreprise' => $item->getEntreprise()->getId(),
-            );
+            ));
         }
         $response = new JsonResponse($arrayCollection);
         $response->headers->set('Content-Type', 'application/json');
