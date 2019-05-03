@@ -124,11 +124,9 @@
                                 </td>
                                 <thead class="thead-dark Bureaux" id="bureautable">
                                     <tr>
-                                        <td>{{bureau.Numero}}</td>
-                                        <td>{{bureau.Adresse}}</td>
-                                        <td>{{bureau.etage}}</td>
-                                        <td><a onclick="return confirm('Êtes vous sûr de vouloir supprimer cet élèment?')" href="{{path('batiment_delete_bureau',{'id_bur':bureau.id})}}">Supprimer</a></td>
-                                        <td><a href="{{path('batiment_edit_bureau',{'id_bat':batiment.id,'id_bur':bureau.id})}}">Modifer</a></td>
+                                        <td>numero</td>
+                                        <td>Adresse</td>
+                                        <td>Etage</td>
                                     </tr>
                                 </thead>
                                 <tbody class="Bureaux">
@@ -137,9 +135,8 @@
                                             <td>{{bureau.Numero}}</td>
                                             <td>{{bureau.Adresse}}</td>
                                             <td>{{bureau.etage}}</td>
-                                            <td>
-                                                <a onclick="return confirm('Êtes vous sûr de vouloir supprimer cet élèment?')" href="{{path('batiment_delete_bureau',{'id_bur':bureau.id})}}">Supprimer</a>
-                                            </td>
+                                            <td><a onclick="return confirm('Êtes vous sûr de vouloir supprimer cet élèment?')" href="{{path('batiment_delete_bureau',{'id_bur':bureau.id})}}">Supprimer</a></td>
+                                            <td><a href="{{path('batiment_edit_bureau',{'id_bat':batiment.id,'id_bur':bureau.id})}}">Modifer</a></td>
                                         </tr>
                                     {% endfor %}
                                 </tbody>
