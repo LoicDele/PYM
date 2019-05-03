@@ -19,7 +19,8 @@ class BureauType extends AbstractType
             ->add('Etage')
             ->add('entreprise',EntityType::class,[
                 'class'=>Entreprise::class,
-                'choice_label'=>'Nom'
+                'choice_label'=>'Nom',
+                'placeholder'=>' '
             ])
         ;
     }

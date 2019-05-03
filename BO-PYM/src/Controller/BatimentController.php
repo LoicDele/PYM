@@ -54,73 +54,33 @@ class BatimentController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()){
-            return new Response("OK");
+            if ($batiment->getTypeBatiment()=="Arret de bus"){
+                $batiment->setRepresentation3D("ARRET.babylon");
+            }
+            if ($batiment->getTypeBatiment()=="PAV"){
+                $batiment->setRepresentation3D("ARRET.babylon");
+            }
+            if ($batiment->getTypeBatiment()=="IRVE"){
+                $batiment->setRepresentation3D("ARRET.babylon");
+            }
+            if ($batiment->getTypeBatiment()=="Batiment"){
+                $model = $form->get('Representation3D')->getData();
+                $nom_batiment=$batiment->getNom();
+                for($i=0,$size=strlen($nom_batiment);$i<$size;$i++){
+                    if ($nom_batiment[$i]==" "){
+                        $nom_batiment[$i]="_";
+                    }
+                }
+                $filename = $fileUploader->upload($model,$nom_batiment);
+                $batiment->setRepresentation3D($filename);
+            }
+            $manager->persist($batiment);
+            $manager->flush();
+            return $this->redirectToRoute('batiments');
         }
-
         return $this->render('batiment/add2.html.twig',[
             'form'=>$form->createView()
         ]);
-
-        // $form=$this->createForm(BatimentType::class,$batiment);
-        // $form->handleRequest($request);
-        // $test=0;
-        
-        // if ($form->isSubmitted() && $form->isValid()){
-        //     if ($form->get('TypeBatiment')->getData()=="Batiment"){
-        //         $model = $form->get('Representation3D')->getData();
-        //         if ($model != null){
-        //             $nom_batiment = $batiment->getNom();             
-        //             $filename = $fileUploader->upload($model,$nom_batiment);
-        //             $batiment->setRepresentation3D($filename);
-        //             $manager->persist($batiment);
-        //             $manager->flush();
-        //             return $this->redirectToRoute('batiments');
-        //         }
-        //     }
-        //     else if($form->get('TypeBatiment')->getData()=="Forme Paramétrique"){
-        //         $model = $form->get('FormeParametrique')->getData();
-        //         if ($model != null){
-        //             dump($batiment);
-        //             $manager->persist($batiment);
-        //             $manager->flush();
-        //             return $this->redirectToRoute('batiments');
-        //         }
-        //     }
-        //     else if($form->get('TypeBatiment')->getData()=="IRVE"){
-        //         dump($batiment);
-        //         if ($batiment->getLongitude() != null){
-        //             $batiment->setRepresentation3D('st.babylon');
-        //             $manager->persist($batiment);
-        //             $manager->flush();
-        //             dump($batiment);
-        //             return $this->redirectToRoute('batiments');
-        //         }
-        //     }   
-        //     else if($form->get('TypeBatiment')->getData()=="PAV"){
-        //         if ($batiment->getLongitude() != null){
-        //             $batiment->setRepresentation3D('st.babylon');
-        //             $manager->persist($batiment);
-        //             $manager->flush();
-        //             dump($batiment);
-        //             return $this->redirectToRoute('batiments');
-        //         }
-        //     }
-        //     else if($form->get('TypeBatiment')->getData()=="Arret de bus"){
-        //         if (  ($batiment->getLongitude() != null)        ){
-        //             $batiment->setRepresentation3D('ARRET.babylon');
-        //             $manager->persist($batiment);
-        //             $manager->flush();
-        //             dump($batiment);
-        //             return $this->redirectToRoute('batiments');
-        //         }
-        //     } 
-        //     $test++;
-        // }
-        // return $this->render('batiment/add.html.twig',[
-        //     'form'=>$form->createView(),
-        //     'test'=>$test,
-        //     'batiment'=>$batiment
-        // ]);
     }
 
     /**
@@ -139,61 +99,46 @@ class BatimentController extends AbstractController
             );
         }
 
-        $form=$this->createForm(BatimentType::class,$batiment);
+        // $file = $batiment->getRepresentation3D();
+        // if ($batiment->getTypeBatiment()=="Batiment"){
+        //     $batiment->setRepresentation3D(new File('./uploads/modeles/'.$file));
+        // }
+        // if ($batiment->getTypeBatiment()=="Arret de bus"){
+        //     $batiment->setRepresentation3D(new File('ARRET.babylon'));
+        // }
+        
 
+        $form=$this->createForm(Batiment2Type::class,$batiment);
         $form->handleRequest($request);
-        $test=0;
 
         
         if ($form->isSubmitted() && $form->isValid()){
-            if ($form->get('TypeBatiment')->getData()=="Batiment"){
+            if ($batiment->getTypeBatiment()=="Arret de bus"){
+                $batiment->setRepresentation3D("ARRET.babylon");
+            }
+            if ($batiment->getTypeBatiment()=="PAV"){
+                $batiment->setRepresentation3D("ARRET.babylon");
+            }
+            if ($batiment->getTypeBatiment()=="IRVE"){
+                $batiment->setRepresentation3D("ARRET.babylon");
+            }
+            if ($batiment->getTypeBatiment()=="Batiment"){
                 $model = $form->get('Representation3D')->getData();
-                if ($model != null){
-                    $nom_batiment = $batiment->getNom();             
-                    $filename = $fileUploader->upload($model,$nom_batiment);
-                    $batiment->setRepresentation3D($filename);
-                    $manager->persist($batiment);
-                    $manager->flush();
-                    return $this->redirectToRoute('batiments');
+                $nom_batiment=$batiment->getNom();
+                for($i=0,$size=strlen($nom_batiment);$i<$size;$i++){
+                    if ($nom_batiment[$i]==" "){
+                        $nom_batiment[$i]="_";
+                    }
                 }
+                $filename = $fileUploader->upload($model,$nom_batiment);
+                $batiment->setRepresentation3D($filename);
             }
-            else if($form->get('TypeBatiment')->getData()=="Forme Paramétrique"){
-                $model = $form->get('FormeParametrique')->getData();
-                if ($model != null){
-                    $manager->persist($batiment);
-                    $manager->flush();
-                    return $this->redirectToRoute('batiments');
-                }
-            }
-            else if($form->get('TypeBatiment')->getData()=="IRVE"){
-                if ($batiment->getLongitude() != null){
-                    $batiment->setRepresentation3D('st.babylon');
-                    $manager->persist($batiment);
-                    $manager->flush();
-                    return $this->redirectToRoute('batiments');
-                }
-            }   
-            else if($form->get('TypeBatiment')->getData()=="PAV"){
-                if ($batiment->getLongitude() != null){
-                    $batiment->setRepresentation3D('st.babylon');
-                    $manager->persist($batiment);
-                    $manager->flush();
-                    return $this->redirectToRoute('batiments');
-                }
-            }
-            else if($form->get('TypeBatiment')->getData()=="Arret de bus"){
-                if (  ($batiment->getLongitude() != null)        ){
-                    $batiment->setRepresentation3D('ARRET.babylon');
-                    $manager->persist($batiment);
-                    $manager->flush();
-                    return $this->redirectToRoute('batiments');
-                }
-            } 
-            $test++;
+            $manager->flush();
+            return $this->redirectToRoute('batiments');
         }
 
         return $this->render('batiment/edit.html.twig',[
-            'form'=>$form->createView(),'test'=>$test,'batiment'=>$batiment
+            'form'=>$form->createView(),'batiment'=>$batiment
             ]);
      }
 
@@ -237,12 +182,50 @@ class BatimentController extends AbstractController
     }
 
     /**
+    * @Route("/batiment/{id_bat}/{id_bur}/edit_bureau",name="batiment_edit_bureau")
+    */
+
+    public function edit_bureau($id_bat,$id_bur,ObjectManager $manager,Request $request){
+
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
+
+        $repository = $this->getDoctrine()->getRepository(Batiment::class);
+        $batiment = $repository->find($id_bat);
+
+        if (!$batiment){
+            throw $this->createNotFoundException(
+                'No batiment found for id'/$id_bat
+            );
+        }
+
+        $repo=$this->getDoctrine()->getRepository(Bureau::class);
+        $bureau = $repo->find($id_bur);
+
+        if (!$bureau){
+            throw $this->createNotFoundException(
+                'No bureau found for id'/$id_bur
+            );
+        }
+
+        $form = $this->createForm(BureauType::class,$bureau);
+        $form ->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()){
+            $manager->flush();
+            return $this->redirectToRoute('batiments');
+        }
+        
+        return $this->render('batiment/bureau/edit.html.twig',['form'=>$form->createView(),'bureau'=>$bureau]);
+        
+    }
+
+    /**
      * @Route("batiments/{id_bur}/delete_bureau",name="batiment_delete_bureau")
      */
 
      public function delete_bureau($id_bur,ObjectManager $manager){
         $this->denyAccessUnlessGranted('ROLE_ADMIN');
-        // return new Response($id_bur);
+
         $repository = $this->getDoctrine()->getRepository(Bureau::class);
         $bureau = $repository->find($id_bur);
 
@@ -253,6 +236,7 @@ class BatimentController extends AbstractController
         }
         $manager->remove($bureau);
         $manager->flush();
+
         return $this->redirectToRoute('batiments');
      }
 
@@ -325,7 +309,14 @@ class BatimentController extends AbstractController
         $repository = $this->getDoctrine()->getRepository(Batiment::class);
         $batiment_to_delete = $repository->find($id);
 
+        $repo=$this->getDoctrine()->getRepository(Bureau::class);
+        $bureaux_to_delete = $repo->findBy(['Batiment'=>$batiment_to_delete]);
+        for ($i=0,$size=sizeof($bureaux_to_delete)-1;$i<=$size;$i++){
+            $manager->remove($bureaux_to_delete[$i]);
+        }
+
         $manager->remove($batiment_to_delete);
+        
         $manager->flush();
         
         return $this->redirectToRoute('batiments');

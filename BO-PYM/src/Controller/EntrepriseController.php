@@ -67,6 +67,11 @@ class EntrepriseController extends AbstractController
 
             $file = $entreprise->getLogo();
             $nom_entreprise = $entreprise->getNom();
+            for($i=0,$size=strlen($nom_entreprise);$i<$size;$i++){
+                if ($nom_entreprise[$i]==" "){
+                    $nom_entreprise[$i]="_";
+                }
+            }
             $filename = $fileUploader->upload($file,$nom_entreprise);
             $entreprise->setLogo($filename);
             
