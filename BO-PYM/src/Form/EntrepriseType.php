@@ -8,6 +8,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\TelType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
@@ -21,7 +22,7 @@ class EntrepriseType extends AbstractType
             ->add('Nom',TextType::class,['attr' => ['placeholder' => "Nom", 'class' => 'reg rounded form-control'] , 'label' => ' '])
             ->add('Site_Internet',TextType::class,['attr' => ['placeholder' => "Site internet", 'class' => 'reg rounded form-control'] , 'label' => ' '])
             ->add('Nb_Salaries',NumberType::class,['attr' => ['placeholder' => "Nombre de salariés", 'class' => 'reg rounded form-control'] , 'label' => ' '])
-            ->add('Telephone',TextType::class,['attr' => ['placeholder' => "Numéro de téléphone", 'class' => 'reg rounded form-control'] , 'label' => ' '])
+            ->add('Telephone',TelType::class,['attr' => ['placeholder' => "Numéro de téléphone", 'class' => 'reg rounded form-control'] , 'label' => ' '])
             ->add('Mail',EmailType::class,['attr' => ['placeholder' => "Adresse email", 'class' => 'reg rounded form-control'] , 'label' => ' '])
             ->add('activites',EntityType::class,array(
                 'required'=>false,

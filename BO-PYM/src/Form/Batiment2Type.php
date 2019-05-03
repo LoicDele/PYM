@@ -25,7 +25,9 @@ class Batiment2Type extends AbstractType
                 'data'=>'1'
             ])
             ->add('Description',TextareaType::class)
-            ->add('Acces_handicape',CheckboxType::class)
+            ->add('Acces_handicape',CheckboxType::class,[
+                'required'=>false
+            ])
             ->add('Etat',ChoiceType::class,[
                 'choices'=>[
                     'Publié'=>true,
@@ -33,7 +35,10 @@ class Batiment2Type extends AbstractType
                 ],
                 'placeholder'=>' '
             ])
-            ->add('Representation3D',FileType::class)
+            ->add('Representation3D',FileType::class,[
+                'required'=>false,
+                'data_class'=>null
+            ])
             ->add('Longitude',RangeType::class,[
                 'attr'=>['min'=>-100,'max'=>100,'step'=>1,'value'=>'1'],
                 'label'=>'Longitude',
@@ -53,10 +58,18 @@ class Batiment2Type extends AbstractType
                 'attr'=>['min'=>1,'max'=>3,'step'=>0.1],
                 'empty_data'=>'1'
             ])
-            ->add('Longueur',RangeType::class)
-            ->add('Largeur',RangeType::class)
-            ->add('Rayon',RangeType::class)
-            ->add('Hauteur',RangeType::class)
+            ->add('Longueur',RangeType::class,[
+                'empty_data'=>'8'
+            ])
+            ->add('Largeur',RangeType::class,[
+                'empty_data'=>'8'
+            ])
+            ->add('Rayon',RangeType::class,[
+                'empty_data'=>'8'
+            ])
+            ->add('Hauteur',RangeType::class,[
+                'empty_data'=>'8'
+            ])
             ->add('TypeBatiment',EntityType::class,[
                 'class'=>TypeBatiment::class,
                 'choice_value'=>'Nom',
@@ -65,7 +78,8 @@ class Batiment2Type extends AbstractType
             ->add('FormeParametrique',EntityType::class,[
                 'class'=>FormeParametrique::class,
                 'choice_value'=>'Nom',
-                'placeholder'=>' '
+                'placeholder'=>' ',
+                'required'=>false
             ])
         ;
     }
