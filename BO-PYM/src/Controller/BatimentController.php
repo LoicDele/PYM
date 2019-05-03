@@ -65,8 +65,13 @@ class BatimentController extends AbstractController
             }
             if ($batiment->getTypeBatiment()=="Batiment"){
                 $model = $form->get('Representation3D')->getData();
-                $batiment->setRepresentation3D("ARRET.babylon");
-                $filename = $fileUploader->upload($model,$batiment->getNom());
+                $nom_batiment=$batiment->getNom();
+                for($i=0,$size=strlen($nom_batiment);$i<$size;$i++){
+                    if ($nom_batiment[$i]==" "){
+                        $nom_batiment[$i]="_";
+                    }
+                }
+                $filename = $fileUploader->upload($model,$nom_batiment);
                 $batiment->setRepresentation3D($filename);
             }
             $manager->persist($batiment);
@@ -94,13 +99,13 @@ class BatimentController extends AbstractController
             );
         }
 
-        $file = $batiment->getRepresentation3D();
-        if ($batiment->getTypeBatiment()=="Batiment"){
-            $batiment->setRepresentation3D(new File('./uploads/modeles/'.$batiment->getNom().'.babylon'));
-        }
-        if ($batiment->getTypeBatiment()=="Arret de bus"){
-            $batiment->setRepresentation3D(new File('ARRET.babylon'));
-        }
+        // $file = $batiment->getRepresentation3D();
+        // if ($batiment->getTypeBatiment()=="Batiment"){
+        //     $batiment->setRepresentation3D(new File('./uploads/modeles/'.$file));
+        // }
+        // if ($batiment->getTypeBatiment()=="Arret de bus"){
+        //     $batiment->setRepresentation3D(new File('ARRET.babylon'));
+        // }
         
 
         $form=$this->createForm(Batiment2Type::class,$batiment);
@@ -119,8 +124,13 @@ class BatimentController extends AbstractController
             }
             if ($batiment->getTypeBatiment()=="Batiment"){
                 $model = $form->get('Representation3D')->getData();
-                $batiment->setRepresentation3D("ARRET.babylon");
-                $filename = $fileUploader->upload($model,$batiment->getNom());
+                $nom_batiment=$batiment->getNom();
+                for($i=0,$size=strlen($nom_batiment);$i<$size;$i++){
+                    if ($nom_batiment[$i]==" "){
+                        $nom_batiment[$i]="_";
+                    }
+                }
+                $filename = $fileUploader->upload($model,$nom_batiment);
                 $batiment->setRepresentation3D($filename);
             }
             $manager->flush();

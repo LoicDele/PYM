@@ -2,8 +2,9 @@
 
 namespace App\Controller;
 
-use App\Entity\Utilisateur;
+use App\Form\UserEditType;
 
+use App\Entity\Utilisateur;
 use App\Form\RegistrationType;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -12,10 +13,10 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
-use App\Form\UserEditType;
 
 class UserController extends AbstractController
 {
@@ -47,23 +48,37 @@ class UserController extends AbstractController
         $user = $this -> getUser();
 
         $form = $this->createFormBuilder($user)
-        ->add('email',EmailType::class,['attr' => ['placeholder' => "Adresse e-mail", 'class' => 'reg-email rounded form-control'] , 'label' => ' '])
-        
-        ->add('username',TextType::class, ['attr' => ['placeholder' => "Identifiant", 'class' => 'reg-username rounded form-control'] , 'label' => ' '])
-        
-        ->add('password',PasswordType::class,['attr' => ['placeholder' => "Mot de passe", 'class' => 'reg-email rounded form-control'], 'label' => ' '])
-        
-        ->add('confirm_password',PasswordType::class,['attr' => ['placeholder' => "Confirmation du mot de passe", 'class' => 'reg-username rounded form-control'], 'label' => ' '])
-        
+        ->add('email',EmailType::class,[
+            'attr' => [
+                'placeholder' => "Adresse e-mail",
+                'class' => 'reg-email rounded form-control'],
+                'label' => ' '])
+        ->add('username',TextType::class, [
+            'attr' => [
+                'placeholder' => "Identifiant",
+                'class' => 'reg-username rounded form-control'],
+                'label' => ' '])
+        ->add('password',PasswordType::class,[
+            'attr' => [
+                'placeholder' => "Mot de passe",
+                'class' => 'reg-email rounded form-control'],
+                'label' => ' '])
+        ->add('confirm_password',PasswordType::class,[
+            'attr' => [
+                'placeholder' => "Confirmation du mot de passe",
+                'class' => 'reg-username rounded form-control'],
+                'label' => ' '])
         ->getForm();
 
         $form -> handleRequest($request);
 
 
         if($form->isSubmitted() && $form->isValid()){
+            
 
             $hash = $encoder->encodePassWord($user,$user->getPassword());
             $user->setPassword($hash);
+            
 
             $manager->persist($user);
             $manager->flush();
