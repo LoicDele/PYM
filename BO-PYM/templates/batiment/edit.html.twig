@@ -1,7 +1,7 @@
 {% extends 'layout.html.twig' %}
 
 {% block javascripts %}
-    <script src="./../../script.js"></script>
+    <script src="./../../script2.js"></script>
     <script src="./../../babylon.custom(1).js"></script>
 {% endblock %}
 
@@ -33,7 +33,7 @@
         {{form_row(form.FormeParametrique,{'id':'FormeParametrique'})}}
     </div>
     
-    {# <canvas id="renderCanvas" style="display:none"></canvas> #}
+    <canvas id="renderCanvas" style="display:none"></canvas>
 
     <div class='position' hidden>
         {{form_row(form.Longitude,{'id':'Longitude'})}}
