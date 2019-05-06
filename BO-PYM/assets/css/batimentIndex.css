@@ -1,0 +1,52 @@
+.batiments .navbar{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    width: 75%;
+    position: fixed;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.batiments input{
+    color: white;
+    background: transparent;
+    padding: 6px 20px 6px 30px;
+    border: 2px solid #ffffff;
+}
+
+.batiments table{
+    margin-top: 100px;
+    height: auto;
+    position: fixed;
+    width: 75%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.batiments th{
+    text-align: center;
+}
+
+.batiments td{
+    text-align: center;
+}
+.dropdown-menu a{
+    text-align: center;
+    
+}
+.dropdown-menu a:hover{
+    background: #343a40;
+    color: white;
+}
+
+.clickabletd{
+    cursor: pointer;
+}
+.batiments .Bureaux{
+    height: auto;
+    width: fit-content;
+}
+.batiments .bureaux-index{
+    border-right: 2px solid white;
+}
+
+@import '../../node_modules/bootstrap/dist/css/bootstrap.css';
+@import './layout.css';

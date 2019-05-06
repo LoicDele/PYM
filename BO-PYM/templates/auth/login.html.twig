@@ -14,6 +14,9 @@
             <div class="h3 mb-3 font-weight-normal">Connexion</div>
             <input required="" autofocus="" name="_username" type="email" class="form-control" id="inputEmail" placeholder="Adresse e-mail">
             <input required="" autofocus=""  name="_password" type="password" class="form-control" id="inputPassword" placeholder="Mot de passe">
+            {% if error %}
+                Email ou mot de passe incorrect !
+            {% endif %}
             <button type="submit" class="btn btl-lg btn-primary btn-block btn-login">Se connecter</button>
             <a href="{{ path('auth_resetpassword')}}" class="forgot"> Mot de passe oublié</a>
         </form>

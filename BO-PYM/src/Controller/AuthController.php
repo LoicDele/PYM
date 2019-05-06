@@ -8,13 +8,14 @@ use App\Form\ResetPasswordType;
 
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Common\Persistence\ObjectManager;
-use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
-use Symfony\Component\Form\Extension\Core\Type\EmailType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
-
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class AuthController extends AbstractController
 {
@@ -71,9 +72,11 @@ class AuthController extends AbstractController
     /**
      * @Route("/",name="auth_connexion")
      */
-    public function login(){
-
-        return $this->render('auth/login.html.twig');
+    public function login(AuthenticationUtils $authUtils){
+        $error=$authUtils->getLastAuthenticationError();
+        return $this->render('auth/login.html.twig',[
+            'error'=>$error
+        ]);
     }
 
     /**
@@ -103,9 +106,10 @@ class AuthController extends AbstractController
             $user = $repository->findOneBy(['email'=>$email]);
 
             if (!$user){
-                throw $this->createNotFoundException(
-                    "Pas d'utilisateur pour cet email :".$email
-                );
+                // throw $this->createNotFoundException(
+                //     "Pas d'utilisateur pour cet email :".$email
+                // );
+                return new Response("Pas d'utilisateur pour cet email.");
             }
 
             $chaine='azertyuiopqsdfghjklmwxcvbn123456789';
