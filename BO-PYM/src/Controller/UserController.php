@@ -53,11 +53,11 @@ class UserController extends AbstractController
                 'placeholder' => "Adresse e-mail",
                 'class' => 'reg-email rounded form-control'],
                 'label' => ' '])
-        ->add('username',TextType::class, [
-            'attr' => [
-                'placeholder' => "Identifiant",
-                'class' => 'reg-username rounded form-control'],
-                'label' => ' '])
+        // ->add('username',TextType::class, [
+        //     'attr' => [
+        //         'placeholder' => "Identifiant",
+        //         'class' => 'reg-username rounded form-control'],
+        //         'label' => ' '])
         ->add('password',PasswordType::class,[
             'attr' => [
                 'placeholder' => "Mot de passe",
@@ -94,7 +94,7 @@ class UserController extends AbstractController
      * @Route("/user_edit/{id}",name="user_edit_other")
      */
 
-    public function edit_other($id,Request $request,ObjectManager $manager){
+    public function edit_other($id,Request $request,ObjectManager $manager,UserPasswordEncoderInterface $encoder,\Swift_Mailer $mailer){
 
         $this->denyAccessUnlessGranted('ROLE_ADMIN');
 
@@ -112,8 +112,25 @@ class UserController extends AbstractController
         $form -> handleRequest($request);
 
         if($form->isSubmitted() ){
+            $password=$user_to_edit->getPassword();
+            $hash = $encoder->encodePassWord($user_to_edit,$user_to_edit->getPassword());
+            $user_to_edit->setPassword($hash);
+            
+
+            $message =(new \Swift_Message('Modification de votre compte'))
+                -> setFrom('projetindu6@gmail.com')
+                -> setTo($user_to_edit->getEmail())
+                -> setBody(
+                    $this->renderView(
+                        "email/resetpassword.html.twig",
+                        ['password'=>$password]
+                    )
+                );
 
             $manager->flush();
+
+            $mailer->send($message);        
+
             
             return $this->redirectToRoute('auth_connexion');
         }
