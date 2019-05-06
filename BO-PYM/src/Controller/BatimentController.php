@@ -54,26 +54,35 @@ class BatimentController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()){
-            if ($batiment->getTypeBatiment()=="Arret de bus"){
-                $batiment->setRepresentation3D("ARRET.babylon");
-            }
-            if ($batiment->getTypeBatiment()=="PAV"){
-                $batiment->setRepresentation3D("ARRET.babylon");
-            }
-            if ($batiment->getTypeBatiment()=="IRVE"){
-                $batiment->setRepresentation3D("ARRET.babylon");
-            }
-            if ($batiment->getTypeBatiment()=="Batiment"){
-                $model = $form->get('Representation3D')->getData();
-                $nom_batiment=$batiment->getNom();
-                for($i=0,$size=strlen($nom_batiment);$i<$size;$i++){
-                    if ($nom_batiment[$i]==" "){
-                        $nom_batiment[$i]="_";
+
+            switch($batiment->getTypeBatiment()){
+                case "Arret de bus":
+                    $batiment->setRepresentation3D("ARRET.babylon");
+                    break;
+                case "PAV":
+                    $batiment->setRepresentation3D("ARRET.babylon");
+                    break;
+                case "IRVE":
+                    $batiment->setRepresentation3D("ARRET.babylon");
+                    break;
+                case "Batiment":
+                    $model = $form->get('Representation3D')->getData();
+                    $nom_batiment=$batiment->getNom();
+                    for($i=0,$size=strlen($nom_batiment);$i<$size;$i++){
+                        if ($nom_batiment[$i]==" "){
+                            $nom_batiment[$i]="_";
+                        }
                     }
-                }
-                $filename = $fileUploader->upload($model,$nom_batiment);
-                $batiment->setRepresentation3D($filename);
+                    $filename = $fileUploader->upload($model,$nom_batiment);
+                    $batiment->setRepresentation3D($filename);
+                    break;
+                case "Forme Paramétrique":
+                    if ($batiment->getFormeParametrique() == null){
+                        // return new Response("Veuillez saisir une forme paramétrique.");
+                    }
+                    
             }
+            
             $manager->persist($batiment);
             $manager->flush();
             return $this->redirectToRoute('batiments');

@@ -16,20 +16,21 @@ PARAM_ANGLE = 'Angle';
 PARAM_ECHELLE = 'Echelle';
 
 window.addEventListener('DOMContentLoaded', function() {
+	console.log('bonjour');
 	var engine = undefined;
 	var scene;
-	document.getElementById(PARAM_TYPE_BATIMENT).onchange = function(e) {
+	document.getElementById(PARAM_TYPE_BATIMENT).oninput = function(e) {
 		document.getElementById(PARAM_FORME).required=false;
-		document.getElementById(PARAM_FORME).onchange = () => {};
-		document.getElementById(PARAM_BAT).onchange = () => {};
-		document.getElementById(PARAM_LONGITUDE).onchange = () => {};
-		document.getElementById(PARAM_LARGEUR).onchange = () => {};
-		document.getElementById(PARAM_LATITUDE).onchange = () => {};
-		document.getElementById(PARAM_LONGUEUR).onchange = () => {};
-		document.getElementById(PARAM_HAUTEUR).onchange = () => {};
-		document.getElementById(PARAM_RAYON).onchange = () => {};
-		document.getElementById(PARAM_ANGLE).onchange = () => {};
-		document.getElementById(PARAM_ECHELLE).onchange = () => {};
+		document.getElementById(PARAM_FORME).oninput = () => {};
+		document.getElementById(PARAM_BAT).oninput = () => {};
+		document.getElementById(PARAM_LONGITUDE).oninput = () => {};
+		document.getElementById(PARAM_LARGEUR).oninput = () => {};
+		document.getElementById(PARAM_LATITUDE).oninput = () => {};
+		document.getElementById(PARAM_LONGUEUR).oninput = () => {};
+		document.getElementById(PARAM_HAUTEUR).oninput = () => {};
+		document.getElementById(PARAM_RAYON).oninput = () => {};
+		document.getElementById(PARAM_ANGLE).oninput = () => {};
+		document.getElementById(PARAM_ECHELLE).oninput = () => {};
 
 		var position= document.getElementsByClassName("position");
 		var FP= document.getElementsByClassName("FP");
