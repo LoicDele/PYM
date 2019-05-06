@@ -42,7 +42,7 @@
 }
 .batiments .Bureaux{
     height: auto;
-    width: fit-content;
+    width: max-content;
 }
 .batiments .bureaux-index{
     border-right: 2px solid white;
