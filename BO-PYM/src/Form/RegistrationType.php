@@ -21,9 +21,9 @@ class RegistrationType extends AbstractType
         $builder
             ->add('email',EmailType::class,['attr' => ['placeholder' => "Adresse email", 'class' => 'reg-email rounded form-control'] , 'label' => ' '])
 
-            ->add('username',TextType::class, ['attr' => ['placeholder' => "Identifiant", 'class' => 'reg-username rounded form-control'] , 'label' => ' '])
+            //->add('username',TextType::class, ['attr' => ['placeholder' => "Identifiant", 'class' => 'reg-username rounded form-control'] , 'label' => ' '])
 
-            ->add('role',ChoiceType::class,['choices' => ['Admin' => "Admin",'User' => "User"] , 'label' => ' ', 'attr' => ['class' => 'role rounded rounded']])
+            //->add('role',ChoiceType::class,['choices' => ['Admin' => "Admin",'User' => "User"] , 'label' => ' ', 'attr' => ['class' => 'role rounded rounded']])
             ;
     }
 

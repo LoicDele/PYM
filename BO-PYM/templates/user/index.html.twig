@@ -41,7 +41,7 @@
             <table class="table table-striped rounded" id="usersTable">
                 <thead class="thead-dark">
                     <tr>
-                        <th scope="col">identifiant</th>
+                        {# <th scope="col">identifiant</th> #}
                         <th scope="col">Adresse e-mail</th>
                         <th scope="col">Rôle</th>
                         {% if app.user.role =="Admin" %}
@@ -52,7 +52,7 @@
                 <tbody>
                 {% for user in users %}
                         <tr>   
-                            <td scope="row">{{user.username}}</td>
+                            {# <td scope="row">{{user.username}}</td> #}
                             <td scope="row">{{user.email}}</td>
                             <td scope="row">{{user.role}}</td>
                             {% if app.user.role =="Admin" %}

@@ -46,7 +46,8 @@ class AuthController extends AbstractController
 
             $hash = $encoder->encodePassWord($user,$password);
             $user->setPassword($hash);
-
+            $user->setUsername($user->getEmail());
+            $user->setRole("Admin");
             $manager->persist($user);
             $manager->flush();
 
@@ -106,10 +107,11 @@ class AuthController extends AbstractController
             $user = $repository->findOneBy(['email'=>$email]);
 
             if (!$user){
-                // throw $this->createNotFoundException(
-                //     "Pas d'utilisateur pour cet email :".$email
-                // );
-                return new Response("Pas d'utilisateur pour cet email.");
+                $error="Email non existant";
+                return $this->render('auth/resetpassword.html.twig', [
+                    'form' => $form->createView(),
+                    'error'=>$error
+                ]);
             }
 
             $chaine='azertyuiopqsdfghjklmwxcvbn123456789';
@@ -142,9 +144,10 @@ class AuthController extends AbstractController
 
             return $this->redirectToRoute('auth_connexion');
         }
-
+        $error=null;
         return $this->render('auth/resetpassword.html.twig', [
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'error'=>$error
         ]);
     }
 }
