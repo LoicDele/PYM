@@ -1,9 +1,9 @@
 {% extends 'layout.html.twig' %}
 {% block stylesheets %}
-    {{ encore_entry_link_tags('entrepriseIndex') }}
+    {{ encore_entry_link_tags('batimentIndex') }}
 {% endblock %}
 {% block javascripts %}
-    {{ encore_entry_script_tags('entrepriseIndex') }}
+    {{ encore_entry_script_tags('batimentIndex') }}
     <script>
         function batimentsSearch() {
             var input,
@@ -75,14 +75,14 @@
                     <div class="mr-sm-2"></div>
                     <input class="my-2 my-sm-0 rounded" id="batimentsInput" onkeyup="batimentsSearch()" placeholder=" Rechercher un bâtiment" type="text">
                 </nav>
-            </div>
+            </input>
             <div class="row">
                 <table class="table table-striped rounded" id="batimentsTable">
                     <thead class="thead-dark">
                         <tr>
                             <th scope="col">Nom</th>
-                            <th scope="col">Nombre d'étages</th>
-                            <th scope="col">Type de bâtiment</th>
+                            <th scope="col">Nbr d'étages</th>
+                            <th scope="col">Type</th>
                             <th scope="col">Etat</th>
                             <th scope="col">Accès handicapé</th>
                             <th scope="col">Action</th>
@@ -91,20 +91,18 @@
                     <tbody>
                         {% for key, batiment in batiments %}
                             <tr>
-                                <td>
-                                    <button onclick="toggleCollapse({{key}})">{{batiment.Nom}}</button>
-                                </td>
-                                <td>{{batiment.Nbetage}}</td>
-                                <td>{{batiment.TypeBatiment}}</td>
+                                <td class="clickabletd" onclick="toggleCollapse({{key}})">{{batiment.Nom}}</td>
+                                <td class="clickabletd" onclick="toggleCollapse({{key}})">{{batiment.Nbetage}}</td>
+                                <td class="clickabletd" onclick="toggleCollapse({{key}})">{{batiment.TypeBatiment}}</td>
                                 {% if batiment.etat %}
-                                    <td>Publié</td>
+                                    <td class="clickabletd" onclick="toggleCollapse({{key}})">Publié</td>
                                 {% else %}
-                                    <td>Non Publié</td>
+                                    <td class="clickabletd" onclick="toggleCollapse({{key}})">Non Publié</td>
                                 {% endif %}
                                 {% if batiment.acceshandicape %}
-                                    <td>Oui</td>
+                                    <td class="clickabletd" onclick="toggleCollapse({{key}})">Oui</td>
                                 {% else %}
-                                    <td>Non</td>
+                                    <td class="clickabletd" onclick="toggleCollapse({{key}})">Non</td>
                                 {% endif %}
                                 <td>
                                     <div class="btn-group action">
@@ -120,23 +118,38 @@
                                                 <a class="dropdown-item btn rounded" onclick="return confirm('Êtes vous sûr de vouloir supprimer cet élèment?')" href="{{path('batiment_delete',{'id':batiment.id})}}">Supprimer</a>
                                             {% endif %}
                                         </div>
-                                    </button>
+                                    </div>
                                 </td>
-                                <thead class="thead-dark Bureaux" id="bureautable">
-                                    <tr>
-                                        <td>numero</td>
+                                <thead class="thead-info Bureaux" id="bureautable">
+                        
+                                    <tr class="bg-info">
+                                        <th>Bureaux</th class="bureaux-index">
+                                        <td>Nom</td>
                                         <td>Adresse</td>
                                         <td>Etage</td>
+                                        <td>Action</td>
                                     </tr>
                                 </thead>
                                 <tbody class="Bureaux">
                                     {% for bureau in batiment.Bureaux %}
-                                        <tr>
-                                            <td>{{bureau.Numero}}</td>
+                                        <tr class="table-info">
+                                            <td></td>
+                                            <td>{{bureau.entreprise.Nom}}</td>
                                             <td>{{bureau.Adresse}}</td>
                                             <td>{{bureau.etage}}</td>
-                                            <td><a onclick="return confirm('Êtes vous sûr de vouloir supprimer cet élèment?')" href="{{path('batiment_delete_bureau',{'id_bur':bureau.id})}}">Supprimer</a></td>
-                                            <td><a href="{{path('batiment_edit_bureau',{'id_bat':batiment.id,'id_bur':bureau.id})}}">Modifer</a></td>
+                                            <td>
+                                                <div class="btn-group action">
+                                                    <button aria-expanded="false" aria-haspopup="true" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" type="button">
+                                                        Action
+                                                    </button>
+                                                    <div class="dropdown-menu dropdown-menu-right">
+                                                        {% if app.user.role =="Admin" %}
+                                                            <a class="dropdown-item btn rounded" href="{{path('batiment_edit_bureau',{'id_bat':batiment.id,'id_bur':bureau.id})}}">Modifer</a>
+                                                            <a class="dropdown-item btn rounded" onclick="return confirm('Êtes vous sûr de vouloir supprimer cet élèment?')" href="{{path('batiment_delete_bureau',{'id_bur':bureau.id})}}">Supprimer</a>
+                                                        {% endif %}
+                                                    </div>
+                                                </div>
+                                            </td>
                                         </tr>
                                     {% endfor %}
                                 </tbody>
