@@ -32,6 +32,7 @@ Encore
     .addEntry('contactAdd', './assets/js/contactAdd.js')
     .addEntry('addActivite', './assets/js/addActivite.js')
     .addEntry('addPoste', './assets/js/addPoste.js')
+    .addEntry('batimentIndex', './assets/js/batimentIndex.js')
     // When enabled, Webpack "splits" your files into sm
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
     .splitEntryChunks()
