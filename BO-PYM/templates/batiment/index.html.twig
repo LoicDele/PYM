@@ -75,7 +75,7 @@
                     <div class="mr-sm-2"></div>
                     <input class="my-2 my-sm-0 rounded" id="batimentsInput" onkeyup="batimentsSearch()" placeholder=" Rechercher un bâtiment" type="text">
                 </nav>
-            </input>
+            </div>
             <div class="row">
                 <table class="table table-striped rounded" id="batimentsTable">
                     <thead class="thead-dark">
@@ -106,12 +106,8 @@
                                 {% endif %}
                                 <td>
                                     <div class="btn-group action">
-                                        <button aria-expanded="false" aria-haspopup="true" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" type="button">
-                                            Action
-                                        </button>
-                                        <div
-                                            class="dropdown-menu dropdown-menu-right">
-                                            {# <a class="dropdown-item btn rounded" href="{{path('entreprise_show',{'id':entreprise.id})}}">Voir</a> #}
+                                        <button aria-expanded="false" aria-haspopup="true" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" type="button">Action</button>
+                                        <div class="dropdown-menu dropdown-menu-right">
                                             <a class="dropdown-item btn rounded" href="{{path('batiment_add_bureau',{'id':batiment.id})}}">Ajouter un bureau</a>
                                             {% if app.user.role =="Admin" %}
                                                 <a class="dropdown-item btn rounded" href="{{path('batiment_edit',{'id':batiment.id})}}">Modifier</a>
@@ -120,42 +116,37 @@
                                         </div>
                                     </div>
                                 </td>
-                                <thead class="thead-info Bureaux" id="bureautable">
-                        
-                                    <tr class="bg-info">
-                                        <th>Bureaux</th class="bureaux-index">
-                                        <td>Nom</td>
-                                        <td>Adresse</td>
-                                        <td>Etage</td>
-                                        <td>Action</td>
-                                    </tr>
-                                </thead>
-                                <tbody class="Bureaux">
-                                    {% for bureau in batiment.Bureaux %}
-                                        <tr class="table-info">
-                                            <td></td>
-                                            <td>{{bureau.entreprise.Nom}}</td>
-                                            <td>{{bureau.Adresse}}</td>
-                                            <td>{{bureau.etage}}</td>
-                                            <td>
-                                                <div class="btn-group action">
-                                                    <button aria-expanded="false" aria-haspopup="true" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" type="button">
-                                                        Action
-                                                    </button>
-                                                    <div class="dropdown-menu dropdown-menu-right">
-                                                        {% if app.user.role =="Admin" %}
-                                                            <a class="dropdown-item btn rounded" href="{{path('batiment_edit_bureau',{'id_bat':batiment.id,'id_bur':bureau.id})}}">Modifer</a>
-                                                            <a class="dropdown-item btn rounded" onclick="return confirm('Êtes vous sûr de vouloir supprimer cet élèment?')" href="{{path('batiment_delete_bureau',{'id_bur':bureau.id})}}">Supprimer</a>
-                                                        {% endif %}
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    {% endfor %}
-                                </tbody>
                             </tr>
-                        </tbody>
-                    {% endfor %}
+                            <div class="">
+                                <tr class="Bureaux">
+                                    <th scope="col">Bureaux</th class="bureaux-index">
+                                    <td scope="col">Nom</td>
+                                    <td scope="col">Adresse</td>
+                                    <td scope="col">Etage</td>
+                                    <td scope="col">Action</td>    
+                                </tr>
+                                {% for bureau in batiment.Bureaux %}
+                                    <tr class="table-info Bureaux">
+                                        <td></td>
+                                        <td>{{bureau.entreprise.Nom}}</td>
+                                        <td>{{bureau.Adresse}}</td>
+                                        <td>{{bureau.etage}}</td>
+                                        <td>
+                                            <div class="btn-group action">
+                                                <button aria-expanded="false" aria-haspopup="true" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" type="button">Action</button>
+                                                <div class="dropdown-menu dropdown-menu-right">
+                                                    {% if app.user.role =="Admin" %}
+                                                        <a class="dropdown-item btn rounded" href="{{path('batiment_edit_bureau',{'id_bat':batiment.id,'id_bur':bureau.id})}}">Modifer</a>
+                                                        <a class="dropdown-item btn rounded" onclick="return confirm('Êtes vous sûr de vouloir supprimer cet élèment?')" href="{{path('batiment_delete_bureau',{'id_bur':bureau.id})}}">Supprimer</a>
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </div>
+                        {% endfor %}
+                    </tbody>
                 </table>
             </div>
         </div>
