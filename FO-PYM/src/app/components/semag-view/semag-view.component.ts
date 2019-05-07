@@ -61,11 +61,38 @@ export class SemagViewComponent implements OnInit {
   createScene(): void {
     var PARAM_URL = "http://localhost/sharedfolder/modeles/";
     // Mouse over animations
-    function makeOverOut(mesh: any, x: any, y: any, z: any) {
+    var makeOverOut = (mesh: any, x: any, y: any, z: any) => {
       mesh.actionManager.registerAction(new BABYLON.SetValueAction(BABYLON.ActionManager.OnPointerOutTrigger, mesh.material, "emissiveColor", mesh.material.emissiveColor));
       mesh.actionManager.registerAction(new BABYLON.SetValueAction(BABYLON.ActionManager.OnPointerOverTrigger, mesh.material, "emissiveColor", BABYLON.Color3.White()));
       mesh.actionManager.registerAction(new BABYLON.InterpolateValueAction(BABYLON.ActionManager.OnPointerOutTrigger, mesh, "scaling", new BABYLON.Vector3(x, y, z), 150));
       mesh.actionManager.registerAction(new BABYLON.InterpolateValueAction(BABYLON.ActionManager.OnPointerOverTrigger, mesh, "scaling", new BABYLON.Vector3(1.05 * x, 1.05 * y, 1.05 * z), 150));
+      mesh.actionManager.registerAction(
+        new BABYLON.InterpolateValueAction(
+          BABYLON.ActionManager.OnPickTrigger,
+          this._camera,
+          'target',
+          new BABYLON.Vector3(mesh.position.x, mesh.position.y, mesh.position.z),
+          1000
+        )
+      );
+      mesh.actionManager.registerAction(
+        new BABYLON.InterpolateValueAction(
+          BABYLON.ActionManager.OnPickTrigger,
+          this._camera,
+          'beta',
+          1.15,
+          1000
+        )
+      );
+      mesh.actionManager.registerAction(
+        new BABYLON.InterpolateValueAction(
+          BABYLON.ActionManager.OnPickTrigger,
+          this._camera,
+          'radius',
+          65,
+          1000
+        )
+      );
     }
     // Manage scale, rotation, position of a mesh
     function pos(mesh:any, x:any, y:any, z:any, echelle:any, rot:any){
