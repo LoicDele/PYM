@@ -21,7 +21,7 @@ class AuthController extends AbstractController
 {
 
     /**
-     * @Route("/users/add", name="add_user")
+     * @Route("/users/add", name="user_add")
      */
     public function registration(\Swift_Mailer $mailer,Request $request,ObjectManager $manager,UserPasswordEncoderInterface $encoder)
     {
@@ -56,7 +56,7 @@ class AuthController extends AbstractController
             -> setTo($user->getEmail())
             -> setBody(
                 $this->renderView(
-                    "email/resetpassword.html.twig",
+                    "auth/email/resetpassword.html.twig",
                     ['password'=>$password,'role'=>$user->getRoles()]
                 )
             );
@@ -132,7 +132,7 @@ class AuthController extends AbstractController
                 -> setTo($email)
                 -> setBody(
                     $this->renderView(
-                        "email/resetpassword.html.twig",
+                        "auth/email/resetpassword.html.twig",
                         ['password'=>$password]
                     )
                 );

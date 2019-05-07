@@ -115,7 +115,7 @@
                                         {% for postes in contact.poste %}
                                         {{postes.Nom}}
                                         {% if app.user.role =="Admin" %}
-                                        <a href="{{path('entreprise_delete_poste',{'id_ent':entreprise.id,'id_cont':contact.id,'poste':postes.Nom})}}" onclick="return confirm('Êtes vous sûr de vouloir supprimer cet élèment?')" type="button">X</a>
+                                        <a href="{{path('entreprise_delete_poste',{'id_ent':entreprise.id,'poste':postes.Nom,'id_cont':contact.id})}}" onclick="return confirm('Êtes vous sûr de vouloir supprimer cet élèment?')" type="button">X</a>
                                         {% endif %}
                                     {% endfor %}
                                     </td>

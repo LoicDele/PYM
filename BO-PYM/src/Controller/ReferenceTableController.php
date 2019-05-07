@@ -16,7 +16,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class ReferenceTableController extends AbstractController
 {
     /**
-     * @Route("/reference_table", name="reference_table")
+     * @Route("/reference_tables/index", name="reference_tables")
      */
     public function index()
     {
@@ -36,7 +36,7 @@ class ReferenceTableController extends AbstractController
     }
 
     /**
-     * @Route("reference_table_add_activite",name="add_activite")
+     * @Route("reference_tables/add_activite",name="reference_table_add_activite")
      */
 
      public function add_activite(Request $request, ObjectManager $manager){
@@ -49,14 +49,14 @@ class ReferenceTableController extends AbstractController
         if($form->isSubmitted() && $form->isValid()){
             $manager->persist($activite);
             $manager->flush();
-            return $this->redirectToRoute('reference_table');
+            return $this->redirectToRoute('reference_tables');
         }
         return $this->render('entreprise/activite/add.html.twig',['form'=>$form->createView()]);
      }
 
 
      /**
-     * @Route("reference_table_add_poste",name="add_poste")
+     * @Route("reference_tables/add_poste",name="reference_table_add_poste")
      */
 
     public function add_poste(Request $request, ObjectManager $manager){
@@ -69,7 +69,7 @@ class ReferenceTableController extends AbstractController
         if($form->isSubmitted() && $form->isValid()){
             $manager->persist($poste);
             $manager->flush();
-            return $this->redirectToRoute('reference_table');
+            return $this->redirectToRoute('reference_tables');
         }
         return $this->render('entreprise/poste/add.html.twig',['form'=>$form->createView()]);
      }
@@ -78,7 +78,7 @@ class ReferenceTableController extends AbstractController
 
 
     /**
-     * @Route("/reference_table_delete_activite/{id}",name="delete_activite")
+     * @Route("/reference_table/delete_activite/{id}",name="reference_table_delete_activite")
      */
 
      public function delete_activite(ObjectManager $manager,$id){
@@ -87,19 +87,14 @@ class ReferenceTableController extends AbstractController
         $repository = $this->getDoctrine()->getRepository(Activite::class);
         $activite_to_delete = $repository->findOneBy(['id'=>$id]);
 
-        // $repo=$this->getDoctrine()->getRepository(Entreprise::class);
-        // $entreprise = $repo->findBy(['activites'=>$activite_to_delete]);
-        
-        // $entreprise->removeActivite($activite_to_delete);
-
         $manager->remove($activite_to_delete);
         $manager->flush();
 
-        return $this->redirectToRoute('reference_table');
+        return $this->redirectToRoute('reference_tables');
      }
 
      /**
-     * @Route("/reference_table_delete_poste/{id}",name="delete_poste")
+     * @Route("/reference_table/delete_poste/{id}",name="reference_table_delete_poste")
      */
 
     public function delete_poste(ObjectManager $manager,$id){
@@ -111,6 +106,6 @@ class ReferenceTableController extends AbstractController
         $manager->remove($poste_to_delete);
         $manager->flush();
 
-        return $this->redirectToRoute('reference_table');
+        return $this->redirectToRoute('reference_tables');
      }
 }

@@ -26,7 +26,7 @@ header("Access-Control-Allow-Origin: *");
 class BatimentController extends AbstractController
 {
     /**
-     * @Route("/batiments", name="batiments")
+     * @Route("/batiments/index", name="batiments")
      */
     public function index()
     {
@@ -41,7 +41,7 @@ class BatimentController extends AbstractController
     }
 
     /**
-     * @Route("/batiment/new/0",name="batiment_new")
+     * @Route("/batiment/add/0",name="batiment_add")
      */
 
     public function new(Request $request,ObjectManager $manager,FileUploader $fileUploader){
@@ -85,7 +85,7 @@ class BatimentController extends AbstractController
             
             $manager->persist($batiment);
             $manager->flush();
-            return $this->redirectToRoute('batiments');
+            return $this->redirectToRoute('batiments/index');
         }
         return $this->render('batiment/add2.html.twig',[
             'form'=>$form->createView()
@@ -106,16 +106,7 @@ class BatimentController extends AbstractController
             throw $this->createNotFoundException(
                 'No batiment found for id'/$id
             );
-        }
-
-        // $file = $batiment->getRepresentation3D();
-        // if ($batiment->getTypeBatiment()=="Batiment"){
-        //     $batiment->setRepresentation3D(new File('./uploads/modeles/'.$file));
-        // }
-        // if ($batiment->getTypeBatiment()=="Arret de bus"){
-        //     $batiment->setRepresentation3D(new File('ARRET.babylon'));
-        // }
-        
+        }        
 
         $form=$this->createForm(Batiment2Type::class,$batiment);
         $form->handleRequest($request);
@@ -152,7 +143,7 @@ class BatimentController extends AbstractController
      }
 
     /**
-     * @Route("batiments/{id}/create_bureau",name="batiment_add_bureau")
+     * @Route("batiments/{id}/add_bureau",name="batiment_add_bureau")
      */
 
     public function add_bureau($id,Request $request,ObjectManager $manager){
@@ -191,7 +182,7 @@ class BatimentController extends AbstractController
     }
 
     /**
-    * @Route("/batiment/{id_bat}/{id_bur}/edit_bureau",name="batiment_edit_bureau")
+    * @Route("/batiments/{id_bat}/edit_bureau/{id_bur}",name="batiment_edit_bureau")
     */
 
     public function edit_bureau($id_bat,$id_bur,ObjectManager $manager,Request $request){
@@ -248,6 +239,30 @@ class BatimentController extends AbstractController
 
         return $this->redirectToRoute('batiments');
      }
+
+     /**
+    * @Route("batiments/delete/{id}",name="batiment_delete")   
+    */
+
+    public function delete($id,ObjectManager $manager){
+
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
+
+        $repository = $this->getDoctrine()->getRepository(Batiment::class);
+        $batiment_to_delete = $repository->find($id);
+
+        $repo=$this->getDoctrine()->getRepository(Bureau::class);
+        $bureaux_to_delete = $repo->findBy(['Batiment'=>$batiment_to_delete]);
+        for ($i=0,$size=sizeof($bureaux_to_delete)-1;$i<=$size;$i++){
+            $manager->remove($bureaux_to_delete[$i]);
+        }
+
+        $manager->remove($batiment_to_delete);
+        
+        $manager->flush();
+        
+        return $this->redirectToRoute('batiments');
+    }
 
     /**
     * @Route("/api/batiments")
@@ -307,28 +322,6 @@ class BatimentController extends AbstractController
         return $response;
     }
 
-    /**
-    * @Route("/batiment_delete/{id}",name="batiment_delete")   
-    */
-
-    public function delete($id,ObjectManager $manager){
-
-        $this->denyAccessUnlessGranted('ROLE_ADMIN');
-
-        $repository = $this->getDoctrine()->getRepository(Batiment::class);
-        $batiment_to_delete = $repository->find($id);
-
-        $repo=$this->getDoctrine()->getRepository(Bureau::class);
-        $bureaux_to_delete = $repo->findBy(['Batiment'=>$batiment_to_delete]);
-        for ($i=0,$size=sizeof($bureaux_to_delete)-1;$i<=$size;$i++){
-            $manager->remove($bureaux_to_delete[$i]);
-        }
-
-        $manager->remove($batiment_to_delete);
-        
-        $manager->flush();
-        
-        return $this->redirectToRoute('batiments');
-    }
+    
 }
 

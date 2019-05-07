@@ -31,7 +31,7 @@
         <div class="row">
             <nav class="navbar navbar-dark bg-dark justify-content-between rounded">
             {% if app.user.role =="Admin" %}
-                <a class="btn btn-outline-light add" href="{{path('add_user')}}" >Ajouter</a>
+                <a class="btn btn-outline-light add" href="{{path('user_add')}}" >Ajouter</a>
             {% endif %}
                 <div class="mr-sm-2"></div>
                 <input type="text" id="usersInput" onkeyup="usersSearch()" placeholder="Rechercher un utilisateur" class="my-2 my-sm-0 rounded"> 
@@ -41,7 +41,6 @@
             <table class="table table-striped rounded" id="usersTable">
                 <thead class="thead-dark">
                     <tr>
-                        {# <th scope="col">identifiant</th> #}
                         <th scope="col">Adresse e-mail</th>
                         <th scope="col">Rôle</th>
                         {% if app.user.role =="Admin" %}
