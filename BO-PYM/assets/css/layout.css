@@ -1,6 +1,9 @@
+@import '../../node_modules/bootstrap/dist/css/bootstrap.css';
+
 body{
     background: whitesmoke;
     font-family: 'Roboto', sans-serif;
+    overflow-x: hidden;
 }
 
 .title-layout-navbar{
@@ -55,7 +58,7 @@ body{
     height: 100%;
     position: fixed;
     width: 15%;
-    
+    margin-top: 56px;
 }
 
 .sidebar a{
@@ -73,7 +76,18 @@ body{
 }
 
 .body-page{
-    margin-left: 20%;
+    margin-top: 56px;
+    width: 100%;
+    height: 80%;
+    overflow-y: scroll;
+    overflow-x: hidden;
 }
 
-@import '../../node_modules/bootstrap/dist/css/bootstrap.css';
+.navbar{
+    position: relative;
+}
+
+.top{
+    position: fixed;
+    z-index: 5;
+}
