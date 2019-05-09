@@ -1,79 +1,81 @@
 {% extends 'layout.html.twig' %}
 
 {% block javascripts %}
+    {{ encore_entry_script_tags('batimentIndex') }}
     <script src="./../../script2.js"></script>
     <script src="./../../babylon.custom(1).js"></script>
 {% endblock %}
 
 {% block stylesheets %}
-{{ encore_entry_link_tags('entrepriseIndex') }}
-<style>
-    #renderCanvas {
-        width   : 1000px;
-        height  : 500px;
-        touch-action: none;
-    }
-</style>
+{{ encore_entry_link_tags('batimentAddEdit') }}
 {% endblock %}
 
 {% block body %}
 
-    {{form_start(form)}}
-    {{form_row(form.Nom)}}
-    {{form_row(form.Description)}}
-    {{form_row(form.Nb_etage)}}
-    {{form_row(form.Acces_handicape)}}
-    {{form_row(form.TypeBatiment,{'id':'TypeBatiment'})}}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-3">
+                {{form_start(form)}}
+                {{form_row(form.Nom)}}
+                {{form_row(form.Description)}}
+                {{form_row(form.Nb_etage)}}
+                {{form_row(form.Acces_handicape)}}
+                {{form_row(form.TypeBatiment,{'id':'TypeBatiment'})}}
 
-    <div class='Modele' id='Representation_3D' hidden>
-        {{form_row(form.Representation3D,{'id':'Representation3D'})}}
-    </div>
+                <div class='Modele' id='Representation_3D' hidden>
+                    {{form_row(form.Representation3D,{'id':'Representation3D'})}}
+                </div>
 
-    <div class='FP' id='Forme_Parametrique' hidden>
-        {{form_row(form.FormeParametrique,{'id':'FormeParametrique'})}}
-    </div>
-    
-    <canvas id="renderCanvas" style="display:none"></canvas>
+                <div class='FP' id='Forme_Parametrique' hidden>
+                    {{form_row(form.FormeParametrique,{'id':'FormeParametrique'})}}
+                </div>
+                
+                <div class='position' hidden>
+                    {{form_row(form.Longitude,{'id':'Longitude'})}}
+                </div>
+                
+                <div class='position' hidden>
+                    {{form_row(form.Latitude,{'id':'Latitude'})}}
+                </div>
+                
+                <div class='position' hidden>
+                    {{form_row(form.Echelle,{'id':'Echelle'})}}
+                </div>
+                
+                <div class='position FP' hidden>
+                    {{form_row(form.Angle,{'id':'Angle'})}}
+                </div>
+                
+                <div class='Cube Pavé' hidden>
+                    {{form_row(form.Longueur,{'id':'Longueur'})}}
+                </div>
+                
+                <div class='Pavé' hidden>
+                    {{form_row(form.Largeur,{'id':'Largeur'})}}
+                </div>
+                
+                <div class='Cylindre Pavé' hidden>
+                    {{form_row(form.Hauteur,{'id':'Hauteur'})}}
+                </div>
+                
+                <div class='Cylindre' hidden>
+                    {{form_row(form.Rayon,{'id':'Rayon'})}}
+                </div>
 
-    <div class='position' hidden>
-        {{form_row(form.Longitude,{'id':'Longitude'})}}
+                <div class='position FP Modele Cube Cylindre Pavé' hidden>
+                    {{form_row(form.Etat,{'id':'Etat'})}}
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <canvas id="renderCanvas" class="img-responsive" style="display:none"></canvas>
+            </div>
+        </div>
+        <div class="row">
+            {{form_row(form._token) }}
+            <a href="{{path('batiments')}}">Annuler</a>
+            <button type="submit">Modifier</button>
+            {# {{form_end(form)}} #}
+        </div>
     </div>
-    
-    <div class='position' hidden>
-        {{form_row(form.Latitude,{'id':'Latitude'})}}
-    </div>
-    
-    <div class='position' hidden>
-        {{form_row(form.Echelle,{'id':'Echelle'})}}
-    </div>
-    
-    <div class='position FP' hidden>
-        {{form_row(form.Angle,{'id':'Angle'})}}
-    </div>
-    
-    <div class='Cube Pavé' hidden>
-        {{form_row(form.Longueur,{'id':'Longueur'})}}
-    </div>
-    
-    <div class='Pavé' hidden>
-        {{form_row(form.Largeur,{'id':'Largeur'})}}
-    </div>
-    
-    <div class='Cylindre Pavé' hidden>
-        {{form_row(form.Hauteur,{'id':'Hauteur'})}}
-    </div>
-    
-    <div class='Cylindre' hidden>
-        {{form_row(form.Rayon,{'id':'Rayon'})}}
-    </div>
-
-    <div class='position FP Modele Cube Cylindre Pavé' hidden>
-        {{form_row(form.Etat,{'id':'Etat'})}}
-    </div>
-    
-    {{form_row(form._token) }}
-    <a href="{{path('batiments')}}">Annuler</a>
-    <button type="submit">Ajouter</button>
-    {# {{form_end(form)}} #}
 
 {% endblock %}

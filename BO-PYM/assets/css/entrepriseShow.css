@@ -1,8 +1,12 @@
+.container{
+    position: relative;
+    margin-left: 20%;
+    margin-top: 20px;
+}
+
 .contacts .navbar{
-    margin-top: 500px;
     margin-bottom: 20px;
     width: 75%;
-    position: fixed;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
@@ -14,9 +18,7 @@
 }
 
 .contacts table{
-    margin-top: 600px;
-    height: auto;
-    position: fixed;
+    position: relative;
     width: 75%;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
@@ -31,10 +33,7 @@
 
 .entreprise .card{
     width: 75%;
-    position: fixed;
-    height: auto;
-    margin-top: 30px;
-    margin-bottom: 30px;
+    position: relative;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 .entreprise .card-header{
@@ -55,8 +54,8 @@
 
 .entreprise img{
     border-radius: 8px;
-    height: 200px;
-    width: 200px;
+    height: auto;
+    max-width: 100%;
 }
 
 .dropdown-menu a{
