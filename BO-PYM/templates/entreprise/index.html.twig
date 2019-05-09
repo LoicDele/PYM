@@ -31,7 +31,7 @@
         <div class="row">
             <nav class="navbar navbar-dark bg-dark justify-content-between rounded">
             {% if app.user.role =="Admin" %}
-                <a class="btn btn-outline-light add" href="{{path('entreprise_new')}}" >Ajouter</a>
+                <a class="btn btn-outline-light add" href="{{path('entreprise_add')}}" >Ajouter</a>
             {% endif %}
                 <div class="mr-sm-2"></div>
                 <input type="text" id="entreprisesInput" onkeyup="entreprisesSearch()" placeholder=" Rechercher une entreprise" class="my-2 my-sm-0 rounded"> 

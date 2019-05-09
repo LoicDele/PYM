@@ -70,7 +70,7 @@
             <div class="row">
                 <nav class="navbar navbar-dark bg-dark justify-content-between rounded">
                     {% if app.user.role =="Admin" %}
-                        <a class="btn btn-outline-light add" href="{{path('batiment_new')}}">Ajouter</a>
+                        <a class="btn btn-outline-light add" href="{{path('batiment_add')}}">Ajouter</a>
                     {% endif %}
                     <div class="mr-sm-2"></div>
                     <input class="my-2 my-sm-0 rounded" id="batimentsInput" onkeyup="batimentsSearch()" placeholder=" Rechercher un bâtiment" type="text">

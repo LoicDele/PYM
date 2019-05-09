@@ -51,7 +51,7 @@
     <div class="Activites">
         <div class="row">
             <nav class="navbar navbar-dark bg-dark justify-content-between rounded">
-                <a class="btn btn-outline-light add" href="{{ path('add_activite')}}">Ajouter une activite</a>
+                <a class="btn btn-outline-light add" href="{{ path('reference_table_add_activite')}}">Ajouter une activite</a>
                 <div class="mr-sm-2"></div>
                 <input type="text" id="activitesInput" onkeyup="activitesSearch()" placeholder=" Rechercher une activite"
                     class="my-2 my-sm-0 rounded">
@@ -81,7 +81,7 @@
                                     Action
                                 </button>
                                 <div class="dropdown-menu dropdown-menu-right">
-                                    <a class="dropdown-item" type="button" href="{{path('delete_activite',{'id':activite.id})}}"
+                                    <a class="dropdown-item" type="button" href="{{path('reference_table_delete_activite',{'id':activite.id})}}"
                                         type="button">Supprimer</a>
                                 </div>
                             </div>
@@ -102,7 +102,7 @@
     <div class="Postes">
         <div class="row">
             <nav class="navbar navbar-dark bg-dark justify-content-between rounded">
-                <a class="btn btn-outline-light add" href="{{ path('add_poste')}}">Ajouter un poste</a>
+                <a class="btn btn-outline-light add" href="{{ path('reference_table_add_poste')}}">Ajouter un poste</a>
                 <div class="mr-sm-2"></div>
                 <input type="text" id="postesInput" onkeyup="postesSearch()" placeholder=" Rechercher un poste" class="my-2 my-sm-0 rounded">
             </nav>
@@ -131,7 +131,7 @@
                                     Action
                                 </button>
                                 <div class="dropdown-menu dropdown-menu-right">
-                                    <a class="dropdown-item" type="button" href="{{path('delete_poste',{'id':poste.id})}}"
+                                    <a class="dropdown-item" type="button" href="{{path('reference_table_delete_poste',{'id':poste.id})}}"
                                         type="button">Supprimer</a>
                                 </div>
                             </div>

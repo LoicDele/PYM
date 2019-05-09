@@ -23,7 +23,7 @@ class UserController extends AbstractController
 
 
     /**
-     * @Route("/users", name="users")
+     * @Route("/users/index", name="users")
      */
     public function index()
     {
@@ -38,7 +38,7 @@ class UserController extends AbstractController
 
 
     /**
-     * @Route("/user_edit",name="user_edit")
+     * @Route("/users/edit",name="user_edit")
      */
     public function edit(Request $request,ObjectManager $manager,UserPasswordEncoderInterface $encoder)
     {
@@ -53,11 +53,6 @@ class UserController extends AbstractController
                 'placeholder' => "Adresse e-mail",
                 'class' => 'reg-email rounded form-control'],
                 'label' => ' '])
-        // ->add('username',TextType::class, [
-        //     'attr' => [
-        //         'placeholder' => "Identifiant",
-        //         'class' => 'reg-username rounded form-control'],
-        //         'label' => ' '])
         ->add('password',PasswordType::class,[
             'attr' => [
                 'placeholder' => "Mot de passe",
@@ -91,7 +86,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/user_edit/{id}",name="user_edit_other")
+     * @Route("/users/edit/{id}",name="user_edit_other")
      */
 
     public function edit_other($id,Request $request,ObjectManager $manager,UserPasswordEncoderInterface $encoder,\Swift_Mailer $mailer){
@@ -122,7 +117,7 @@ class UserController extends AbstractController
                 -> setTo($user_to_edit->getEmail())
                 -> setBody(
                     $this->renderView(
-                        "email/resetpassword.html.twig",
+                        "auth/email/resetpassword.html.twig",
                         ['password'=>$password]
                     )
                 );
@@ -132,14 +127,14 @@ class UserController extends AbstractController
             $mailer->send($message);        
 
             
-            return $this->redirectToRoute('auth_connexion');
+            return $this->redirectToRoute('users');
         }
 
         return $this->render('user/edit.html.twig',['user'=>$user_to_edit,'user_connected'=>$user,'form' => $form->createView()]);
     }
 
     /**
-     * @Route("/user_delete/{id}",name="user_delete")   
+     * @Route("/users/delete/{id}",name="user_delete")   
      */
 
     public function delete($id,ObjectManager $manager){
