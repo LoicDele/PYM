@@ -1,9 +1,9 @@
 {% extends 'layout.html.twig' %}
 {% block stylesheets %}
-{{ encore_entry_link_tags('entrepriseShow') }}
+{{ encore_entry_link_tags('reference') }}
 {% endblock %}
 {% block javascripts %}
-{{ encore_entry_script_tags('entrepriseShow') }}
+{{ encore_entry_script_tags('reference') }}
 <script>
     function activitesSearch() {
         var input, filter, table, tr, td, i, txtValue;
@@ -47,103 +47,105 @@
 
 {% block body %}
 {% if app.user %}
-<div class="row">
-    <div class="Activites">
-        <div class="row">
-            <nav class="navbar navbar-dark bg-dark justify-content-between rounded">
-                <a class="btn btn-outline-light add" href="{{ path('reference_table_add_activite')}}">Ajouter une activite</a>
-                <div class="mr-sm-2"></div>
-                <input type="text" id="activitesInput" onkeyup="activitesSearch()" placeholder=" Rechercher une activite"
-                    class="my-2 my-sm-0 rounded">
-            </nav>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-4">
+            <div class="Activites">
+                <div class="row">
+                    <nav class="navbar navbar-dark bg-dark justify-content-between rounded">
+                        <a class="btn btn-outline-light add" href="{{ path('reference_table_add_activite')}}">Ajouter une activite</a>
+                        <div class="mr-sm-2"></div>
+                        <input type="text" id="activitesInput" onkeyup="activitesSearch()" placeholder=" Rechercher une activite"
+                            class="my-2 my-sm-0 rounded">
+                    </nav>
+                </div>
+                <div class="row">
+                    <table class="table table-fixed table-striped rounded" id="activitesTable">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th class="col-xs-2" scope="col">#</th>
+                                <th class="col-xs-6" scope="col">Nom</th>
+                                {% if app.user.role =="Admin" %}
+                                <th class="col-xs-4" scope="col">Action</th>
+                                {% endif %}
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for activite in activites %}
+                            <tr>
+                                <td class="col-xs-2">{{activite.id}}</td>
+                                <td class="col-xs-6">{{activite.Nom}}</td>
+                                {% if app.user.role =="Admin" %}
+                                <td class="col-xs-4">
+                                    <div class="btn-group action">
+                                        <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown"
+                                            aria-haspopup="true" aria-expanded="false">
+                                            Action
+                                        </button>
+                                        <div class="dropdown-menu dropdown-menu-right">
+                                            <a class="dropdown-item" type="button" href="{{path('reference_table_delete_activite',{'id':activite.id})}}"
+                                                type="button">Supprimer</a>
+                                        </div>
+                                    </div>
+                                </td>
+                                {% endif %}
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
-        <div class="row">
-            <table class="table table-striped rounded" id="activitesTable">
-                <thead class="thead-dark">
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Nom</th>
-                        {% if app.user.role =="Admin" %}
-                        <th scope="col">Action</th>
-                        {% endif %}
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for activite in activites %}
-                    <tr>
-                        <th>{{activite.id}}</th>
-                        <td>{{activite.Nom}}</td>
-                        {% if app.user.role =="Admin" %}
-                        <td>
-                            <div class="btn-group action">
-                                <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown"
-                                    aria-haspopup="true" aria-expanded="false">
-                                    Action
-                                </button>
-                                <div class="dropdown-menu dropdown-menu-right">
-                                    <a class="dropdown-item" type="button" href="{{path('reference_table_delete_activite',{'id':activite.id})}}"
-                                        type="button">Supprimer</a>
-                                </div>
-                            </div>
+
+        <div class="col-lg-1"></div>
+
+        <div class="col-lg-4">
+            <div class="Postes">
+                <div class="row">
+                    <nav class="navbar navbar-dark bg-dark justify-content-between rounded">
+                        <a class="btn btn-outline-light add" href="{{ path('reference_table_add_poste')}}">Ajouter un poste</a>
+                        <div class="mr-sm-2"></div>
+                        <input type="text" id="postesInput" onkeyup="postesSearch()" placeholder=" Rechercher un poste" class="my-2 my-sm-0 rounded">
+                    </nav>
+                </div>
+                <div class="row">
+                    <table class="table table-fixed table-striped rounded" id="postesTable">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th class="col-xs-2" scope="col">#</th>
+                                <th class="col-xs-6" scope="col">Nom</th>
+                                {% if app.user.role =="Admin" %}
+                                <th class="col-xs-4" scope="col">Action</th>
+                                {% endif %}
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for poste in postes %}
+                            <tr>
+                                <td class="col-xs-2">{{poste.id}}</td>
+                                <td class="col-xs-6">{{poste.Nom}}</td>
+                                {% if app.user.role =="Admin" %}
+                                <td class="col-xs-4">
+                                    <div class="btn-group action">
+                                        <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown"
+                                            aria-haspopup="true" aria-expanded="false">
+                                            Action
+                                        </button>
+                                        <div class="dropdown-menu dropdown-menu-right">
+                                            <a class="dropdown-item" type="button" href="{{path('reference_table_delete_poste',{'id':poste.id})}}"
+                                                type="button">Supprimer</a>
+                                        </div>
+                                    </div>
+                                </td>
+                                {% endif %}
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
-        </td>
-        {% endif %}
-        </tr>
-        {% endfor %}
-        </tbody>
-        </table>
     </div>
-</div>
-</div>
-
-
-
-<div class="row">
-    <div class="Postes">
-        <div class="row">
-            <nav class="navbar navbar-dark bg-dark justify-content-between rounded">
-                <a class="btn btn-outline-light add" href="{{ path('reference_table_add_poste')}}">Ajouter un poste</a>
-                <div class="mr-sm-2"></div>
-                <input type="text" id="postesInput" onkeyup="postesSearch()" placeholder=" Rechercher un poste" class="my-2 my-sm-0 rounded">
-            </nav>
-        </div>
-        <div class="row">
-            <table class="table table-striped rounded" id="postesTable">
-                <thead class="thead-dark">
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Nom</th>
-                        {% if app.user.role =="Admin" %}
-                        <th scope="col">Action</th>
-                        {% endif %}
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for poste in postes %}
-                    <tr>
-                        <th>{{poste.id}}</th>
-                        <td>{{poste.Nom}}</td>
-                        {% if app.user.role =="Admin" %}
-                        <td>
-                            <div class="btn-group action">
-                                <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown"
-                                    aria-haspopup="true" aria-expanded="false">
-                                    Action
-                                </button>
-                                <div class="dropdown-menu dropdown-menu-right">
-                                    <a class="dropdown-item" type="button" href="{{path('reference_table_delete_poste',{'id':poste.id})}}"
-                                        type="button">Supprimer</a>
-                                </div>
-                            </div>
-        </div>
-        </td>
-        {% endif %}
-        </tr>
-        {% endfor %}
-        </tbody>
-        </table>
-    </div>
-</div>
 </div>
 
 {% else %}

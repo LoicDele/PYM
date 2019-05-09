@@ -1,6 +1,6 @@
 .card{
-    position: fixed;
-    margin-left: 20%;
+    position: relative;
+    margin-left: 35%;
     margin-top: 150px;
     background: white;
     width: 30%;

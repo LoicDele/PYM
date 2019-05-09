@@ -7,30 +7,27 @@
 {% endblock %}
 {% block body %}
     {% if app.user %}         
-            <div class="col-lg-3 col-md-2"></div>
-            <div class="col-lg-6 col-md-8">
-                <div class="card">
-                    <div class="card-header bg-dark ">
-                        <h4>Ajouter un poste</h4> 
-                    </div>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-1"></div>
-                            <div class="col-10">
-                                {{ form_start(form) }}
-                                {{ form_widget(form)}}
-                            </div>
-                            <div class="col-1"></div>
+            <div class="card">
+                <div class="card-header bg-dark ">
+                    <h4>Ajouter un poste</h4> 
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-1"></div>
+                        <div class="col-10">
+                            {{ form_start(form) }}
+                            {{ form_widget(form)}}
                         </div>
-                        <div class="btns row">
-                            <div class="col-1"></div>
-                            <a href="{{path('reference_tables')}}" class="btn btn-secondary btn-back col-3">Annuler</a>
-                            <div class="col-4"></div>
-                            <button type="submit" class="btn btn-success btn-add col-3">Ajouter</button>
-                            <div class="col-1"></div>
-                        </div>
-                        {{form_end(form) }}
+                        <div class="col-1"></div>
                     </div>
+                    <div class="btns row">
+                        <div class="col-1"></div>
+                        <a href="{{path('reference_tables')}}" class="btn btn-secondary btn-back col-3">Annuler</a>
+                        <div class="col-4"></div>
+                        <button type="submit" class="btn btn-success btn-add col-3">Ajouter</button>
+                        <div class="col-1"></div>
+                    </div>
+                    {{form_end(form) }}
                 </div>
             </div>
                 

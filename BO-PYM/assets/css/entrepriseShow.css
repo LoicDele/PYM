@@ -1,12 +1,28 @@
-.container{
+@import '../../node_modules/bootstrap/dist/css/bootstrap.css';
+@import './layout.css';
+
+.container-fluid{
     position: relative;
     margin-left: 20%;
     margin-top: 20px;
 }
 
-.contacts .navbar{
-    margin-bottom: 20px;
+.row{
+    margin: 0;
+}
+
+.contacts{
+    margin-top: 20px;
     width: 75%;
+}
+
+.entreprise{
+    width: 75%;
+}
+
+.contacts .navbar{
+    width: 100%;
+    margin-bottom: 20px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
@@ -18,8 +34,6 @@
 }
 
 .contacts table{
-    position: relative;
-    width: 75%;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
@@ -32,7 +46,6 @@
 }
 
 .entreprise .card{
-    width: 75%;
     position: relative;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
@@ -55,6 +68,7 @@
 .entreprise img{
     border-radius: 8px;
     height: auto;
+    max-height: 1200px;
     max-width: 100%;
 }
 
@@ -66,5 +80,3 @@
     background: #343a40;
     color: white;
 }
-@import '../../node_modules/bootstrap/dist/css/bootstrap.css';
-@import './layout.css';
