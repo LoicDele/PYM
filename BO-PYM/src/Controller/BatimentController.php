@@ -85,7 +85,7 @@ class BatimentController extends AbstractController
             
             $manager->persist($batiment);
             $manager->flush();
-            return $this->redirectToRoute('batiments/index');
+            return $this->redirectToRoute('batiments');
         }
         return $this->render('batiment/add2.html.twig',[
             'form'=>$form->createView()

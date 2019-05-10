@@ -55,3 +55,24 @@
     border-right: 2px solid white;
 }
 
+.burHead {
+    background: rgb(96, 96, 224);
+}
+
+.Bureaux table{
+    width: 100%;
+}
+
+#batimentsTable #batBody>tr:nth-child(4n+1) {
+    background: rgba(0, 0, 0, 0.05);
+}
+#batimentsTable #batBody>tr:nth-child(4n+1):hover {
+    background: rgba(0, 0, 0, 0.1);
+}
+
+#batimentsTable #batBody>tr:nth-child(4n+3) {
+    background: white;
+}
+#batimentsTable #batBody>tr:nth-child(4n+3):hover {
+    background: rgba(0, 0, 0, 0.02);
+}

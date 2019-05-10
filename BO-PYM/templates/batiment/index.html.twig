@@ -17,7 +17,7 @@
             filter = input.value.toUpperCase();
             table = document.getElementById("batimentsTable");
             console.log(table);
-            tr = table.getElementsByTagName("tr");
+            tr = table.getElementsByClassName("searchHide");
             for (i = 0; i < tr.length; i ++) {
                 td = tr[i].getElementsByTagName("td")[0];
                 if (td) {
@@ -33,7 +33,7 @@
         function toggleCollapse(key) {
             desktop = document.getElementsByClassName("Bureaux");
             console.log(desktop);
-            for (i = 0; i < desktop.length; i += 2) {
+            /*for (i = 0; i < desktop.length; i += 2) {
                 if (i == key * 2) {
                     if (desktop[i].hidden == true) {
                         desktop[i].hidden = false;
@@ -46,6 +46,19 @@
                 else {
                     desktop[i].hidden = true;
                     desktop[i+1].hidden =true;
+                }
+            }*/
+
+            for (i = 0; i < desktop.length; i ++) {
+                if (i == key) {
+                    if (desktop[i].hidden == true) {
+                        desktop[i].hidden = false;
+                    } else {
+                        desktop[i].hidden = true;
+                    }
+                } 
+                else {
+                    desktop[i].hidden = true;
                 }
             }
 
@@ -77,9 +90,9 @@
                 </nav>
             </div>
             <div class="row">
-                <table class="table table-striped rounded" id="batimentsTable">
+                <table class="table rounded" id="batimentsTable">
                     <thead class="thead-dark">
-                        <tr>
+                        <tr class="searchHide">
                             <th scope="col">Nom</th>
                             <th scope="col">Nbr d'étages</th>
                             <th scope="col">Type</th>
@@ -88,9 +101,9 @@
                             <th scope="col">Action</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="batBody">
                         {% for key, batiment in batiments %}
-                            <tr>
+                            <tr class="searchHide">
                                 <td class="clickabletd" onclick="toggleCollapse({{key}})">{{batiment.Nom}}</td>
                                 <td class="clickabletd" onclick="toggleCollapse({{key}})">{{batiment.Nbetage}}</td>
                                 <td class="clickabletd" onclick="toggleCollapse({{key}})">{{batiment.TypeBatiment}}</td>
@@ -117,34 +130,53 @@
                                     </div>
                                 </td>
                             </tr>
-                            <div class="">
-                                <tr class="Bureaux">
-                                    <th scope="col">Bureaux</th class="bureaux-index">
-                                    <td scope="col">Nom</td>
-                                    <td scope="col">Adresse</td>
-                                    <td scope="col">Etage</td>
-                                    <td scope="col">Action</td>    
-                                </tr>
-                                {% for bureau in batiment.Bureaux %}
-                                    <tr class="table-info Bureaux">
-                                        <td></td>
-                                        <td>{{bureau.entreprise.Nom}}</td>
-                                        <td>{{bureau.Adresse}}</td>
-                                        <td>{{bureau.etage}}</td>
-                                        <td>
-                                            <div class="btn-group action">
-                                                <button aria-expanded="false" aria-haspopup="true" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" type="button">Action</button>
-                                                <div class="dropdown-menu dropdown-menu-right">
-                                                    {% if app.user.role =="Admin" %}
-                                                        <a class="dropdown-item btn rounded" href="{{path('batiment_edit_bureau',{'id_bat':batiment.id,'id_bur':bureau.id})}}">Modifer</a>
-                                                        <a class="dropdown-item btn rounded" onclick="return confirm('Êtes vous sûr de vouloir supprimer cet élèment?')" href="{{path('batiment_delete_bureau',{'id_bur':bureau.id})}}">Supprimer</a>
-                                                    {% endif %}
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                {% endfor %}
-                            </div>
+                            <tr class="Bureaux" hidden>
+                                <td colspan="5">
+                                    <table class="table table-stripped rounded">
+                                        {% if batiment.Bureaux|length==0 %}
+                                            <tr>
+                                                <td>Pas encore de bureau créé pour cette entreprise</td>
+                                                <td>
+                                                    <div class="btn-group action">
+                                                        <button class="btn btn-secondary rounded" aria-expanded="false" aria-haspopup="true" type="button">
+                                                            <a class="btn rounded" href="{{path('batiment_add_bureau',{'id':batiment.id})}}">Ajouter un bureau</a>
+                                                        </button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        {% else %}
+                                            <thead class="burHead">
+                                                <th scope="col">Bureaux</th class="bureaux-index">
+                                                <th scope="col">Nom</td>
+                                                <th scope="col">Adresse</td>
+                                                <th scope="col">Etage</td>
+                                                <th scope="col">Action</td>    
+                                            </thead>
+                                            {% for bureau in batiment.Bureaux %}
+                                                <tbody class="table-info burBody">
+                                                    <tr>
+                                                        <td></td>
+                                                        <td>{{bureau.entreprise.Nom}}</td>
+                                                        <td>{{bureau.Adresse}}</td>
+                                                        <td>{{bureau.etage}}</td>
+                                                        <td>
+                                                            <div class="btn-group action">
+                                                                <button aria-expanded="false" aria-haspopup="true" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" type="button">Action</button>
+                                                                <div class="dropdown-menu dropdown-menu-right">
+                                                                    {% if app.user.role =="Admin" %}
+                                                                        <a class="dropdown-item btn rounded" href="{{path('batiment_edit_bureau',{'id_bat':batiment.id,'id_bur':bureau.id})}}">Modifer</a>
+                                                                        <a class="dropdown-item btn rounded" onclick="return confirm('Êtes vous sûr de vouloir supprimer cet élèment?')" href="{{path('batiment_delete_bureau',{'id_bur':bureau.id})}}">Supprimer</a>
+                                                                    {% endif %}
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            {% endfor %}
+                                        {% endif %}
+                                    </table>
+                                </td>
+                            </tr>
                         {% endfor %}
                     </tbody>
                 </table>
