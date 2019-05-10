@@ -18,12 +18,33 @@
             table = document.getElementById("batimentsTable");
             console.log(table);
             tr = table.getElementsByClassName("searchHide");
+            var color = 0;
+            console.log(tr)
             for (i = 0; i < tr.length; i ++) {
                 td = tr[i].getElementsByTagName("td")[0];
                 if (td) {
                     txtValue = td.textContent || td.innerText;
                     if (txtValue.toUpperCase().indexOf(filter) > -1) {
                         tr[i].style.display = "";
+                        if(color%2==0){
+                            tr[i].style.backgroundColor = "rgba(0, 0, 0, 0.05)";
+                            tr[i].onmouseover = (e) => {
+                                e.target.parentNode.style.backgroundColor = "rgba(0, 0, 250, 0.08)";
+                            };
+                             tr[i].onmouseout = (e) => {
+                                e.target.parentNode.style.backgroundColor = "rgba(0, 0, 0, 0.05)";
+                            };
+                        }
+                        else{
+                            tr[i].style.backgroundColor = "rgba(0, 0, 0, 0)";
+                            tr[i].onmouseover = (e) => {
+                                e.target.parentNode.style.backgroundColor = "rgba(0, 0, 250, 0.08)";
+                            };
+                             tr[i].onmouseout = (e) => {
+                                e.target.parentNode.style.backgroundColor = "rgba(0, 0, 0, 0)";
+                            };
+                        }
+                        color++
                     } else {
                         tr[i].style.display = "none";
                     }

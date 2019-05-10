@@ -66,13 +66,15 @@
 #batimentsTable #batBody>tr:nth-child(4n+1) {
     background: rgba(0, 0, 0, 0.05);
 }
-#batimentsTable #batBody>tr:nth-child(4n+1):hover {
-    background: rgba(0, 0, 0, 0.1);
-}
 
 #batimentsTable #batBody>tr:nth-child(4n+3) {
-    background: white;
+    background: rgba(0, 0, 0, 0);
 }
-#batimentsTable #batBody>tr:nth-child(4n+3):hover {
-    background: rgba(0, 0, 0, 0.02);
+
+/* #batimentsTable #batBody>tr:hover {
+    background: rgba(0, 0, 0, 0.08);
+} */
+
+#batimentsTable #batBody .searchHide:hover{
+    background-color: rgba(0, 0, 250, 0.08);
 }
