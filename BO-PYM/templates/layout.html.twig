@@ -19,13 +19,15 @@
         </div>
     </nav>
     <div class="row">
+        <div class="col-lg-2">
             <div class="sidebar">
-                    <a class="list-group-item rounded-0" href="{{ path('entreprises')}}">Gestion des entreprises</a>
-                    <a class="list-group-item rounded-0" href="{{path('batiments')}}">Gestion des bâtiments</a>
-                    <a class="list-group-item rounded-0" href="{{path('domaine')}}">Gestion du domaine</a>
-                    <a class="list-group-item rounded-0" href="{{ path('users')}}">Gestion des utilisateurs</a>
-                    <a class="list-group-item rounded-0" href="{{ path('reference_tables')}}">Gestion Postes,Activité</a>
+                    <a class="list-group-item rounded-0" href="{{ path('entreprises')}}">Entreprises</a>
+                    <a class="list-group-item rounded-0" href="{{path('batiments')}}">Bâtiments</a>
+                    <a class="list-group-item rounded-0" href="{{path('domaine')}}">Domaine</a>
+                    <a class="list-group-item rounded-0" href="{{ path('users')}}">Utilisateurs</a>
+                    <a class="list-group-item rounded-0" href="{{ path('reference_tables')}}">Tables de référence</a>
             </div>
+        </div>
         <div class="body-page">
         <body>
             {% block body %}          

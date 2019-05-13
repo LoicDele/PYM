@@ -9,7 +9,56 @@
 
 #renderCanvas{
     border: 1px solid black;
-    width: 80%;
-    height: 80%;
+    width: 60%;
+    height: 50%;
+    min-height: 500;
     touch-action: none;
+}
+
+.reg{
+    background: transparent;
+    border: 2px solid #343a40;
+    text-align: center;
+    margin-bottom: 2%;
+}
+
+.reg-select{
+    text-align-last: center;
+    margin-bottom: 4%;
+    margin-top: 2%;
+    border: 2px solid #343a40;
+    width: 100%;
+}
+.btns{
+    margin-top: 1%;
+    margin-left: 40%;
+    display: block;
+    margin-bottom: 5%;
+}
+
+.form-group{
+    max-width: 100%;
+}
+
+.form-control-file{
+    text-align: center;
+    margin-bottom: 4%;
+    width: 100%;
+}
+
+label{
+    margin-right: 3%;
+}
+
+.commun{
+    margin-right: 0%;
+    border-right: #343a40 solid 2px;
+    padding: 1%;
+}
+
+.title{
+    text-align: center;
+    margin-bottom: 2%;
+    border-bottom: #343a40 1px solid;
+    width: 70%;
 }
