@@ -60,3 +60,13 @@ td {
 border-bottom: none;
 border-left: none;
 }
+
+.Activites .navbar{
+    width: calc(100% - 17px);
+    margin-bottom: 2%;
+}
+
+.Postes .navbar{
+    width: calc(100% - 17px);
+    margin-bottom: 2%;
+}
