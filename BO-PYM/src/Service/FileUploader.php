@@ -16,7 +16,7 @@ class FileUploader
         $this->targetDirectory = $targetDirectory;
     }
 
-    public function upload($file,$name)
+    public function upload($file,$name,$domaine=0)
     {
         if (is_null($file)){
 
@@ -28,6 +28,10 @@ class FileUploader
                 if ($file->guessExtension()=="txt"){
                     $fileName =$name.'.'."babylon";
                    $file->move('uploads/modeles',$fileName); 
+                }
+                elseif($domaine != 0){
+                    $fileName = $name.'.'.$file->guessExtension();
+                    $file->move('uploads/domaine',$fileName);
                 }
                 else {
                     $fileName = $name.'.'.$file->guessExtension();
