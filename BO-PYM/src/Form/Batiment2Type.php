@@ -49,26 +49,22 @@ class Batiment2Type extends AbstractType
                 'label' => 'Représentation 3D',
             ])
             ->add('Longitude',RangeType::class,[
-                'attr'=>['min'=>-100,'max'=>100,'step'=>1,'value'=>'1'],
+                'attr'=>['min'=>-100,'max'=>100,'step'=>1,'value'=>'1','class' =>"reg form-control-range"],
                 'label'=>'Longitude',
-                'attr' => ['class' =>"reg form-control-range"],
                 'empty_data'=>'0'])
 
             ->add('Latitude',RangeType::class,[
-                'attr'=>['min'=>-100,'max'=>100,'step'=>1,'value'=>'1'],
+                'attr'=>['min'=>-100,'max'=>100,'step'=>1,'value'=>'1','class' =>"reg form-control-range"],
                 'label'=>'Latitude',
-                'attr' => ['class' =>"reg form-control-range"],
                 'empty_data'=>'0'
             ])
             ->add('Angle',RangeType::class,[
-                'attr'=>['min'=>0,'max'=>2*pi(),'step'=>pi()/12,'value'=>pi()],
+                'attr'=>['min'=>0,'max'=>2*pi(),'step'=>pi()/12,'value'=>pi(),'class' =>"reg form-control-range"],
                 'label'=>'Angle',
-                'attr' => ['class' =>"reg form-control-range"],
                 'empty_data'=>pi()
             ])
             ->add('Echelle',RangeType::class,[
-                'attr'=>['min'=>1,'max'=>3,'step'=>0.1],
-                'attr' => ['class' =>"reg form-control-range"],
+                'attr'=>['min'=>1,'max'=>3,'step'=>0.1,'class' =>"reg form-control-range"],
                 'empty_data'=>'1'
             ])
             ->add('Longueur',RangeType::class,[
