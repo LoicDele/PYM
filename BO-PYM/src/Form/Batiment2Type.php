@@ -14,72 +14,94 @@ use Symfony\Component\Form\Extension\Core\Type\RangeType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 class Batiment2Type extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('Nom')
-            ->add('Nb_etage',null,[
-                'data'=>'1'
+            ->add('Nom',TextType::class, ['attr' => ['class'=> 'form-control reg rounded']])
+            ->add('Nb_etage',NumberType::class,[
+                'data'=>'0',
+                'attr' => ['class'=> 'reg form-control'],
+                'label' => "Nombre d'étages"
             ])
-            ->add('Description',TextareaType::class)
+            ->add('Description',TextareaType::class, ['attr' => ['class'=> 'form-control reg rounded']])
             ->add('Acces_handicape',CheckboxType::class,[
-                'required'=>false
+                'required'=>false,
+                'attr' => ['class' =>'form-check-input reg'],
+                'label' => 'Accés handicapé'
             ])
             ->add('Etat',ChoiceType::class,[
                 'choices'=>[
                     'Publié'=>true,
-                    'Non Publié'=>false
+                    'Non Publié'=>false,
                 ],
-                'placeholder'=>' '
+                'placeholder'=>'Etat du bâtiment',
+                'label' => ' ',
+                'attr' => ['class' =>'form-control reg-select'],
             ])
             ->add('Representation3D',FileType::class,[
                 'required'=>false,
-                'data_class'=>null
+                'data_class'=>null,
+                'attr' => ['class' => 'form-control-file'],
+                'label' => 'Représentation 3D',
             ])
             ->add('Longitude',RangeType::class,[
                 'attr'=>['min'=>-100,'max'=>100,'step'=>1,'value'=>'1'],
                 'label'=>'Longitude',
+                'attr' => ['class' =>"reg form-control-range"],
                 'empty_data'=>'0'])
 
             ->add('Latitude',RangeType::class,[
                 'attr'=>['min'=>-100,'max'=>100,'step'=>1,'value'=>'1'],
                 'label'=>'Latitude',
+                'attr' => ['class' =>"reg form-control-range"],
                 'empty_data'=>'0'
             ])
             ->add('Angle',RangeType::class,[
                 'attr'=>['min'=>0,'max'=>2*pi(),'step'=>pi()/12,'value'=>pi()],
                 'label'=>'Angle',
+                'attr' => ['class' =>"reg form-control-range"],
                 'empty_data'=>pi()
             ])
             ->add('Echelle',RangeType::class,[
                 'attr'=>['min'=>1,'max'=>3,'step'=>0.1],
+                'attr' => ['class' =>"reg form-control-range"],
                 'empty_data'=>'1'
             ])
             ->add('Longueur',RangeType::class,[
-                'empty_data'=>'8'
+                'empty_data'=>'8',
+                'attr' => ['class' =>"reg form-control-range"],
             ])
             ->add('Largeur',RangeType::class,[
-                'empty_data'=>'8'
+                'empty_data'=>'8',
+                'attr' => ['class' =>"reg form-control-range"],
             ])
             ->add('Rayon',RangeType::class,[
-                'empty_data'=>'8'
+                'empty_data'=>'8',
+                'attr' => ['class' =>"reg form-control-range"],
             ])
             ->add('Hauteur',RangeType::class,[
-                'empty_data'=>'8'
+                'empty_data'=>'8',
+                'attr' => ['class' =>"form-control-range"],
             ])
             ->add('TypeBatiment',EntityType::class,[
                 'class'=>TypeBatiment::class,
                 'choice_value'=>'Nom',
-                'placeholder'=>' '
+                'placeholder'=>'type bâtiment',
+                'label' => ' ',
+                'attr' => ['class' =>'form-control reg-select'],
             ])
             ->add('FormeParametrique',EntityType::class,[
                 'class'=>FormeParametrique::class,
                 'choice_value'=>'Nom',
                 'placeholder'=>' ',
-                'required'=>false
+                'required'=>false,
+                'placeholder'=>'Type de forme',
+                'label' => ' ',
+                'attr' => ['class' =>'form-control reg-select'],
             ])
         ;
     }
