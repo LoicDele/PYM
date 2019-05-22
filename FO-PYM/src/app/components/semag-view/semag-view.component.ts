@@ -4,6 +4,7 @@ import 'babylonjs-loaders';
 import { Batiment } from 'src/app/class/batiment/batiment';
 import { BatimentService } from 'src/app/services/batiment-service/batiment.service';
 import { Subscription } from 'rxjs';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 @Component({
   selector: 'app-semag-view',
   templateUrl: './semag-view.component.html',
@@ -19,7 +20,7 @@ export class SemagViewComponent implements OnInit {
   private _camera: BABYLON.ArcRotateCamera;
   private _light: BABYLON.Light;
 
-  constructor(private batimentService: BatimentService) {
+  constructor(private batimentService: BatimentService, private router: Router) {
   }
 
   ngOnInit() {
@@ -91,6 +92,14 @@ export class SemagViewComponent implements OnInit {
           'radius',
           65,
           1000
+        )
+      );
+      mesh.actionManager.registerAction(
+        new BABYLON.ExecuteCodeAction(
+          {
+            trigger: BABYLON.ActionManager.OnPickTrigger
+          },
+          () => {this.router.navigate(['/entreprise',1]);}
         )
       );
     }
