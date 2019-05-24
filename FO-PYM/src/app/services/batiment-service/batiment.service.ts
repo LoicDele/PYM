@@ -7,6 +7,7 @@ import { Observable, of, Subject } from 'rxjs';
 })
 export class BatimentService {
   urlBatiment: string ="http://127.0.0.1:8000/api/batiments";
+  //urlBatiment: string ="admin.map-pym.com/api/batiments";
   batiments: Batiment[];
   subjectBatiments = new Subject<Batiment[]>();
   constructor(private httpClient: HttpClient) { }

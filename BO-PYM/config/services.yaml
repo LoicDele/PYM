@@ -6,8 +6,6 @@
 parameters:
     locale: 'en' 
     shared_directory: '%kernel.project_dir%/public/uploads/'
-    logos_directory: '%kernel.project_dir%/public/uploads/logos'
-    models_directory: '%kernel.project_dir%/public/uploads/modeles'
 
 services:
     # default configuration for services in *this* file
