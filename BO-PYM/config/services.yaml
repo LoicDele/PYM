@@ -5,6 +5,7 @@
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: 'en' 
+    shared_directory: '%kernel.project_dir%/public/uploads/'
     logos_directory: '%kernel.project_dir%/public/uploads/logos'
     models_directory: '%kernel.project_dir%/public/uploads/modeles'
 
@@ -28,7 +29,7 @@ services:
 
     App\Service\FileUploader:
         arguments:
-            $targetDirectory: '%logos_directory%'
+            $targetDirectory: '%shared_directory%'
     
     App\EventListener\LogoUploadListener:
         tags:
