@@ -14,10 +14,20 @@ PARAM_HAUTEUR = 'Hauteur';
 PARAM_RAYON = 'Rayon'
 PARAM_ANGLE = 'Angle';
 PARAM_ECHELLE = 'Echelle';
+LISTE_BATIMENTS = [];
+PARAM_URL = "http://127.0.0.1:8000/uploads/modeles/";
 
 window.addEventListener('DOMContentLoaded', function() {
 	var engine = undefined;
 	var scene;
+	$.ajax({
+		type: "GET",
+		url: "/api/batiments",
+		complete: function(result){
+			LISTE_BATIMENTS = result.responseJSON;
+			console.log(LISTE_BATIMENTS);
+		}
+	});
 	document.getElementById(PARAM_TYPE_BATIMENT).onchange = function(e) {
 		document.getElementById(PARAM_FORME).required=false;
 		document.getElementById(PARAM_FORME).onchange = () => {};
@@ -68,7 +78,7 @@ window.addEventListener('DOMContentLoaded', function() {
 			camera.upperBetaLimit = Math.PI/2 - 0.1;
 			
 			camera.lowerRadiusLimit = 10;
-			camera.upperRadiusLimit = 150;
+			camera.upperRadiusLimit = 330;
 			
 			scene.activeCamera.panningSensibility = 0;
 			
@@ -94,17 +104,18 @@ window.addEventListener('DOMContentLoaded', function() {
 			scene.clearColor = new BABYLON.Color3(0.368, 0.512, 0.956);
 			scene.ambientColor = BABYLON.Color3.White();
 
-			BABYLON.SceneLoader.ImportMesh("", "./../../", "domaine.babylon", scene, function(object) {
-				// You can apply properties to object.
-				object[0].scaling = new BABYLON.Vector3(0.30, 0.30, 0.30);
-				object[0].setPositionWithLocalVector(new BABYLON.Vector3(0, 0, 0));
-			});
+			// BABYLON.SceneLoader.ImportMesh("", "./../../", "domaine.babylon", scene, function(object) {
+			// 	// You can apply properties to object.
+			// 	object[0].scaling = new BABYLON.Vector3(0.30, 0.30, 0.30);
+			// 	object[0].setPositionWithLocalVector(new BABYLON.Vector3(0, 0, 0));
+			// });
 			
 			var shadowGenerator = new BABYLON.ShadowGenerator(1024, light);
 			// Our built-in 'ground' shape. Params: name, width, depth, subdivs, scene
-			var ground = BABYLON.Mesh.CreateGround("ground1", 350, 350, 20, scene);
+			var ground = BABYLON.Mesh.CreateGround("ground1", 650, 600, 20, scene);
 			ground.material = new BABYLON.StandardMaterial("test_mat", scene);
 			ground.material.specularColor = new BABYLON.Color3(0, 0, 0);
+			ground.material.diffuseTexture = new BABYLON.Texture("http://map-pym.com/sharedfolder/domaine/domaine.png", scene);
 			ground.receiveShadows = true;
 
 			return scene;
@@ -141,15 +152,19 @@ window.addEventListener('DOMContentLoaded', function() {
 
 			longitude.onchange = function(){
 				mesh.position.x = longitude.value;
+				scene.cameras[0].setTarget(scene.meshes[scene.meshes.length-1], false, true);
 			}
 			longitude.oninput = function(){
 				mesh.position.x = longitude.value;
+				scene.cameras[0].setTarget(scene.meshes[scene.meshes.length-1], false, true);
 			}
 			latitude.onchange = function(){
 				mesh.position.z = latitude.value;
+				scene.cameras[0].setTarget(scene.meshes[scene.meshes.length-1], false, true);
 			}
 			latitude.oninput = function(){
 				mesh.position.z = latitude.value;
+				scene.cameras[0].setTarget(scene.meshes[scene.meshes.length-1], false, true);
 			}
 			echelle.onchange = function(){
 				mesh.scaling.x = echelle.value;
@@ -217,6 +232,7 @@ window.addEventListener('DOMContentLoaded', function() {
 					monobjet.position.x=longitude.value;
 					monobjet.position.y=altitude/2;
 					monobjet.position.z=latitude.value;
+					scene.cameras[0].setTarget(scene.meshes[scene.meshes.length-1], false, true);
 				}
 				modif();
 				document.getElementById(PARAM_LONGUEUR).oninput = modif;
@@ -249,12 +265,61 @@ window.addEventListener('DOMContentLoaded', function() {
 				equip.position.x = longitude.value;
 				equip.position.z = latitude.value;
 				equip.rotation.y = rotation.value;
+				scene.cameras[0].setTarget(scene.meshes[scene.meshes.length-1], false, true);
 			}
 
 			echelle.oninput = modif;
 			longitude.oninput = modif;
 			latitude.oninput = modif;
 			rotation.oninput = modif;
+		}
+		// Manage scale, rotation, position of a mesh
+		function pos(mesh, x, y, z, echelle, rot){
+			mesh.setPositionWithLocalVector(new BABYLON.Vector3(x, z, y));
+			mesh.scaling = new BABYLON.Vector3(echelle, echelle, echelle);
+			mesh.rotation.y = rot;
+		}
+		var pose_batiments = function(){
+			for (let bat of LISTE_BATIMENTS){
+					if(bat["formeParamétrique"] == null){
+					BABYLON.SceneLoader.ImportMesh("", PARAM_URL, bat["url"], scene, (object)=>{
+						// You can apply properties to object.
+						pos(object[0], bat["x"], bat["y"], 0, bat["scale"], bat["angle"]);
+					});
+					}
+					else{
+					let altitude;
+					let afficher = true;
+					switch(bat["formeParamétrique"]){
+						case "Cube":{    //cube
+						scene.meshes.push(BABYLON.MeshBuilder.CreateBox(bat["nom"], {size : bat["longueur"]}, scene));
+						altitude = bat["longueur"]/2;
+						break;
+						}
+						case "Pavé":{    //pave
+						scene.meshes.push(BABYLON.MeshBuilder.CreateBox(bat["nom"], {height : bat["hauteur"], width : bat["largeur"], depth : bat["longueur"]}, scene));
+						altitude = bat["hauteur"]/2;
+						break;
+						}
+						case "Cylindre":{    //cylindre
+						scene.meshes.push(BABYLON.MeshBuilder.CreateCylinder(bat["nom"], {height : bat["hauteur"], diameter : bat["rayon"]}, scene));
+						altitude = bat["hauteur"]/2;
+						break;
+						}
+						default:{   //id not found handler
+						console.log("ID for bat "+bat["nom"]+" not found");
+						afficher = false;
+						break;
+						}
+					}
+					if(afficher){
+						var texture = new BABYLON.StandardMaterial(bat["nom"],scene);
+						texture.emissiveColor = new BABYLON.Color3(0,0,1);
+						scene.meshes[scene.meshes.length-1].material = texture;
+						pos(scene.meshes[scene.meshes.length-1], bat["x"], bat["y"], altitude, bat["scale"], bat["angle"]);
+					}
+					}
+			}
 		}
 
 		if(engine != undefined){
@@ -288,32 +353,22 @@ window.addEventListener('DOMContentLoaded', function() {
 				engine.resize();
 			});
 		}
+		pose_batiments();
 		if (document.getElementById(PARAM_TYPE_BATIMENT).value =="Arret de bus"){
-			for (var i=0;i<position.length;i++){
-				if (position[i].id != fileInput && position[i].id != formeInput){
-					position[i].hidden=false;
-				}
+			for (var i=0;i<Modele.length;i++){
+				if(Modele[i].id != fileInput)
+					Modele[i].hidden=false;
 			}
 			var imported_object = PARAM_EQUIPEMENT_ARRET;
 			canvas.style.display = "";
 			
 			// call the createScene function
 			createEquip();
-			// run the render loop
-			engine.runRenderLoop(function(){
-				scene.render();
-			});
-	
-			// the canvas/window resize event handler
-			window.addEventListener('resize', function(){
-				engine.resize();
-			});
 		}
 		if (document.getElementById(PARAM_TYPE_BATIMENT).value =="PAV"){
-			for (var i=0;i<position.length;i++){
-				if (position[i].id != fileInput && position[i].id != formeInput){
-					position[i].hidden=false;
-				}
+			for (var i=0;i<Modele.length;i++){
+				if(Modele[i].id != fileInput)
+					Modele[i].hidden=false;
 			}
 			var imported_object = PARAM_EQUIPEMENT_PAV;
 			
@@ -321,10 +376,9 @@ window.addEventListener('DOMContentLoaded', function() {
 			createEquip();
 		}
 		if (document.getElementById(PARAM_TYPE_BATIMENT).value =="IRVE"){
-			for (var i=0;i<position.length;i++){
-				if (position[i].id != fileInput && position[i].id != formeInput){
-					position[i].hidden=false;
-				}
+			for (var i=0;i<Modele.length;i++){
+				if(Modele[i].id != fileInput)
+					Modele[i].hidden=false;
 			}
 			var imported_object = PARAM_EQUIPEMENT_IRVE;
 
@@ -387,7 +441,10 @@ window.addEventListener('DOMContentLoaded', function() {
 				test.src = URL.createObjectURL(e.target.files[0]);
 				reader.readAsText(e.target.files[0]);
 
-				
+				scene.dispose();
+				scene = createScene();
+				pose_batiments();
+
 				// call the createScene function
 				createBat();
 				// run the render loop
