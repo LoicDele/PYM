@@ -27,15 +27,15 @@ class FileUploader
             try {
                 if ($file->guessExtension()=="txt"){
                     $fileName =$name.'.'."babylon";
-                   $file->move('uploads/modeles',$fileName); 
+                   $file->move($this->getTargetDirectory().'modeles',$fileName); 
                 }
                 elseif($domaine != 0){
                     $fileName = $name.'.'.$file->guessExtension();
-                    $file->move('uploads/domaine',$fileName);
+                    $file->move($this->getTargetDirectory().'domaine',$fileName);
                 }
                 else {
                     $fileName = $name.'.'.$file->guessExtension();
-                    $file->move('uploads/logos',$fileName);
+                    $file->move($this->getTargetDirectory().'logos',$fileName);
                 }
             } catch (FileException $e) {
             // ... handle exception if something happens during file upload

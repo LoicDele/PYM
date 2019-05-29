@@ -4,6 +4,7 @@ import 'babylonjs-loaders';
 import { Batiment } from 'src/app/class/batiment/batiment';
 import { BatimentService } from 'src/app/services/batiment-service/batiment.service';
 import { Subscription } from 'rxjs';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 @Component({
   selector: 'app-semag-view',
   templateUrl: './semag-view.component.html',
@@ -19,7 +20,7 @@ export class SemagViewComponent implements OnInit {
   private _camera: BABYLON.ArcRotateCamera;
   private _light: BABYLON.Light;
 
-  constructor(private batimentService: BatimentService) {
+  constructor(private batimentService: BatimentService, private router: Router) {
   }
 
   ngOnInit() {
@@ -59,7 +60,7 @@ export class SemagViewComponent implements OnInit {
   }
 
   createScene(): void {
-    var PARAM_URL = "http://localhost/sharedfolder/modeles/";
+    var PARAM_URL = "http://map-pym.com/sharedfolder/modeles/";
     // Mouse over animations
     var makeOverOut = (mesh: any, x: any, y: any, z: any) => {
       mesh.actionManager.registerAction(new BABYLON.SetValueAction(BABYLON.ActionManager.OnPointerOutTrigger, mesh.material, "emissiveColor", mesh.material.emissiveColor));
@@ -93,6 +94,14 @@ export class SemagViewComponent implements OnInit {
           1000
         )
       );
+      mesh.actionManager.registerAction(
+        new BABYLON.ExecuteCodeAction(
+          {
+            trigger: BABYLON.ActionManager.OnPickTrigger
+          },
+          () => {this.router.navigate(['/entreprise',1]);}
+        )
+      );
     }
     // Manage scale, rotation, position of a mesh
     function pos(mesh:any, x:any, y:any, z:any, echelle:any, rot:any){
@@ -109,7 +118,7 @@ export class SemagViewComponent implements OnInit {
     this._camera.upperBetaLimit = Math.PI / 2 - 0.1;
 
     this._camera.lowerRadiusLimit = 10;
-    this._camera.upperRadiusLimit = 150;
+    this._camera.upperRadiusLimit = 330;
 
     //this._scene.activeCamera.panningSensibility = 0;
     this._camera.useBouncingBehavior = true;
@@ -130,13 +139,17 @@ export class SemagViewComponent implements OnInit {
 
     // Create a built-in "ground" shape.
     let ground = BABYLON.MeshBuilder.CreateGround('ground1',
-      { width: 350, height: 350, subdivisions: 20 }, this._scene);
+      { width: 650, height: 600, subdivisions: 20 }, this._scene);
+    var backgroundMaterial = new BABYLON.BackgroundMaterial("ground_material", this._scene);
+    backgroundMaterial.diffuseTexture = new BABYLON.Texture("http://map-pym.com/sharedfolder/domaine/domaine.png", this._scene);
+    backgroundMaterial.shadowLevel = 0.4;
 
-    BABYLON.SceneLoader.ImportMesh("", "../../assets/objets/", "domaine.babylon", this._scene, function(object) {
-      // You can apply properties to object.
-      object[0].scaling = new BABYLON.Vector3(0.30, 0.30, 0.30);
-      object[0].setPositionWithLocalVector(new BABYLON.Vector3(0, 0, 0));
-    });
+    ground.material = backgroundMaterial;
+    // BABYLON.SceneLoader.ImportMesh("", "../../assets/objets/", "domaine.babylon", this._scene, function(object) {
+    //   // You can apply properties to object.
+    //   object[0].scaling = new BABYLON.Vector3(0.30, 0.30, 0.30);
+    //   object[0].setPositionWithLocalVector(new BABYLON.Vector3(0, 0, 0));
+    // });
     for (let bat of this.batiments){
       //console.log(bat);
       if(bat.formeParamétrique == null){
@@ -192,162 +205,6 @@ export class SemagViewComponent implements OnInit {
         //console.log(this._scene.meshes);
       }
     }
-    /*BABYLON.SceneLoader.ImportMesh("", "../../assets/objets/", "chevalement_bright.babylon", this._scene, (object)=>{
-      // You can apply properties to object.
-
-      object[0].scaling = new BABYLON.Vector3(1.3, 1.3, 1.3);
-      object[0].setPositionWithLocalVector(new BABYLON.Vector3(0, 0, 20));
-      object[0].actionManager = new BABYLON.ActionManager(this._scene);
-
-      makeOverOut(object[0], 1.3,1.3,1.3);
-      object[0].actionManager.registerAction(
-        new BABYLON.InterpolateValueAction(
-          BABYLON.ActionManager.OnPickTrigger,
-          this._light,
-          'diffuse',
-          BABYLON.Color3.White(),
-          1000
-        )
-      );
-    });
-    BABYLON.SceneLoader.ImportMesh("", "../../assets/objets/", "BRGM.babylon", this._scene, (object)=>{
-			// You can apply properties to object.
-			object[0].scaling = new BABYLON.Vector3(1, 1, 1);
-			object[0].setPositionWithLocalVector(new BABYLON.Vector3(-5, 0, -3));
-			object[0].actionManager = new BABYLON.ActionManager(this._scene);
-
-			makeOverOut(object[0],1,1,1);
-
-			object[0].actionManager.registerAction(
-			    new BABYLON.InterpolateValueAction(
-				BABYLON.ActionManager.OnPickTrigger,
-				this._light,
-				'diffuse',
-				BABYLON.Color3.Red(),
-				1000
-			    )
-			);
-		});
-
-	    BABYLON.SceneLoader.ImportMesh("", "../../assets/objets/", "domaine.babylon", this._scene, (object)=> {
-			// You can apply properties to object.
-			object[0].scaling = new BABYLON.Vector3(0.2, 0.2, 0.2);
-			object[0].setPositionWithLocalVector(new BABYLON.Vector3(0, 0, 0));
-		});
-
-	    BABYLON.SceneLoader.ImportMesh("", "../../assets/objets/", "bat_elec.babylon", this._scene, (object)=> {
-			// You can apply properties to object.
-			object[0].scaling = new BABYLON.Vector3(3,3,6);
-			object[0].setPositionWithLocalVector(new BABYLON.Vector3(-10, 0, 0));
-			object[0].actionManager = new BABYLON.ActionManager(this._scene);
-
-			makeOverOut(object[0],3,3,6);
-
-			object[0].actionManager.registerAction(
-			    new BABYLON.InterpolateValueAction(
-				BABYLON.ActionManager.OnPickTrigger,
-				this._light,
-				'diffuse',
-				BABYLON.Color3.Blue(),
-				1000
-			    )
-			);
-		});
-
-	    BABYLON.SceneLoader.ImportMesh("", "../../assets/objets/", "chaufferie.babylon", this._scene, (object)=> {
-			// You can apply properties to object.
-			object[0].scaling = new BABYLON.Vector3(1,1,1);
-			object[0].setPositionWithLocalVector(new BABYLON.Vector3(-16, 0, 0));
-			object[0].actionManager = new BABYLON.ActionManager(this._scene);
-
-			makeOverOut(object[0],1,1,1);
-
-			object[0].actionManager.registerAction(
-			    new BABYLON.InterpolateValueAction(
-				BABYLON.ActionManager.OnPickTrigger,
-				this._light,
-				'diffuse',
-				BABYLON.Color3.Purple(),
-				1000
-			    )
-			);
-		});
-	    BABYLON.SceneLoader.ImportMesh("", "../../assets/objets/", "hall_mineurs.babylon", this._scene, (object)=> {
-			// You can apply properties to object.
-			object[0].scaling = new BABYLON.Vector3(1, 1, 1);
-			object[0].setPositionWithLocalVector(new BABYLON.Vector3(0, 0, -20));
-			object[0].actionManager = new BABYLON.ActionManager(this._scene);
-
-			makeOverOut(object[0],1,1,1);
-
-			object[0].actionManager.registerAction(
-			    new BABYLON.InterpolateValueAction(
-				BABYLON.ActionManager.OnPickTrigger,
-				this._light,
-				'diffuse',
-				BABYLON.Color3.Yellow(),
-				1000
-			    )
-			);
-		});
-    BABYLON.SceneLoader.ImportMesh("", "../../assets/objets/", "admin.babylon", this._scene, (object)=> {
-			// You can apply properties to object.
-			object[0].scaling = new BABYLON.Vector3(5, 1, 0.8);
-			object[0].setPositionWithLocalVector(new BABYLON.Vector3(30, 1, 30));
-			object[0].actionManager = new BABYLON.ActionManager(this._scene);
-
-			makeOverOut(object[0],5,1,0.8);
-
-			object[0].actionManager.registerAction(
-			    new BABYLON.InterpolateValueAction(
-				BABYLON.ActionManager.OnPickTrigger,
-				this._light,
-				'diffuse',
-				BABYLON.Color3.White(),
-				1000
-			    )
-			);
-		});
-
-    BABYLON.SceneLoader.ImportMesh("", "../../assets/objets/", "Steripure2.0.babylon", this._scene, (object)=> {
-      // You can apply properties to object.
-      object[0].scaling = new BABYLON.Vector3(1, 1, 1);
-      object[0].setPositionWithLocalVector(new BABYLON.Vector3(25, 0, 0));
-      object[0].actionManager = new BABYLON.ActionManager(this._scene);
-
-      makeOverOut(object[0], 1, 1, 1);
-      object[0].actionManager.registerAction(
-        new BABYLON.InterpolateValueAction(
-          BABYLON.ActionManager.OnPickTrigger,
-          this._light,
-          'diffuse',
-          BABYLON.Color3.Black(),
-          1000
-        )
-      );
-    });
-
-    BABYLON.SceneLoader.ImportMesh("", "../../assets/objets/", "puit_sciences.babylon", this._scene, (object)=> {
-			// You can apply properties to object.
-			object[0].scaling = new BABYLON.Vector3(1, 1, 1);
-			object[0].setPositionWithLocalVector(new BABYLON.Vector3(-20, 0, -20));
-			object[0].actionManager = new BABYLON.ActionManager(this._scene);
-
-			makeOverOut(object[0],1,1,1);
-
-			object[0].actionManager.registerAction(
-			    new BABYLON.InterpolateValueAction(
-				BABYLON.ActionManager.OnPickTrigger,
-				this._light,
-				'diffuse',
-				BABYLON.Color3.Yellow(),
-				1000
-			    )
-			);
-		});*/
-
-
-
   }
 
   doRender(): void {
