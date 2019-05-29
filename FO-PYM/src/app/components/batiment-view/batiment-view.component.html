@@ -1,0 +1,30 @@
+<div class="modal-batiment rounded">
+  <div class="modal-header col-12">
+    <div class="col-1"></div>
+    <div class="modal-title col-10">
+      <!-- <img src="assets/icon/1259px-Twitter_Bird.svg.png" id="logo" class="img-fluid" alt="Responsive image" height="50%" width="50%"> -->
+      <h3 class="strong">{{batiment.nom}}</h3>
+    </div>
+    <a class="close col-1" data-dismiss="modal" aria-label="Close" [routerLink]="['']"
+      routerLinkActive="router-link-active">
+      <span aria-hidden="true">&times;</span>
+    </a>
+  </div>
+  <div class="modal-body">
+    <div class="root description">
+        {{batiment.description}}
+    </div>
+    <div class="root floor">
+      Nombre d'étages: {{batiment.nbEtage}}
+    </div>
+    <div class="root handicap">
+        <div *ngIf="batiment.accesHandicape == true; else elseBlock">Accès handicapés: oui</div>
+        <ng-template #elseBlock>Accès handicapés: non</ng-template>
+    </div>
+    <div class="root entreprise">
+      <div *ngFor="">
+
+      </div>
+    </div>
+  </div>
+</div>
