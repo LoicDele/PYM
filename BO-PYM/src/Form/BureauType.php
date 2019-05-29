@@ -15,7 +15,6 @@ class BureauType extends AbstractType
     {
         $builder
             ->add('Numero')
-            ->add('Adresse')
             ->add('Etage')
             ->add('entreprise',EntityType::class,[
                 'class'=>Entreprise::class,
