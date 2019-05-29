@@ -22,11 +22,6 @@ class Bureau
     private $Numero;
 
     /**
-     * @ORM\Column(type="string", length=40)
-     */
-    private $Adresse;
-
-    /**
      * @ORM\Column(type="integer")
      */
     private $Etage;
@@ -54,18 +49,6 @@ class Bureau
     public function setNumero(int $Numero): self
     {
         $this->Numero = $Numero;
-
-        return $this;
-    }
-
-    public function getAdresse(): ?string
-    {
-        return $this->Adresse;
-    }
-
-    public function setAdresse(string $Adresse): self
-    {
-        $this->Adresse = $Adresse;
 
         return $this;
     }

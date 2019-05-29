@@ -28,6 +28,7 @@ class Batiment2Type extends AbstractType
                 'label' => "Nombre d'étages"
             ])
             ->add('Description',TextareaType::class, ['attr' => ['class'=> 'form-control reg rounded']])
+            ->add('Adresse',TextareaType::class,['attr'=>['class'=>'form-control reg rounded']])
             ->add('Acces_handicape',CheckboxType::class,[
                 'required'=>false,
                 'attr' => ['class' =>'form-check-input reg'],

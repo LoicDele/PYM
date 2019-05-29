@@ -103,6 +103,11 @@ class Batiment
      */
     private $Hauteur;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $Adresse;
+
     public function __construct()
     {
         $this->Bureaux = new ArrayCollection();
@@ -336,6 +341,18 @@ class Batiment
     public function setHauteur(?float $Hauteur): self
     {
         $this->Hauteur = $Hauteur;
+
+        return $this;
+    }
+
+    public function getAdresse(): ?string
+    {
+        return $this->Adresse;
+    }
+
+    public function setAdresse(?string $Adresse): self
+    {
+        $this->Adresse = $Adresse;
 
         return $this;
     }
