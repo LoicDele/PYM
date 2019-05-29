@@ -322,6 +322,27 @@ class BatimentController extends AbstractController
         return $response;
     }
 
-    
+    /**
+    * @Route("/api/bureaux")
+    * 
+    * return array;
+    */
+    public function SendAllBureauAction(){
+        $bureaux = $this->getDoctrine()->getRepository(Bureau::class)->findAll();
+        $arrayCollection = array();
+        foreach($bureaux as $item) {
+            dump($item);
+            array_push($arrayCollection, array(
+                'id' => $item->getId(), 
+                'idBatiment' => $item->getBatiment()->getId(), 
+                'idEntreprise' => $item->getEntreprise()->getId(),
+                'Entreprise' => $item->getEntreprise()->getNom(),
+                'UrlEntreprise' => $item->getEntreprise()->getLogo(),
+                'Numero' => $item->getNumero(),
+            ));
+        }
+        $response = new JsonResponse($arrayCollection);
+        $response->headers->set('Content-Type', 'application/json');
+        return $response;
+    }
 }
-
