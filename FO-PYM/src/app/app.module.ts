@@ -14,6 +14,7 @@ import { ContactService } from './services/contact-service/contact.service';
 import { BatimentService } from './services/batiment-service/batiment.service';
 //Pipes
 import { ContactfilterPipe } from './pipes/contact/contactfilter.pipe';
+import { BatimentViewComponent } from './components/batiment-view/batiment-view.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { ContactfilterPipe } from './pipes/contact/contactfilter.pipe';
     EntrepriseViewComponent,
     ContactViewComponent,
     ContactfilterPipe,
+    BatimentViewComponent,
   ],
   imports: [
     BrowserModule,

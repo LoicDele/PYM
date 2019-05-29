@@ -1,0 +1,34 @@
+@import "../../../styles.scss";
+
+.modal-batiment{
+  width: 500px;
+  max-width: 90%;
+  background: white;
+  float: none;
+  margin: 0 auto;
+  margin-top: 5%;
+}
+
+.modal-header{
+  background: whitesmoke;
+}
+
+.modal-title{
+  text-align: center;
+}
+.close{
+  text-align: right;
+  margin-right: 1%;
+}
+
+#logo{
+  max-width: 200px;
+  max-height: 200px;
+  margin-bottom: 20px;
+}
+
+.list-group{
+  margin-bottom: 1%;
+}
+
+
