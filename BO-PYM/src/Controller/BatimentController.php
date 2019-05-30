@@ -292,6 +292,7 @@ class BatimentController extends AbstractController
                         'scale' => $item->getEchelle(),
                         'type' => $item->getTypeBatiment()->getNom(),
                         'formeParamétrique' => $item->getFormeParametrique()->getNom(),
+                        'adresse' => $item->getAdresse(),
                     ));
                 }
                 else{
@@ -312,6 +313,7 @@ class BatimentController extends AbstractController
                         'scale' => $item->getEchelle(),
                         'type' => $item->getTypeBatiment()->getNom(),
                         'formeParamétrique' => null,
+                        'adresse' => $item->getAdresse(),
                     ));
 
                 }
@@ -336,8 +338,9 @@ class BatimentController extends AbstractController
                 'id' => $item->getId(), 
                 'idBatiment' => $item->getBatiment()->getId(), 
                 'idEntreprise' => $item->getEntreprise()->getId(),
-                'Entreprise' => $item->getEntreprise()->getNom(),
-                'UrlEntreprise' => $item->getEntreprise()->getLogo(),
+                'entreprise' => $item->getEntreprise()->getNom(),
+                'urlEntreprise' => $item->getEntreprise()->getLogo(),
+                'etage' => $item->getEtage(),
                 'Numero' => $item->getNumero(),
             ));
         }
