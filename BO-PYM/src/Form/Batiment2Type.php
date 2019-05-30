@@ -50,12 +50,12 @@ class Batiment2Type extends AbstractType
                 'label' => 'Représentation 3D',
             ])
             ->add('Longitude',RangeType::class,[
-                'attr'=>['min'=>-100,'max'=>100,'step'=>1,'value'=>'1','class' =>"reg form-control-range"],
+                'attr'=>['min'=>-250,'max'=>250,'step'=>1,'value'=>'1','class' =>"reg form-control-range"],
                 'label'=>'Longitude',
                 'empty_data'=>'0'])
 
             ->add('Latitude',RangeType::class,[
-                'attr'=>['min'=>-100,'max'=>100,'step'=>1,'value'=>'1','class' =>"reg form-control-range"],
+                'attr'=>['min'=>-250,'max'=>250,'step'=>1,'value'=>'1','class' =>"reg form-control-range"],
                 'label'=>'Latitude',
                 'empty_data'=>'0'
             ])

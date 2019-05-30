@@ -2,6 +2,7 @@
 
 {% block javascripts %}
     {{ encore_entry_script_tags('batimentIndex') }}
+    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
     <script src="./../../script2.js"></script>
     <script src="./../../babylon.custom(1).js"></script>
 {% endblock %}
@@ -47,7 +48,7 @@
                             {{form_row(form.Latitude,{'id':'Latitude'})}}
                         </div>
 
-                        <div class='position Modele' hidden>
+                        <div class='Modele' hidden>
                             {{form_row(form.Echelle,{'id':'Echelle'})}}
                         </div>
 
