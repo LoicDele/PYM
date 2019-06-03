@@ -341,7 +341,7 @@ class BatimentController extends AbstractController
                 'entreprise' => $item->getEntreprise()->getNom(),
                 'urlEntreprise' => $item->getEntreprise()->getLogo(),
                 'etage' => $item->getEtage(),
-                'Numero' => $item->getNumero(),
+                'numero' => $item->getNumero(),
             ));
         }
         $response = new JsonResponse($arrayCollection);

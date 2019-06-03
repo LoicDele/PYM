@@ -17,6 +17,8 @@ import { BatimentService } from './services/batiment-service/batiment.service';
 import { BureauService } from './services/bureau-service/bureau.service';
 //Pipes
 import { ContactfilterPipe } from './pipes/contact/contactfilter.pipe';
+import { BureaufilterPipe } from './pipes/bureau/bureaufilter.pipe';
+import { BatimentfilterPipe } from './pipes/batiment/batimentfilter.pipe';
 
 
 @NgModule({
@@ -29,6 +31,8 @@ import { ContactfilterPipe } from './pipes/contact/contactfilter.pipe';
     ContactfilterPipe,
     BatimentViewComponent,
     BureauViewComponent,
+    BureaufilterPipe,
+    BatimentfilterPipe,
   ],
   imports: [
     BrowserModule,
