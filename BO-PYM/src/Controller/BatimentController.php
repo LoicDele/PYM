@@ -44,7 +44,7 @@ class BatimentController extends AbstractController
      * @Route("/batiment/add/0",name="batiment_add")
      */
 
-    public function new(Request $request,ObjectManager $manager,FileUploader $fileUploader){
+    public function add(Request $request,ObjectManager $manager,FileUploader $fileUploader){
         $this->denyAccessUnlessGranted('ROLE_ADMIN');
 
 

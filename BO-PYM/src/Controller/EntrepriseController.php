@@ -46,7 +46,9 @@ class EntrepriseController extends AbstractController
      * @Route("/entreprises/add",name="entreprise_add")
      */
 
-    public function new(Request $request,ObjectManager $manager, FileUploader $fileUploader){
+
+    public function  add(Request $request,ObjectManager $manager, FileUploader $fileUploader)
+    {
         $this->denyAccessUnlessGranted('ROLE_ADMIN');
 
         $entreprise = new Entreprise();
