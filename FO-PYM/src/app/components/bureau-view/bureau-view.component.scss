@@ -1,0 +1,19 @@
+@import "../../../styles.scss";
+
+a{
+  color: black;
+
+}
+a:hover{
+  color: white;
+  font-size: 120%;
+  text-decoration: none;
+}
+
+li{
+  margin-top: 1px;
+}
+
+li:hover{
+  background: $semag-color-tertiary;
+}

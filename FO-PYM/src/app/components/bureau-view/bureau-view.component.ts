@@ -9,7 +9,7 @@ import { BureauService } from 'src/app/services/bureau-service/bureau.service';
   styleUrls: ['./bureau-view.component.scss']
 })
 export class BureauViewComponent implements OnInit {
-  //@Input() idBat: number;
+  @Input() idBat: number;
   bureaux: Bureau[];
   subscriptionBureau: Subscription;
 

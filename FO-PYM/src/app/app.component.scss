@@ -1,7 +1,8 @@
+@import "../styles.scss";
 .header{
     z-index: 2;
     width: 100%;
-    position: relative;
+    position: static;
 }
 .view{
     z-index: 0;
@@ -12,4 +13,4 @@
   z-index: 1;
   position: relative;
 }
-@import "../styles.scss";
+

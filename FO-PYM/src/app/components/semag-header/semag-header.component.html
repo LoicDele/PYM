@@ -11,7 +11,7 @@
           aria-expanded="false">Bâtiments</a>
         <div class="dropdown-menu" aria-labelledby="dropdownBat">
           <a [routerLink]="['/batiment', elt.id]" routerLinkActive="router-link-active"
-          class="dropdown-item dropdown-picture" *ngFor="let elt of batiments" (click)="toggleCollapse()">{{elt.nom}}</a>
+          class="dropdown-item dropdown-picture" *ngFor="let elt of batiments | batimentfilter" (click)="toggleCollapse()">{{elt.nom}}</a>
         </div>
       </li>
       <li class="nav-item dropdown">

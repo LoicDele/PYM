@@ -1,5 +1,21 @@
 <ul class="list-group">
-  <li *ngFor="let item of bureaux" class="list-group-item">
-    {{item.numero}} {{item.etage}} {{item.entreprise}}
+  <li *ngFor="let item of bureaux | bureaufilter:idBat" class="list-group-item">
+    <a [routerLink]="['/entreprise', item.idEntreprise]" class="link">
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="row">
+            {{item.entreprise}}
+          </div>
+          <div class="row">
+            étage: {{item.etage}} | numéro: {{item.numero}}
+          </div>
+        </div>
+        <div class="col-sm-2">
+        </div>
+        <div class="col-sm-4">
+          img-entreprise
+        </div>
+      </div>
+    </a>
   </li>
 </ul>
