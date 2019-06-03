@@ -43,6 +43,11 @@ class Batiment2Type extends AbstractType
                 'label' => ' ',
                 'attr' => ['class' =>'form-control reg-select'],
             ])
+            ->add('Accessoire',CheckboxType::class,[
+                'required'=>false,
+                'attr' => ['class' =>'form-check-input reg'],
+                'label' => 'Accessoire'
+            ])
             ->add('Representation3D',FileType::class,[
                 'required'=>false,
                 'data_class'=>null,
