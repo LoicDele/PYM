@@ -16,10 +16,8 @@
             input = document.getElementById("batimentsInput");
             filter = input.value.toUpperCase();
             table = document.getElementById("batimentsTable");
-            console.log(table);
             tr = table.getElementsByClassName("searchHide");
             var color = 0;
-            console.log(tr)
             for (i = 0; i < tr.length; i ++) {
                 td = tr[i].getElementsByTagName("td")[0];
                 if (td) {
@@ -53,7 +51,7 @@
         }
         function toggleCollapse(key) {
             desktop = document.getElementsByClassName("Bureaux");
-            console.log(desktop);
+            //console.log(desktop);
             /*for (i = 0; i < desktop.length; i += 2) {
                 if (i == key * 2) {
                     if (desktop[i].hidden == true) {
@@ -88,9 +86,9 @@
         window.addEventListener('DOMContentLoaded', function () {
             ref = document.getElementById("batimentsTable");
             count = ref.getElementsByClassName("key");
-            console.log(count.length);
+            //console.log(count.length);
             var show = Array(count.length).fill(false);
-            console.log(show);
+            //console.log(show);
             desktop = document.getElementsByClassName("Bureaux");
             for (i = 0; i < desktop.length; i ++) {
                 desktop[i].hidden = true;

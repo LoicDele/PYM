@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\DomaineRepository")
@@ -18,6 +19,8 @@ class Domaine
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Joindre un fichier png")
+     * @Assert\File(mimeTypes={"image/png"})
      */
     private $Fichier;
 

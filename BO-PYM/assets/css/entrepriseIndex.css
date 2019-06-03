@@ -43,3 +43,38 @@
     background: #343a40;
     color: white;
 }
+
+.clickabletd{
+    cursor: pointer;
+}
+.entreprises .Contacts{
+    height: auto;
+    width: max-content;
+}
+.entreprises .contacts-index{
+    border-right: 2px solid white;
+}
+
+.contactHead {
+    background: rgb(96, 96, 224);
+}
+
+.Contacts table{
+    width: 100%;
+}
+
+#entreprisesTable #entrepriseBody>tr:nth-child(4n+1) {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+#entreprisesTable #entrepriseBody>tr:nth-child(4n+3) {
+    background: rgba(0, 0, 0, 0);
+}
+
+/* #entreprisesTable #batBody>tr:hover {
+    background: rgba(0, 0, 0, 0.08);
+} */
+
+#entreprisesTable #entrepriseBody .searchHide:hover{
+    background-color: rgba(0, 0, 250, 0.08);
+}

@@ -40,7 +40,6 @@ class DomaineController extends AbstractController
 
         $repository = $this->getDoctrine()->getRepository(Domaine::class);
         $domaine = $repository->find($id);
-        dump($domaine);
         $form=$this->createForm(FileType::class);
         $form->handleRequest($request);
 
