@@ -10,18 +10,55 @@
             input = document.getElementById("entreprisesInput");
             filter = input.value.toUpperCase();
             table = document.getElementById("entreprisesTable");
-            tr = table.getElementsByTagName("tr");
-            for (i = 0; i < tr.length; i++) {
-              td = tr[i].getElementsByTagName("td")[0];
-              if (td) {
-                txtValue = td.textContent || td.innerText;
-                if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                  tr[i].style.display = "";
-                } else {
-                  tr[i].style.display = "none";
+            tr = table.getElementsByClassName("searchHide");
+            var color = 0;
+            for (i = 0; i < tr.length; i ++) {
+                td = tr[i].getElementsByTagName("td")[0];
+                if (td) {
+                    txtValue = td.textContent || td.innerText;
+                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                        if(color%2==0){
+                            tr[i].style.backgroundColor = "rgba(0, 0, 0, 0.05)";
+                            tr[i].onmouseover = (e) => {
+                                e.target.parentNode.style.backgroundColor = "rgba(0, 0, 250, 0.08)";
+                            };
+                             tr[i].onmouseout = (e) => {
+                                e.target.parentNode.style.backgroundColor = "rgba(0, 0, 0, 0.05)";
+                            };
+                        }
+                        else{
+                            tr[i].style.backgroundColor = "rgba(0, 0, 0, 0)";
+                            tr[i].onmouseover = (e) => {
+                                e.target.parentNode.style.backgroundColor = "rgba(0, 0, 250, 0.08)";
+                            };
+                             tr[i].onmouseout = (e) => {
+                                e.target.parentNode.style.backgroundColor = "rgba(0, 0, 0, 0)";
+                            };
+                        }
+                        color++
+                    } else {
+                        tr[i].style.display = "none";
+                    }
                 }
-              }       
             }
+        }
+        function toggleCollapse(key) {
+            contact = document.getElementsByClassName("Contacts");
+
+            for (i = 0; i < contact.length; i ++) {
+                if (i == key) {
+                    if (contact[i].hidden == true) {
+                        contact[i].hidden = false;
+                    } else {
+                        contact[i].hidden = true;
+                    }
+                } 
+                else {
+                    contact[i].hidden = true;
+                }
+            }
+
         }
     </script>
 {% endblock %}
@@ -38,9 +75,9 @@
             </nav>
         </div>
         <div class="row">
-            <table class="table table-striped rounded" id="entreprisesTable">
+            <table class="table rounded" id="entreprisesTable">
                 <thead class="thead-dark">
-                    <tr>
+                    <tr class="searchHide">
                         <th scope="col">Nom</th>
                         <th scope="col">Site internet</th>
                         <th scope="col">Nombre de salariés</th>
@@ -49,14 +86,14 @@
                         <th scope="col">Action</th>
                     </tr>
                 </thead>
-                <tbody>
-                {% for entreprise in entreprises %}
-                        <tr>
-                            <td>{{entreprise.Nom}}</td>
-                            <td>{{entreprise.SiteInternet}}</td>
-                            <td>{{entreprise.NbSalaries}}</td>
-                            <td>{{entreprise.Telephone}}</td>
-                            <td>{{entreprise.Mail}}</td>
+                <tbody id="entrepriseBody">
+                {% for key, entreprise in entreprises %}
+                        <tr class="searchHide">
+                            <td class="clickabletd" onclick="toggleCollapse({{key}})">{{entreprise.Nom}}</td>
+                            <td class="clickabletd" onclick="toggleCollapse({{key}})">{{entreprise.SiteInternet}}</td>
+                            <td class="clickabletd" onclick="toggleCollapse({{key}})">{{entreprise.NbSalaries}}</td>
+                            <td class="clickabletd" onclick="toggleCollapse({{key}})">{{entreprise.Telephone}}</td>
+                            <td class="clickabletd" onclick="toggleCollapse({{key}})">{{entreprise.Mail}}</td>
                             <td>
                                 <div class="btn-group action">
                                   <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -70,6 +107,61 @@
                                                 {% endif %}
                                   </div>
                                 </div>
+                            </td>
+                        </tr>
+                        <tr class="Contacts" hidden>
+                            <td colspan="5">
+                                <table class="table table-stripped rounded">
+                                    {% if entreprise.Contact|length==0 %}
+                                        <tr>
+                                            <td>Pas encore de contact créé pour ce bâtiment</td>
+                                            <td>
+                                                <div class="btn-group action">
+                                                    <button class="btn btn-secondary rounded" aria-expanded="false" aria-haspopup="true" type="button">
+                                                        <a class="btn rounded" href="{{path('entreprise_add_contact',{'id':entreprise.id})}}">Ajouter un contact</a>
+                                                    </button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    {% else %}
+                                        <thead class="contactHead">
+                                            <th scope="col">Contacts</th class="contacts-index">
+                                            <th scope="col">Nom</th>
+                                            <th scope="col">Prénom</th>
+                                            <th scope="col">Mail</th>  
+                                            <th scope="col">Tél</th>
+                                            <th scope="col">Postes</th>
+                                            <th scope="col">Action</th>
+                                        </thead>
+                                        {% for contact in entreprise.Contact %}
+                                            <tbody class="table-info contactBody">
+                                                <tr>
+                                                    <td></td>
+                                                    <td>{{contact.Nom}}</td>
+                                                    <td>{{contact.Prenom}}</td>
+                                                    <td>{{contact.Mail}}</td>
+                                                    <td>{{contact.Telephone}}</td>
+                                                    <td>
+                                                        {% for poste in contact.poste %}
+                                                            <p>{{poste.Nom}}</p>
+                                                        {% endfor %}
+                                                    </td>
+                                                    <td>
+                                                        <div class="btn-group action">
+                                                            <button aria-expanded="false" aria-haspopup="true" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" type="button">Action</button>
+                                                            <div class="dropdown-menu dropdown-menu-right">
+                                                                {% if app.user.role =="Admin" %}
+                                                                    <a class="dropdown-item btn rounded" href="{{path('entreprise_edit_contact',{'id_ent':entreprise.id,'id_cont':contact.id})}}">Modifer</a>
+                                                                    <a class="dropdown-item btn rounded" onclick="return confirm('Êtes vous sûr de vouloir supprimer cet élèment?')" href="{{path('entreprise_delete_contact',{'id_ent':entreprise.id,'id_cont':contact.id})}}">Supprimer</a>
+                                                                {% endif %}
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        {% endfor %}
+                                    {% endif %}
+                                </table>
                             </td>
                         </tr>
                     {% endfor %}
