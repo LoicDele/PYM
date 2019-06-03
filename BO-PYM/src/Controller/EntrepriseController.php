@@ -12,6 +12,7 @@ use App\Entity\Entreprise;
 use App\Form\ActiviteType;
 use App\Form\EntrepriseType;
 use App\Service\FileUploader;
+use Intervention\Image\ImageManagerStatic as Image;
 use App\Form\EntrepriseEditType;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -76,8 +77,12 @@ class EntrepriseController extends AbstractController
                 }
             }
             $filename = $fileUploader->upload($file,$nom_entreprise);
+            $img=Image::make('uploads/logos/'.$filename);
+            $img->resize(500,500);
+            $img->save('uploads/logos/'.$filename);
             $entreprise->setLogo($filename);
             
+
             
            
             $manager->persist($entreprise);
@@ -191,6 +196,7 @@ class EntrepriseController extends AbstractController
         }
 
          $file = $entreprise->getLogo();
+         
          $contacts = $entreprise->getContact();
          $activites = $entreprise->getActivites();
 
