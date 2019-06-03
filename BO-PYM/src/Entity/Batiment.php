@@ -108,6 +108,11 @@ class Batiment
      */
     private $Adresse;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $Accessoire;
+
     public function __construct()
     {
         $this->Bureaux = new ArrayCollection();
@@ -353,6 +358,18 @@ class Batiment
     public function setAdresse(?string $Adresse): self
     {
         $this->Adresse = $Adresse;
+
+        return $this;
+    }
+
+    public function getAccessoire(): ?bool
+    {
+        return $this->Accessoire;
+    }
+
+    public function setAccessoire(bool $Accessoire): self
+    {
+        $this->Accessoire = $Accessoire;
 
         return $this;
     }

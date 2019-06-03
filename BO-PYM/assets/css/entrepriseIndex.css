@@ -78,3 +78,7 @@
 #entreprisesTable #entrepriseBody .searchHide:hover{
     background-color: rgba(0, 0, 250, 0.08);
 }
+
+.clickabletd{
+    cursor: pointer;
+}

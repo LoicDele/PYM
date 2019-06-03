@@ -38,8 +38,8 @@ export class SemagViewComponent implements OnInit {
       this.doRender();
       //});
     }
-    /*this.subscriptionBatiment = this.batimentService.subjectBatiments.subscribe(res => { 
-      _this.batiments = res; 
+    /*this.subscriptionBatiment = this.batimentService.subjectBatiments.subscribe(res => {
+      _this.batiments = res;
       console.log(_this.batiments);
     },
     err=>{console.log("error")},
@@ -92,14 +92,6 @@ export class SemagViewComponent implements OnInit {
           'radius',
           65,
           1000
-        )
-      );
-      mesh.actionManager.registerAction(
-        new BABYLON.ExecuteCodeAction(
-          {
-            trigger: BABYLON.ActionManager.OnPickTrigger
-          },
-          () => {this.router.navigate(['/entreprise',1]);}
         )
       );
     }
@@ -167,6 +159,14 @@ export class SemagViewComponent implements OnInit {
             )
           );
           makeOverOut(object[0], bat.scale,bat.scale,bat.scale);
+          this._scene.meshes[this._scene.meshes.length-1].actionManager.registerAction(
+            new BABYLON.ExecuteCodeAction(
+              {
+                trigger: BABYLON.ActionManager.OnPickTrigger
+              },
+              () => {this.router.navigate(['/batiment',bat.id]);}
+            )
+          );
         });
       }
       else{
@@ -201,6 +201,14 @@ export class SemagViewComponent implements OnInit {
           this._scene.meshes[this._scene.meshes.length-1].actionManager = new BABYLON.ActionManager(this._scene);
           pos(this._scene.meshes[this._scene.meshes.length-1], bat.x, bat.y, altitude, bat.scale, bat.angle);
           makeOverOut(this._scene.meshes[this._scene.meshes.length-1], bat.scale, bat.scale, bat.scale);
+          this._scene.meshes[this._scene.meshes.length-1].actionManager.registerAction(
+            new BABYLON.ExecuteCodeAction(
+              {
+                trigger: BABYLON.ActionManager.OnPickTrigger
+              },
+              () => {this.router.navigate(['/batiment',bat.id]);}
+            )
+          );
         }
         //console.log(this._scene.meshes);
       }
