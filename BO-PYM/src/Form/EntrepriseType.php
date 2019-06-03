@@ -33,7 +33,7 @@ class EntrepriseType extends AbstractType
                 'placeholder'=>'Choisir une activite',
                 'attr' => ['class' => 'reg reg-end rounded form-control']
             ))
-            ->add('Logo',FileType::class,['label'=>'Importer un logo: (JPEG ou PNG)', 'attr' => ['class' => 'import btn']])
+            ->add('Logo',FileType::class,['label'=>'Importer un logo: (JPEG ou PNG)','required'=>false, 'attr' => ['class' => 'import btn']])
         ;
     }
 
