@@ -8,13 +8,16 @@ import { SemagHeaderComponent } from './components/semag-header/semag-header.com
 import { SemagViewComponent } from './components/semag-view/semag-view.component';
 import { EntrepriseViewComponent } from './components/entreprise-view/entreprise-view.component';
 import { ContactViewComponent } from './components/contact-view/contact-view.component';
+import { BatimentViewComponent } from './components/batiment-view/batiment-view.component';
+import { BureauViewComponent } from './components/bureau-view/bureau-view.component';
 //Services
 import {EntrepriseService} from './services/entreprise-service/entreprise.service';
 import { ContactService } from './services/contact-service/contact.service';
 import { BatimentService } from './services/batiment-service/batiment.service';
+import { BureauService } from './services/bureau-service/bureau.service';
 //Pipes
 import { ContactfilterPipe } from './pipes/contact/contactfilter.pipe';
-import { BatimentViewComponent } from './components/batiment-view/batiment-view.component';
+
 
 @NgModule({
   declarations: [
@@ -25,13 +28,14 @@ import { BatimentViewComponent } from './components/batiment-view/batiment-view.
     ContactViewComponent,
     ContactfilterPipe,
     BatimentViewComponent,
+    BureauViewComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
   ],
-  providers: [EntrepriseService, ContactService, BatimentService],
+  providers: [EntrepriseService, ContactService, BatimentService, BureauService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -52,7 +52,7 @@ class AuthController extends AbstractController
             $manager->flush();
 
             $message =(new \Swift_Message('Voici votre mot de passe'))
-            -> setFrom('projetindu6@gmail.com')
+            -> setFrom('account-security-noreply@map-pym.com')
             -> setTo($user->getEmail())
             -> setBody(
                 $this->renderView(
@@ -128,7 +128,7 @@ class AuthController extends AbstractController
             $user->setPassword($hash);
 
             $message =(new \Swift_Message('Récupération du mot de passe'))
-                -> setFrom('projetindu6@gmail.com')
+                -> setFrom('account-security-noreply@map-pym.com')
                 -> setTo($email)
                 -> setBody(
                     $this->renderView(

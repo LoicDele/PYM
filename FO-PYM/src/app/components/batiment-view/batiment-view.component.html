@@ -14,6 +14,9 @@
     <div class="root description">
         {{batiment.description}}
     </div>
+    <div class="root adress">
+      Adresse: {{batiment.adresse}}
+    </div>
     <div class="root floor">
       Nombre d'étages: {{batiment.nbEtage}}
     </div>
@@ -22,9 +25,7 @@
         <ng-template #elseBlock>Accès handicapés: non</ng-template>
     </div>
     <div class="root entreprise">
-      <div *ngFor="">
-
-      </div>
+      <app-bureau-view></app-bureau-view>
     </div>
   </div>
 </div>
