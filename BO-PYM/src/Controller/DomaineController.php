@@ -8,6 +8,7 @@ use App\Service\FileUploader;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -40,13 +41,14 @@ class DomaineController extends AbstractController
 
         $repository = $this->getDoctrine()->getRepository(Domaine::class);
         $domaine = $repository->find($id);
-        $form=$this->createForm(FileType::class);
+        $form=$this->createForm(DomaineType::class, $domaine);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()){
-            $file=$form->getData();
+            $file=new File($domaine->getFichier());
             $filename=$fileUploader->upload($file,"domaine",1);
             $domaine->setFichier($filename);
+            $manager->persist($domaine);
             $manager->flush();
             return $this->redirectToRoute('domaine');
         }
