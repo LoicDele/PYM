@@ -6,7 +6,7 @@
 
 {% block body %}
     <div class="entreprises">
-        <a href="{{path('domaine_edit',{'id':1})}}" >Modifier</a>
+        <a class="btn btn-primary" href="{{path('domaine_edit',{'id':1})}}" >Modifier</a>
         <img class="img-fluid" src="{{asset('uploads/domaine/' ~ file)}}"/>
     </div>
 {% endblock %}

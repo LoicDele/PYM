@@ -16,4 +16,5 @@ export class Batiment {
   scale: number;
   formeParamétrique: string;
   type: string;
+  adresse: string;
 }

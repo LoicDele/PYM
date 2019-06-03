@@ -150,7 +150,7 @@
                                 </td>
                             </tr>
                             <tr class="Bureaux" hidden>
-                                <td colspan="5">
+                                <th colspan="5">
                                     <table class="table table-stripped rounded">
                                         {% if batiment.Bureaux|length==0 %}
                                             <tr>
@@ -168,6 +168,7 @@
                                                 <th scope="col">Bureaux</th class="bureaux-index">
                                                 <th scope="col">Nom</th>
                                                 <th scope="col">Etage</th>
+                                                <th scope="col">Numéro</th>
                                                 <th scope="col">Action</th>    
                                             </thead>
                                             {% for bureau in batiment.Bureaux %}
@@ -176,6 +177,7 @@
                                                         <td></td>
                                                         <td>{{bureau.entreprise.Nom}}</td>
                                                         <td>{{bureau.etage}}</td>
+                                                        <td>{{bureau.numero}}</td>  
                                                         <td>
                                                             <div class="btn-group action">
                                                                 <button aria-expanded="false" aria-haspopup="true" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" type="button">Action</button>
