@@ -172,7 +172,7 @@ class EntrepriseController extends AbstractController
 
             $manager->flush();
             
-            return $this->redirectToRoute('entreprise_show',['id'=>$id]);
+            return $this->redirectToRoute('entreprises');
         }
 
         return $this->render('entreprise/edit.html.twig',['entreprise'=>$entreprise_to_edit,'form' => $form->createView(),'file'=>$file]);
@@ -245,7 +245,7 @@ class EntrepriseController extends AbstractController
 
             $manager->flush();
 
-            return $this->redirectToRoute('entreprise_show',['id'=>$id]);
+            return $this->redirectToRoute('entreprises');
         }
     
         return $this->render('entreprise/contact/add.html.twig',['form'=>$form->createView(),'entreprise'=>$entreprise]);
@@ -330,7 +330,7 @@ class EntrepriseController extends AbstractController
             }
             
             $manager->flush();
-            return $this->redirectToRoute('entreprise_show',['id'=>$id_ent]);
+            return $this->redirectToRoute('entreprises');
         } 
     
         return $this->render('entreprise/contact/edit.html.twig',['entreprise'=>$entreprise,'contact'=>$contact,'form'=>$form->createView()]);
@@ -365,7 +365,7 @@ class EntrepriseController extends AbstractController
         $manager->remove($contact);
         $manager->flush();       
             
-        return $this->redirectToRoute('entreprise_show',['id'=>$id_ent]);
+        return $this->redirectToRoute('entreprises');
     }
 
     /**
@@ -393,7 +393,7 @@ class EntrepriseController extends AbstractController
         $poste_to_delete = $repos->findOneBy(['Nom'=>$poste]);
         $contact->removePoste($poste_to_delete);
         $manager->flush();
-        return $this->redirectToRoute('entreprise_show',['id'=>$id_ent]);
+        return $this->redirectToRoute('entreprises');
     }
 
     /**
@@ -412,7 +412,7 @@ class EntrepriseController extends AbstractController
         $activite_to_delete = $repos->findOneBy(['Nom'=>$activite]);
         $entreprise->removeActivite($activite_to_delete);
         $manager->flush();
-        return $this->redirectToRoute('entreprise_show',['id'=>$id_ent]);
+        return $this->redirectToRoute('entreprises');
     }
 
     /**

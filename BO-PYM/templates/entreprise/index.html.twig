@@ -91,7 +91,7 @@
                         <tr class="searchHide">
                             <td class="clickabletd" onclick="toggleCollapse({{key}})">{{entreprise.Nom}}</td>
                             <td class="clickabletd" onclick="toggleCollapse({{key}})">{{entreprise.SiteInternet}}</td>
-                            <td class="clickabletd" onclick="toggleCollapse({{key}})">{{entreprise.NbSalaries}}</td>
+                            <td class="clickabletd number" onclick="toggleCollapse({{key}})">{{entreprise.NbSalaries}}</td>
                             <td class="clickabletd" onclick="toggleCollapse({{key}})">{{entreprise.Telephone}}</td>
                             <td class="clickabletd" onclick="toggleCollapse({{key}})">{{entreprise.Mail}}</td>
                             <td>
@@ -100,7 +100,7 @@
                                     Action
                                   </button>
                                   <div class="dropdown-menu dropdown-menu-right">              
-                                                <a class="dropdown-item btn rounded" href="{{path('entreprise_show',{'id':entreprise.id})}}">Voir</a>
+                                                <a class="dropdown-item btn rounded" href="{{path('entreprise_add_contact',{'id':entreprise.id})}}" >Ajouter un contact</a>
                                                 {% if app.user.role =="Admin" %}
                                                 <a class="dropdown-item btn rounded" href="{{path('entreprise_edit',{'id':entreprise.id})}}">Modifier</a>
                                                 <a class="dropdown-item btn rounded" onclick="return confirm('Êtes vous sûr de vouloir supprimer cet élèment?')" href="{{path('entreprise_delete',{'id':entreprise.id})}}">Supprimer</a>
@@ -114,7 +114,7 @@
                                 <table class="table table-stripped rounded">
                                     {% if entreprise.Contact|length==0 %}
                                         <tr>
-                                            <td>Pas encore de contact créé pour ce bâtiment</td>
+                                            <td>Pas encore de contact créé pour cete entreprise</td>
                                             <td>
                                                 <div class="btn-group action">
                                                     <button class="btn btn-secondary rounded" aria-expanded="false" aria-haspopup="true" type="button">
