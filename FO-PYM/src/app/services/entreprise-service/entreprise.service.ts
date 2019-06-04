@@ -9,7 +9,7 @@ import { Observable, of, Subject } from 'rxjs';
 })
 export class EntrepriseService {
   urlEntreprise: string = "http://127.0.0.1:8000/api/entreprises";
-    //urlBatiment: string ="http.admin.map-pym.com/api/entreprises";
+    //urlEntreprise: string ="http://admin.map-pym.com/api/entreprises";
   entreprises: Entreprise[];
   entreprise: Entreprise;
   subjectEntreprises = new Subject<Entreprise[]>();

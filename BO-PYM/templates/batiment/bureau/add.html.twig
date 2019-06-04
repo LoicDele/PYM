@@ -1,9 +1,9 @@
 {% extends 'layout.html.twig' %}
 {% block stylesheets %}
-    {{ encore_entry_link_tags('contactAdd') }}
+    {{ encore_entry_link_tags('addedit') }}
 {% endblock %}
 {% block javascripts %}
-    {{ encore_entry_script_tags('contactAdd') }}
+    {{ encore_entry_script_tags('addedit') }}
 {% endblock %}
 {% block body %}
     {% if app.user %}
@@ -16,7 +16,7 @@
                     <div class="col-1"></div>
                     <div class="col-10">
                         {{ form_start(form) }}
-                        {{ form_widget(form)}}
+                        {{ form_widget(form) }}
                     </div>
                     <div class="col-1"></div>
                 </div>
