@@ -35,6 +35,8 @@ Encore
     .addEntry('batimentIndex', './assets/js/batimentIndex.js')
     .addEntry('batimentAddEdit', './assets/js/batimentAddEdit.js')
     .addEntry('reference', './assets/js/reference.js')
+    .addEntry('addedit', './assets/js/addedit.js')
+    .addEntry('domaine', './assets/js/domaine.js')
     // When enabled, Webpack "splits" your files into sm
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
     .splitEntryChunks()

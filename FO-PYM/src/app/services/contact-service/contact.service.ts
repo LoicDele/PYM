@@ -8,7 +8,7 @@ import { Observable, of, Subject } from 'rxjs';
 })
 export class ContactService {
   urlContact: string = "http://127.0.0.1:8000/api/contacts";
-    //urlBatiment: string ="admin.map-pym.com/api/contacts";
+  //urlContact: string ="http://admin.map-pym.com/api/contacts";
   contacts: Contact[];
   subjectContacts = new Subject<Contact[]>();
   constructor(private httpClient: HttpClient) { }

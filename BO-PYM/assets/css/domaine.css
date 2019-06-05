@@ -1,0 +1,12 @@
+@import '../../node_modules/bootstrap/dist/css/bootstrap.css';
+@import './layout.css';
+
+.domaine{
+    margin-left: 20%;
+    margin-top: 2%;
+}
+
+.domaine .btn{
+    margin-top: 1%;
+    margin-left: 8%;
+}

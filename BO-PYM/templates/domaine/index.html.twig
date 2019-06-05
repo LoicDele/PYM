@@ -1,12 +1,14 @@
 {% extends 'layout.html.twig' %}
 
 {% block stylesheets %}
-    {{ encore_entry_link_tags('entrepriseIndex') }}
+    {{ encore_entry_link_tags('domaine') }}
 {% endblock %}
-
+{% block javascripts %}
+    {{ encore_entry_script_tags('domaine') }}
+{% endblock %}
 {% block body %}
-    <div class="entreprises">
-        <a class="btn btn-primary" href="{{path('domaine_edit',{'id':1})}}" >Modifier</a>
-        <img class="img-fluid" src="{{asset('uploads/domaine/' ~ file)}}"/>
+    <div class="domaine">
+        <img class="img-fluid row" height="25%" width="25%" src="{{asset('uploads/domaine/' ~ file)}}"/>
+        <a class="btn btn-primary row" href="{{path('domaine_edit',{'id':1})}}" >Modifier</a>
     </div>
 {% endblock %}
