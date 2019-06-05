@@ -136,8 +136,7 @@ class BatimentController extends AbstractController
                     $batiment->setRepresentation3D($filename);
                 }
                 else{
-                    $filename = $fileUploader->upload($old_value,$nom_batiment);
-                    $batiment->setRepresentation3D($filename);
+                    $batiment->setRepresentation3D($old_value);
                 }
                 
             }
