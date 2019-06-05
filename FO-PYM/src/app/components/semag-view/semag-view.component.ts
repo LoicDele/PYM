@@ -159,7 +159,7 @@ export class SemagViewComponent implements OnInit {
             )
           );
           makeOverOut(object[0], bat.scale,bat.scale,bat.scale);
-          this._scene.meshes[this._scene.meshes.length-1].actionManager.registerAction(
+          object[0].actionManager.registerAction(
             new BABYLON.ExecuteCodeAction(
               {
                 trigger: BABYLON.ActionManager.OnPickTrigger

@@ -60,10 +60,10 @@ class BatimentController extends AbstractController
                     $batiment->setRepresentation3D("ARRET.babylon");
                     break;
                 case "PAV":
-                    $batiment->setRepresentation3D("ARRET.babylon");
+                    $batiment->setRepresentation3D("PAV_Poubelles.babylon");
                     break;
                 case "IRVE":
-                    $batiment->setRepresentation3D("ARRET.babylon");
+                    $batiment->setRepresentation3D("IRVE.babylon");
                     break;
                 case "Batiment":
                     $model = $form->get('Representation3D')->getData();
@@ -117,10 +117,10 @@ class BatimentController extends AbstractController
                 $batiment->setRepresentation3D("ARRET.babylon");
             }
             if ($batiment->getTypeBatiment()=="PAV"){
-                $batiment->setRepresentation3D("ARRET.babylon");
+                $batiment->setRepresentation3D("PAV_Poubelles.babylon");
             }
             if ($batiment->getTypeBatiment()=="IRVE"){
-                $batiment->setRepresentation3D("ARRET.babylon");
+                $batiment->setRepresentation3D("IRVE.babylon");
             }
             if ($batiment->getTypeBatiment()=="Batiment"){
                 $model = $form->get('Representation3D')->getData();
