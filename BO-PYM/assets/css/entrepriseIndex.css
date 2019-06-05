@@ -82,3 +82,8 @@
 .clickabletd{
     cursor: pointer;
 }
+
+.logo-entreprise{
+    max-width: 39.2;
+    max-height: 39.2;
+}

@@ -78,6 +78,7 @@
             <table class="table rounded" id="entreprisesTable">
                 <thead class="thead-dark">
                     <tr class="searchHide">
+                        <th scope="col">Logo</th>
                         <th scope="col">Nom</th>
                         <th scope="col">Site internet</th>
                         <th scope="col">Nombre de salariés</th>
@@ -89,6 +90,9 @@
                 <tbody id="entrepriseBody">
                 {% for key, entreprise in entreprises %}
                         <tr class="searchHide">
+                            <td class="clickabletd" onclick="toggleCollapse({{key}})">
+                                <img class="img-fluid logo-entreprise" src="{{asset('uploads/logos/' ~ entreprise.Logo)}}"/>
+                            </td>
                             <td class="clickabletd" onclick="toggleCollapse({{key}})">{{entreprise.Nom}}</td>
                             <td class="clickabletd" onclick="toggleCollapse({{key}})">{{entreprise.SiteInternet}}</td>
                             <td class="clickabletd number" onclick="toggleCollapse({{key}})">{{entreprise.NbSalaries}}</td>
