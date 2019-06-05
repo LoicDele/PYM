@@ -2,12 +2,12 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Batiment } from 'src/app/class/batiment/batiment';
 import { Observable, of, Subject } from 'rxjs';
+import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root'
 })
 export class BatimentService {
-  urlBatiment: string = "http://127.0.0.1:8000/api/batiments";
-  //urlBatiment: string ="http://admin.map-pym.com/api/batiments";
+  urlBatiment: string = environment.api + "batiments";
   batiments: Batiment[];
   batiment: Batiment;
   subjectBatiments = new Subject<Batiment[]>();

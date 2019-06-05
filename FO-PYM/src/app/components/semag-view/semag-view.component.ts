@@ -57,7 +57,6 @@ export class SemagViewComponent implements OnInit {
     }
     this.subscriptionBatiment = this.batimentService.subjectBatiments.subscribe(myObserver);
     //this.batimentService.getBatimentByHTTP();
-    console.log(this.batiments);
   }
 
   createScene(): void {

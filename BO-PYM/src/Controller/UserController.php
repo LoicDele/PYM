@@ -23,7 +23,7 @@ class UserController extends AbstractController
 
 
     /**
-     * @Route("/users/index", name="users")
+     * @Route("/users/lister", name="users")
      */
     public function index()
     {
@@ -38,7 +38,7 @@ class UserController extends AbstractController
 
 
     /**
-     * @Route("/users/edit",name="user_edit")
+     * @Route("/users/modifier",name="user_edit")
      */
     public function edit(Request $request,ObjectManager $manager,UserPasswordEncoderInterface $encoder)
     {
@@ -86,7 +86,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/users/edit/{id}",name="user_edit_other")
+     * @Route("/users/modifier/{id}",name="user_edit_other")
      */
 
     public function edit_other($id,Request $request,ObjectManager $manager,UserPasswordEncoderInterface $encoder,\Swift_Mailer $mailer){
@@ -134,7 +134,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/users/delete/{id}",name="user_delete")   
+     * @Route("/users/supprimer/{id}",name="user_delete")   
      */
 
     public function delete($id,ObjectManager $manager){

@@ -31,7 +31,7 @@ header("Access-Control-Allow-Origin: *");
 class EntrepriseController extends AbstractController
 {
     /**
-     * @Route("/entreprises/index", name="entreprises")
+     * @Route("/entreprises/lister", name="entreprises")
      */
     public function index()
     {
@@ -44,7 +44,7 @@ class EntrepriseController extends AbstractController
     }
 
     /**
-     * @Route("/entreprises/add",name="entreprise_add")
+     * @Route("/entreprises/ajouter",name="entreprise_add")
      */
 
 
@@ -96,7 +96,7 @@ class EntrepriseController extends AbstractController
 
 
     /**
-    * @Route("/entreprises/edit/{id}",name="entreprise_edit")
+    * @Route("/entreprises/modifier/{id}",name="entreprise_edit")
     */
 
     public function edit($id,Request $request,ObjectManager $manager,FileUploader $fileUploader){
@@ -112,63 +112,27 @@ class EntrepriseController extends AbstractController
             );
         }
         $file = $entreprise_to_edit->getLogo();
-        $entreprise_to_edit->setLogo(new File($this->getParameter('shared_directory').'/logos/'.$entreprise_to_edit->getLogo()));
-
-        $form = $this->createFormBuilder($entreprise_to_edit)
-            ->add('Nom',TextType::class,[
-                 'attr' => [
-                     'placeholder' => "Nom",
-                     'class' => 'reg rounded form-control'],
-                     'label' => ' '])
-            ->add('Site_Internet',TextType::class,[
-                'attr' => [
-                    'placeholder' => "Site internet",
-                    'class' => 'reg rounded form-control'],
-                    'label' => ' '])
-            ->add('Nb_Salaries',NumberType::class,[
-                'attr' => [
-                    'placeholder' => "Nombre de salariés",
-                    'class' => 'reg rounded form-control'],
-                    'label' => ' '])
-            ->add('Telephone',TextType::class,[
-                'attr' => [
-                    'placeholder' => "Numéro de téléphone",
-                    'class' => 'reg rounded form-control'],
-                    'label' => ' '])
-            ->add('Mail',EmailType::class,[
-                'attr' => [
-                    'placeholder' => "Adresse email",
-                    'class' => 'reg reg-end rounded form-control'],
-                    'label' => ' '])
-            ->add('activites',EntityType::class,array(
-                'required'=>false,
-                'class'=>Activite::class,
-                'choice_label'=>'Nom',  
-                'mapped'=>false,
-                'label'=>' ',
-                'placeholder'=>'Choisir une activite',
-                'attr' => ['class' => 'reg reg-end rounded form-control'],
-                'empty_data'=>$entreprise_to_edit->getActivites()
-            ))
-            ->add('Logo',FileType::class,[
-                'label'=>'Importer un logo: (JPEG ou PNG)',
-                'attr' => [
-                    'class' => 'import btn btn-secondary'],
-                    'required' => false,
-                    'empty_data'=>$entreprise_to_edit->getLogo()])
-            ->getForm();
+        $entreprise_to_edit->setLogo(new File('uploads/logos/'.$file));
+        $old_value = $entreprise_to_edit->getLogo();
+        $form = $this->createForm(EntrepriseType::class,$entreprise_to_edit);
         $form -> handleRequest($request);
 
         if($form->isSubmitted() ){
 
-            $file = $entreprise_to_edit->getLogo();
+            $new_file = $form->get('Logo')->getData();
+            if ($new_file != null){
+                $nom_entreprise = $entreprise_to_edit->getNom();
+                $filename = $fileUploader->upload($new_file,$nom_entreprise);
+                $entreprise_to_edit->setLogo($filename);
+            }
+            else{
+                $logo=$entreprise_to_edit->getLogo();
+                $entreprise_to_edit->setLogo($old_value);
+            }
+
             if ($form->get('activites')->getData()!=null){
                 $entreprise_to_edit->addActivite($form->get('activites')->getData());
             }
-
-            $nom_entreprise = $entreprise_to_edit->getNom();
-            $filename = $fileUploader->upload($file,$nom_entreprise);
-            $entreprise_to_edit->setLogo($filename);
 
             $manager->flush();
             
@@ -179,7 +143,7 @@ class EntrepriseController extends AbstractController
     }
 
     /**
-     * @Route("/entreprises/show/{id}",name="entreprise_show")
+     * @Route("/entreprises/voir/{id}",name="entreprise_show")
      */
 
      public function show($id){
@@ -204,7 +168,7 @@ class EntrepriseController extends AbstractController
      }
 
     /**
-    * @Route("/entreprises/{id}/add_contact",name="entreprise_add_contact")
+    * @Route("/entreprises/{id}/ajouter_contact",name="entreprise_add_contact")
     */
 
     public function add_contact($id,Request $request,ObjectManager $manager){
@@ -252,7 +216,7 @@ class EntrepriseController extends AbstractController
     }
 
     /**
-     * @Route("/entreprises/add_poste",name="entreprise_add_poste")
+     * @Route("/entreprises/ajouter_poste",name="entreprise_add_poste")
      */
 
     public function add_poste(Request $request, ObjectManager $manager){
@@ -269,7 +233,7 @@ class EntrepriseController extends AbstractController
     }
 
     /**
-     * @Route("/entreprises/add_activite",name="entreprise_add_activite")
+     * @Route("/entreprises/ajouter_activite",name="entreprise_add_activite")
      */
 
     public function add_activite(Request $request, ObjectManager $manager){
@@ -286,7 +250,7 @@ class EntrepriseController extends AbstractController
     }
 
     /**
-    * @Route("/entreprises/{id_ent}/edit_contact/{id_cont}",name="entreprise_edit_contact")
+    * @Route("/entreprises/{id_ent}/modifier_contact/{id_cont}",name="entreprise_edit_contact")
     */
 
     public function edit_contact($id_ent,$id_cont,Request $request,ObjectManager $manager){
@@ -337,7 +301,7 @@ class EntrepriseController extends AbstractController
     }
 
     /**
-    * @Route("/entreprises/{id_ent}/delete_contact/{id_cont}",name="entreprise_delete_contact")
+    * @Route("/entreprises/{id_ent}/supprimer_contact/{id_cont}",name="entreprise_delete_contact")
     */
 
     public function delete_contact($id_ent,$id_cont,ObjectManager $manager){
@@ -369,7 +333,7 @@ class EntrepriseController extends AbstractController
     }
 
     /**
-     * @Route("/entreprises/{id_ent}/delete_poste/{poste}/{id_cont}",name="entreprise_delete_poste")
+     * @Route("/entreprises/{id_ent}/supprimer_poste/{poste}/{id_cont}",name="entreprise_delete_poste")
      */
 
     public function delete_poste($id_ent,$id_cont,$poste,ObjectManager $manager){
@@ -397,7 +361,7 @@ class EntrepriseController extends AbstractController
     }
 
     /**
-     * @Route("/entreprises/{id_ent}/delete_activite/{activite}",name="entreprise_delete_activite")
+     * @Route("/entreprises/{id_ent}/supprimer_activite/{activite}",name="entreprise_delete_activite")
      */
 
     public function delete_activite($id_ent,$activite,ObjectManager $manager){
@@ -416,7 +380,7 @@ class EntrepriseController extends AbstractController
     }
 
     /**
-    * @Route("/entreprises/delete/{id}",name="entreprise_delete")   
+    * @Route("/entreprises/supprimer/{id}",name="entreprise_delete")   
     */
 
     public function delete($id,ObjectManager $manager){

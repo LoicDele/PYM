@@ -16,7 +16,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class ReferenceTableController extends AbstractController
 {
     /**
-     * @Route("/reference_tables/index", name="reference_tables")
+     * @Route("/tables_reference/lister", name="reference_tables")
      */
     public function index()
     {
@@ -36,7 +36,7 @@ class ReferenceTableController extends AbstractController
     }
 
     /**
-     * @Route("reference_tables/add_activite",name="reference_table_add_activite")
+     * @Route("tables_reference/ajouter_activite",name="reference_table_add_activite")
      */
 
      public function add_activite(Request $request, ObjectManager $manager){
@@ -56,7 +56,7 @@ class ReferenceTableController extends AbstractController
 
 
      /**
-     * @Route("reference_tables/add_poste",name="reference_table_add_poste")
+     * @Route("tables_reference/ajouter_poste",name="reference_table_add_poste")
      */
 
     public function add_poste(Request $request, ObjectManager $manager){
@@ -78,7 +78,7 @@ class ReferenceTableController extends AbstractController
 
 
     /**
-     * @Route("/reference_table/delete_activite/{id}",name="reference_table_delete_activite")
+     * @Route("/tables_reference/supprimer_activite/{id}",name="reference_table_delete_activite")
      */
 
      public function delete_activite(ObjectManager $manager,$id){
@@ -94,7 +94,7 @@ class ReferenceTableController extends AbstractController
      }
 
      /**
-     * @Route("/reference_table/delete_poste/{id}",name="reference_table_delete_poste")
+     * @Route("/tables_reference/supprimer_poste/{id}",name="reference_table_delete_poste")
      */
 
     public function delete_poste(ObjectManager $manager,$id){
