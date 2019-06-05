@@ -1,18 +1,20 @@
 <h4>Contacts:</h4>
-<ul class="list-group list-group-horizontal">
-  <li *ngFor="let item of contacts | contactfilter:idEnt" class="list-group-item">
-    <div class="row">
-      <small class="name">{{item.prenom}} {{item.nom}}</small>
-    </div>
-    <div class="row">
-      <div class="tel">
-        <small>Tél.: {{item.telephone}}</small>
+<div class="contact-horizontal">
+  <ul class="list-group list-group-horizontal">
+    <li *ngFor="let item of contacts | contactfilter:idEnt" class="list-group-item">
+      <div class="row">
+        <small class="name">{{item.prenom}} {{item.nom}}</small>
       </div>
-    </div>
-    <div class="row">
-      <div class="mail">
-        <small>E-mail: {{item.mail}}</small>
+      <div class="row">
+        <div class="tel">
+          <small>Tél.: {{item.telephone}}</small>
+        </div>
       </div>
-    </div>
-  </li>
-</ul>
+      <div class="row">
+        <div class="mail">
+          <small>E-mail: {{item.mail}}</small>
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>

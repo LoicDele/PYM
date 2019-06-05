@@ -3,13 +3,13 @@ import { HttpClient } from '@angular/common/http';
 import { Entreprise } from '../../class/entreprise/entreprise';
 
 import { Observable, of, Subject } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EntrepriseService {
-  urlEntreprise: string = "http://127.0.0.1:8000/api/entreprises";
-    //urlEntreprise: string ="http://admin.map-pym.com/api/entreprises";
+  urlEntreprise: string = environment.api + "entreprises";
   entreprises: Entreprise[];
   entreprise: Entreprise;
   subjectEntreprises = new Subject<Entreprise[]>();

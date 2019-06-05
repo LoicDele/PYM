@@ -3,6 +3,7 @@
 .modal-batiment{
   width: 500px;
   max-width: 90%;
+  height: 50%;
   background: white;
   float: none;
   margin: 0 auto;
@@ -31,4 +32,9 @@
   margin-bottom: 1%;
 }
 
+.entreprise{
+  margin-top: 20px;
+  max-height: 30vh;
+  overflow-y: scroll;
+}
 
