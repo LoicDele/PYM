@@ -5,8 +5,46 @@
   <title>Semag</title>
   <base href="/">
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <script>
+  window.addEventListener('DOMContentLoaded', function() {
+    // Prevent scrolling when touching the canvas
+    canvas = document.getElementById("renderCanvas");
+    document.body.addEventListener("touchstart", (e) => {
+      if(e.target == canvas){
+          e.preventDefault();
+          console.log("START")
+      }
+    }, { passive: false });
+    document.body.addEventListener("touchend", (e) => {
+      if(e.target == canvas)
+          e.preventDefault();
+          console.log("END")
+    }, { passive: false });
+    document.body.addEventListener("touchmove", (e) => {
+      if(e.target == canvas){
+          e.preventDefault();
+          console.log("MOVE")
+      }
+    }, { passive: false });
+  });
+  </script>
+  <style>
+    html, body {
+        overflow: hidden;
+        width   : 100%;
+        height  : 100%;
+        margin  : 0;
+        padding : 0;
+    }
+
+    #renderCanvas {
+        width   : 100%;
+        height  : 100%;
+        touch-action: none;
+    }
+  </style>
 </head>
 <body>
   <app-root></app-root>

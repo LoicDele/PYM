@@ -5,6 +5,7 @@ import { Batiment } from 'src/app/class/batiment/batiment';
 import { BatimentService } from 'src/app/services/batiment-service/batiment.service';
 import { Subscription } from 'rxjs';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import 'pepjs';
 @Component({
   selector: 'app-semag-view',
   templateUrl: './semag-view.component.html',
