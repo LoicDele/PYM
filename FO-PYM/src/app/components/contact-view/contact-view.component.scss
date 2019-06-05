@@ -6,3 +6,12 @@ li{
   border: 2px solid lightgray;
 
 }
+
+.contact-horizontal{
+  overflow-x: scroll;
+  width: 100%;
+}
+
+.list-group-horizontal > .list-group-item {
+  min-width: 9rem;
+}

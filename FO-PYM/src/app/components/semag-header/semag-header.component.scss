@@ -3,3 +3,8 @@
     border : 1px solid $semag-color-tertiary;
     box-shadow: 0 0 0 1px $semag-color-tertiary;
 }
+
+.dropdown-menu{
+    max-height: 200px;
+    overflow-y: scroll;
+}
