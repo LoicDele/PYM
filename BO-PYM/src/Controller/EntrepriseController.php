@@ -31,7 +31,7 @@ header("Access-Control-Allow-Origin: *");
 class EntrepriseController extends AbstractController
 {
     /**
-     * @Route("/entreprises/index", name="entreprises")
+     * @Route("/entreprises/lister", name="entreprises")
      */
     public function index()
     {
@@ -44,7 +44,7 @@ class EntrepriseController extends AbstractController
     }
 
     /**
-     * @Route("/entreprises/add",name="entreprise_add")
+     * @Route("/entreprises/ajouter",name="entreprise_add")
      */
 
 
@@ -96,7 +96,7 @@ class EntrepriseController extends AbstractController
 
 
     /**
-    * @Route("/entreprises/edit/{id}",name="entreprise_edit")
+    * @Route("/entreprises/modifier/{id}",name="entreprise_edit")
     */
 
     public function edit($id,Request $request,ObjectManager $manager,FileUploader $fileUploader){
@@ -143,7 +143,7 @@ class EntrepriseController extends AbstractController
     }
 
     /**
-     * @Route("/entreprises/show/{id}",name="entreprise_show")
+     * @Route("/entreprises/voir/{id}",name="entreprise_show")
      */
 
      public function show($id){
@@ -168,7 +168,7 @@ class EntrepriseController extends AbstractController
      }
 
     /**
-    * @Route("/entreprises/{id}/add_contact",name="entreprise_add_contact")
+    * @Route("/entreprises/{id}/ajouter_contact",name="entreprise_add_contact")
     */
 
     public function add_contact($id,Request $request,ObjectManager $manager){
@@ -216,7 +216,7 @@ class EntrepriseController extends AbstractController
     }
 
     /**
-     * @Route("/entreprises/add_poste",name="entreprise_add_poste")
+     * @Route("/entreprises/ajouter_poste",name="entreprise_add_poste")
      */
 
     public function add_poste(Request $request, ObjectManager $manager){
@@ -233,7 +233,7 @@ class EntrepriseController extends AbstractController
     }
 
     /**
-     * @Route("/entreprises/add_activite",name="entreprise_add_activite")
+     * @Route("/entreprises/ajouter_activite",name="entreprise_add_activite")
      */
 
     public function add_activite(Request $request, ObjectManager $manager){
@@ -250,7 +250,7 @@ class EntrepriseController extends AbstractController
     }
 
     /**
-    * @Route("/entreprises/{id_ent}/edit_contact/{id_cont}",name="entreprise_edit_contact")
+    * @Route("/entreprises/{id_ent}/modifier_contact/{id_cont}",name="entreprise_edit_contact")
     */
 
     public function edit_contact($id_ent,$id_cont,Request $request,ObjectManager $manager){
@@ -301,7 +301,7 @@ class EntrepriseController extends AbstractController
     }
 
     /**
-    * @Route("/entreprises/{id_ent}/delete_contact/{id_cont}",name="entreprise_delete_contact")
+    * @Route("/entreprises/{id_ent}/supprimer_contact/{id_cont}",name="entreprise_delete_contact")
     */
 
     public function delete_contact($id_ent,$id_cont,ObjectManager $manager){
@@ -333,7 +333,7 @@ class EntrepriseController extends AbstractController
     }
 
     /**
-     * @Route("/entreprises/{id_ent}/delete_poste/{poste}/{id_cont}",name="entreprise_delete_poste")
+     * @Route("/entreprises/{id_ent}/supprimer_poste/{poste}/{id_cont}",name="entreprise_delete_poste")
      */
 
     public function delete_poste($id_ent,$id_cont,$poste,ObjectManager $manager){
@@ -361,7 +361,7 @@ class EntrepriseController extends AbstractController
     }
 
     /**
-     * @Route("/entreprises/{id_ent}/delete_activite/{activite}",name="entreprise_delete_activite")
+     * @Route("/entreprises/{id_ent}/supprimer_activite/{activite}",name="entreprise_delete_activite")
      */
 
     public function delete_activite($id_ent,$activite,ObjectManager $manager){
@@ -380,7 +380,7 @@ class EntrepriseController extends AbstractController
     }
 
     /**
-    * @Route("/entreprises/delete/{id}",name="entreprise_delete")   
+    * @Route("/entreprises/supprimer/{id}",name="entreprise_delete")   
     */
 
     public function delete($id,ObjectManager $manager){

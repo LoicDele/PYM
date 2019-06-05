@@ -33,7 +33,7 @@ class DomaineController extends AbstractController
 
 
     /**
-     * @Route("/domaine/edit/{id}",name="domaine_edit")
+     * @Route("/domaine/modifier/{id}",name="domaine_edit")
      */
 
      public function edit($id,Request $request,FileUploader $fileUploader,ObjectManager $manager){

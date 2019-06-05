@@ -26,7 +26,7 @@ header("Access-Control-Allow-Origin: *");
 class BatimentController extends AbstractController
 {
     /**
-     * @Route("/batiments/index", name="batiments")
+     * @Route("/batiments/lister", name="batiments")
      */
     public function index()
     {
@@ -41,7 +41,7 @@ class BatimentController extends AbstractController
     }
 
     /**
-     * @Route("/batiment/add/0",name="batiment_add")
+     * @Route("/batiment/ajouter/0",name="batiment_add")
      */
 
     public function add(Request $request,ObjectManager $manager,FileUploader $fileUploader){
@@ -93,7 +93,7 @@ class BatimentController extends AbstractController
     }
 
     /**
-     * @Route("batiment/edit/{id}",name="batiment_edit")
+     * @Route("batiment/modifier/{id}",name="batiment_edit")
      */
 
      public function edit($id,ObjectManager $manager, Request $request,FileUploader $fileUploader){
@@ -150,7 +150,7 @@ class BatimentController extends AbstractController
      }
 
     /**
-     * @Route("batiments/{id}/add_bureau",name="batiment_add_bureau")
+     * @Route("batiments/{id}/ajouter_bureau",name="batiment_add_bureau")
      */
 
     public function add_bureau($id,Request $request,ObjectManager $manager){
@@ -189,7 +189,7 @@ class BatimentController extends AbstractController
     }
 
     /**
-    * @Route("/batiments/{id_bat}/edit_bureau/{id_bur}",name="batiment_edit_bureau")
+    * @Route("/batiments/{id_bat}/modifier_bureau/{id_bur}",name="batiment_edit_bureau")
     */
 
     public function edit_bureau($id_bat,$id_bur,ObjectManager $manager,Request $request){
@@ -227,7 +227,7 @@ class BatimentController extends AbstractController
     }
 
     /**
-     * @Route("batiments/{id_bur}/delete_bureau",name="batiment_delete_bureau")
+     * @Route("batiments/{id_bur}/supprimer_bureau",name="batiment_delete_bureau")
      */
 
      public function delete_bureau($id_bur,ObjectManager $manager){
@@ -248,7 +248,7 @@ class BatimentController extends AbstractController
      }
 
      /**
-    * @Route("batiments/delete/{id}",name="batiment_delete")   
+    * @Route("batiments/supprimer/{id}",name="batiment_delete")   
     */
 
     public function delete($id,ObjectManager $manager){
