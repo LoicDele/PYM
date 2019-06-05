@@ -333,7 +333,6 @@ class BatimentController extends AbstractController
         $bureaux = $this->getDoctrine()->getRepository(Bureau::class)->findAll();
         $arrayCollection = array();
         foreach($bureaux as $item) {
-            dump($item);
             array_push($arrayCollection, array(
                 'id' => $item->getId(), 
                 'idBatiment' => $item->getBatiment()->getId(), 

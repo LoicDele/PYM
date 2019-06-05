@@ -112,7 +112,7 @@ class EntrepriseController extends AbstractController
             );
         }
         $file = $entreprise_to_edit->getLogo();
-        $entreprise_to_edit->setLogo(new File($this->getParameter('logos_directory').'/'.$entreprise_to_edit->getLogo()));
+        $entreprise_to_edit->setLogo(new File($this->getParameter('shared_directory').'/logos/'.$entreprise_to_edit->getLogo()));
 
         $form = $this->createFormBuilder($entreprise_to_edit)
             ->add('Nom',TextType::class,[
