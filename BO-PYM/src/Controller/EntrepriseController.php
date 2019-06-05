@@ -113,50 +113,6 @@ class EntrepriseController extends AbstractController
         }
         $file = $entreprise_to_edit->getLogo();
         $entreprise_to_edit->setLogo(new File('uploads/logos/'.$file));
-
-        // $form = $this->createFormBuilder($entreprise_to_edit)
-        //     ->add('Nom',TextType::class,[
-        //          'attr' => [
-        //              'placeholder' => "Nom",
-        //              'class' => 'reg rounded form-control'],
-        //              'label' => ' '])
-        //     ->add('Site_Internet',TextType::class,[
-        //         'attr' => [
-        //             'placeholder' => "Site internet",
-        //             'class' => 'reg rounded form-control'],
-        //             'label' => ' '])
-        //     ->add('Nb_Salaries',NumberType::class,[
-        //         'attr' => [
-        //             'placeholder' => "Nombre de salariés",
-        //             'class' => 'reg rounded form-control'],
-        //             'label' => ' '])
-        //     ->add('Telephone',TextType::class,[
-        //         'attr' => [
-        //             'placeholder' => "Numéro de téléphone",
-        //             'class' => 'reg rounded form-control'],
-        //             'label' => ' '])
-        //     ->add('Mail',EmailType::class,[
-        //         'attr' => [
-        //             'placeholder' => "Adresse email",
-        //             'class' => 'reg reg-end rounded form-control'],
-        //             'label' => ' '])
-        //     ->add('activites',EntityType::class,array(
-        //         'required'=>false,
-        //         'class'=>Activite::class,
-        //         'choice_label'=>'Nom',  
-        //         'mapped'=>false,
-        //         'label'=>' ',
-        //         'placeholder'=>'Choisir une activite',
-        //         'attr' => ['class' => 'reg reg-end rounded form-control'],
-        //         'empty_data'=>$entreprise_to_edit->getActivites()
-        //     ))
-        //     ->add('Logo',FileType::class,[
-        //         'label'=>'Importer un logo: (JPEG ou PNG)',
-        //         'attr' => [
-        //             'class' => 'import btn btn-secondary'],
-        //             'required' => false,
-        //             'empty_data'=>$entreprise_to_edit->getLogo()])
-        //     ->getForm();
         $old_value = $entreprise_to_edit->getLogo();
         $form = $this->createForm(EntrepriseType::class,$entreprise_to_edit);
         $form -> handleRequest($request);

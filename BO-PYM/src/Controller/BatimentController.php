@@ -106,8 +106,9 @@ class BatimentController extends AbstractController
             throw $this->createNotFoundException(
                 'No batiment found for id'/$id
             );
-        }        
-
+        }
+        $old_value=$batiment->getRepresentation3D();       
+        
         $form=$this->createForm(Batiment2Type::class,$batiment);
         $form->handleRequest($request);
 
@@ -130,8 +131,15 @@ class BatimentController extends AbstractController
                         $nom_batiment[$i]="_";
                     }
                 }
-                $filename = $fileUploader->upload($model,$nom_batiment);
-                $batiment->setRepresentation3D($filename);
+                if ($model != null ){
+                    $filename = $fileUploader->upload($model,$nom_batiment);
+                    $batiment->setRepresentation3D($filename);
+                }
+                else{
+                    $filename = $fileUploader->upload($old_value,$nom_batiment);
+                    $batiment->setRepresentation3D($filename);
+                }
+                
             }
             $manager->flush();
             return $this->redirectToRoute('batiments');

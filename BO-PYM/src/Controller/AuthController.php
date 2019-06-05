@@ -17,11 +17,12 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
+
 class AuthController extends AbstractController
 {
 
     /**
-     * @Route("/users/add", name="user_add")
+     * @Route("/utilisateurs/ajout", name="user_add")
      */
     public function registration(\Swift_Mailer $mailer,Request $request,ObjectManager $manager,UserPasswordEncoderInterface $encoder)
     {
@@ -89,7 +90,7 @@ class AuthController extends AbstractController
     }
 
     /**
-     * @Route("/reset_password",name="auth_resetpassword")
+     * @Route("/réinitialisation_mot_de_passe",name="auth_resetpassword")
      */
 
     public function reset_password(ObjectManager $manager,Request $request,\Swift_Mailer $mailer,UserPasswordEncoderInterface $encoder){
