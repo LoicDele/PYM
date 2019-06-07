@@ -108,29 +108,31 @@ export class SemagViewComponent implements OnInit {
     this._scene = new BABYLON.Scene(this._engine);
 
     // Create an ArcRotate camera, with limited movements and smooth zoom
-    this._camera = new BABYLON.ArcRotateCamera("Camera", 0, 0, 10, new BABYLON.Vector3(0, 0, 0), this._scene);
+    this._camera = new BABYLON.ArcRotateCamera("Camera", -70, 1, 300, new BABYLON.Vector3(0, 0, 0), this._scene);
     this._camera.lowerBetaLimit = 0.5;
-    this._camera.upperBetaLimit = Math.PI / 2 - 0.1;
+    this._camera.upperBetaLimit = Math.PI / 2 - 0.3;
 
-    this._camera.lowerRadiusLimit = 10;
+    this._camera.lowerRadiusLimit = 20;
     this._camera.upperRadiusLimit = 330;
 
     //this._scene.activeCamera.panningSensibility = 0;
     this._camera.useBouncingBehavior = true;
 
     // Target the camera to scene origin.
-    this._camera.setPosition(new BABYLON.Vector3(-30, 30, 50));
+    //this._camera.setPosition(new BABYLON.Vector3(-30, 30, 50));
 
     // Attach the camera to the canvas.
     this._camera.attachControl(this._canvas, false);
 
     // Create a basic light, aiming 0,1,0, light intensity 0.7
-    this._light = new BABYLON.HemisphericLight('light1', new BABYLON.Vector3(0, 1, 0), this._scene);
+    //this._light = new BABYLON.HemisphericLight('light1', new BABYLON.Vector3(0, 10, 0), this._scene);
+    this._light = new BABYLON.DirectionalLight("light1", new BABYLON.Vector3(-20, -40, -20), this._scene);
     this._light.intensity = 0.7;
     this._light.specular = new BABYLON.Color3(0, 0, 0);
 
     // Create color for environnement
     this._scene.clearColor = new BABYLON.Color4(0.368, 0.512, 0.956, 1);
+    this._scene.ambientColor = BABYLON.Color3.White();
 
     // Create a built-in "ground" shape.
     let ground = BABYLON.MeshBuilder.CreateGround('ground1',
