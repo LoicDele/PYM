@@ -152,19 +152,19 @@ window.addEventListener('DOMContentLoaded', function() {
 
 			longitude.onchange = function(){
 				mesh.position.x = longitude.value;
-				scene.cameras[0].setTarget(scene.meshes[scene.meshes.length-1], false, true);
+				scene.cameras[0].setTarget(mesh, false, true);
 			}
 			longitude.oninput = function(){
 				mesh.position.x = longitude.value;
-				scene.cameras[0].setTarget(scene.meshes[scene.meshes.length-1], false, true);
+				scene.cameras[0].setTarget(mesh, false, true);
 			}
 			latitude.onchange = function(){
 				mesh.position.z = latitude.value;
-				scene.cameras[0].setTarget(scene.meshes[scene.meshes.length-1], false, true);
+				scene.cameras[0].setTarget(mesh, false, true);
 			}
 			latitude.oninput = function(){
 				mesh.position.z = latitude.value;
-				scene.cameras[0].setTarget(scene.meshes[scene.meshes.length-1], false, true);
+				scene.cameras[0].setTarget(mesh, false, true);
 			}
 			echelle.onchange = function(){
 				mesh.scaling.x = echelle.value;
