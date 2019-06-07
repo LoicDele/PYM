@@ -77,9 +77,9 @@ class EntrepriseController extends AbstractController
                 }
             }
             $filename = $fileUploader->upload($file,$nom_entreprise);
-            $img=Image::make('uploads/logos/'.$filename);
-            $img->resize(500,500);
-            $img->save('uploads/logos/'.$filename);
+            //$img=Image::make('uploads/logos/'.$filename);
+            //$img->resize(500,500);
+            //$img->save('uploads/logos/'.$filename);
             $entreprise->setLogo($filename);
             
 
@@ -393,14 +393,12 @@ class EntrepriseController extends AbstractController
 
         $repo=$this->getDoctrine()->getRepository(Contact::class);
         $contacts_to_delete = $repo->findBy(['entreprise'=>$entreprise_to_delete]);
-        
         for ($i=0,$size=sizeof($contacts_to_delete)-1;$i<=$size;$i++){
             $manager->remove($contacts_to_delete[$i]);
         }
 
         $repo2=$this->getDoctrine()->getRepository(Bureau::class);
         $bureaux=$repo2->findBy(['entreprise'=>$entreprise_to_delete]);
-        
         for ($i=0,$size=sizeof($bureaux)-1;$i<=$size;$i++){
             $manager->remove($bureaux[$i]);
         }
