@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  api: 'http://127.0.0.1:8000/api/',
+  api: 'http://192.168.43.214:8000/api/',
+  sharedfolder: 'http://192.168.43.214/sharedfolder/',
 };
 
 /*

@@ -5,6 +5,8 @@ import { Batiment } from 'src/app/class/batiment/batiment';
 import { BatimentService } from 'src/app/services/batiment-service/batiment.service';
 import { Subscription } from 'rxjs';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { environment } from 'src/environments/environment';
+import 'pepjs';
 @Component({
   selector: 'app-semag-view',
   templateUrl: './semag-view.component.html',
@@ -19,6 +21,8 @@ export class SemagViewComponent implements OnInit {
   private _scene: BABYLON.Scene;
   private _camera: BABYLON.ArcRotateCamera;
   private _light: BABYLON.Light;
+  urlBat: string = environment.sharedfolder + "modeles/";
+  urlDomaine: string = environment.sharedfolder + "domaine/";
 
   constructor(private batimentService: BatimentService, private router: Router) {
   }
@@ -59,7 +63,7 @@ export class SemagViewComponent implements OnInit {
   }
 
   createScene(): void {
-    var PARAM_URL = "http://map-pym.com/sharedfolder/modeles/";
+    var PARAM_URL = this.urlBat;
     // Mouse over animations
     var makeOverOut = (mesh: any, x: any, y: any, z: any) => {
       mesh.actionManager.registerAction(new BABYLON.SetValueAction(BABYLON.ActionManager.OnPointerOutTrigger, mesh.material, "emissiveColor", mesh.material.emissiveColor));
@@ -132,7 +136,7 @@ export class SemagViewComponent implements OnInit {
     let ground = BABYLON.MeshBuilder.CreateGround('ground1',
       { width: 650, height: 600, subdivisions: 20 }, this._scene);
     var backgroundMaterial = new BABYLON.BackgroundMaterial("ground_material", this._scene);
-    backgroundMaterial.diffuseTexture = new BABYLON.Texture("http://map-pym.com/sharedfolder/domaine/domaine.png", this._scene);
+    backgroundMaterial.diffuseTexture = new BABYLON.Texture(this.urlDomaine+"domaine.png", this._scene);
     backgroundMaterial.shadowLevel = 0.4;
 
     ground.material = backgroundMaterial;
@@ -148,15 +152,15 @@ export class SemagViewComponent implements OnInit {
           // You can apply properties to object.
           pos(object[0], bat.x, bat.y, 0, bat.scale, bat.angle);
           object[0].actionManager = new BABYLON.ActionManager(this._scene);
-          object[0].actionManager.registerAction(
-            new BABYLON.InterpolateValueAction(
-              BABYLON.ActionManager.OnPickTrigger,
-              this._light,
-              'diffuse',
-              new BABYLON.Color3(Math.random(), Math.random(), Math.random()),
-              1000
-            )
-          );
+          // object[0].actionManager.registerAction(
+          //   new BABYLON.InterpolateValueAction(
+          //     BABYLON.ActionManager.OnPickTrigger,
+          //     this._light,
+          //     'diffuse',
+          //     new BABYLON.Color3(Math.random(), Math.random(), Math.random()),
+          //     1000
+          //   )
+          // );
           makeOverOut(object[0], bat.scale,bat.scale,bat.scale);
           object[0].actionManager.registerAction(
             new BABYLON.ExecuteCodeAction(

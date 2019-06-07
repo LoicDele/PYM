@@ -3,6 +3,7 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { EntrepriseService } from 'src/app/services/entreprise-service/entreprise.service';
 import { Entreprise } from 'src/app/class/entreprise/entreprise';
 import { Subscription } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-entreprise-view',
@@ -11,6 +12,7 @@ import { Subscription } from 'rxjs';
 })
 export class EntrepriseViewComponent implements OnInit, OnDestroy {
   entreprise: Entreprise;
+  urlEntreprise: string = environment.sharedfolder + "logos/";
   subscriptionEntreprise: Subscription;
   idEnt: number;
   constructor(private entrepriseService: EntrepriseService, private route: ActivatedRoute) {

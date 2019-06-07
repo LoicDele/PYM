@@ -296,7 +296,7 @@ class BatimentController extends AbstractController
                         'rayon' => $item->getRayon(),
                         'hauteur' => $item->getHauteur(),
                         'angle' => $item->getAngle(),
-                        'scale' => $item->getEchelle(),
+                        'scale' => 1,
                         'type' => $item->getTypeBatiment()->getNom(),
                         'formeParamétrique' => $item->getFormeParametrique()->getNom(),
                         'adresse' => $item->getAdresse(),

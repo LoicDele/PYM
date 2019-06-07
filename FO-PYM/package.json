@@ -27,6 +27,7 @@
     "ngfor-pipe": "^1.0.0",
     "ngx-popover": "0.0.16",
     "ngx-smart-popover": "^1.0.5",
+    "pepjs": "^0.5.2",
     "popper.js": "^1.14.7",
     "rxjs": "~6.3.3",
     "tslib": "^1.9.0",
