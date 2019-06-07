@@ -389,18 +389,15 @@ class EntrepriseController extends AbstractController
 
         $repository = $this->getDoctrine()->getRepository(Entreprise::class);
         $entreprise_to_delete = $repository->find($id);
-        dump($entreprise_to_delete);
 
         $repo=$this->getDoctrine()->getRepository(Contact::class);
         $contacts_to_delete = $repo->findBy(['entreprise'=>$entreprise_to_delete]);
-        dump($contacts_to_delete);
         for ($i=0,$size=sizeof($contacts_to_delete)-1;$i<=$size;$i++){
             $manager->remove($contacts_to_delete[$i]);
         }
 
         $repo2=$this->getDoctrine()->getRepository(Bureau::class);
         $bureaux=$repo2->findBy(['entreprise'=>$entreprise_to_delete]);
-        dump($bureaux);
         for ($i=0,$size=sizeof($bureaux)-1;$i<=$size;$i++){
             $manager->remove($bureaux[$i]);
         }
