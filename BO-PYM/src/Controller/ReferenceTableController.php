@@ -54,6 +54,27 @@ class ReferenceTableController extends AbstractController
         return $this->render('entreprise/activite/add.html.twig',['form'=>$form->createView()]);
      }
 
+     /**
+     * @Route("tables_reference/modifier_activite/{id}",name="reference_table_edit_activite")
+     */
+
+    public function edit_activite($id,Request $request, ObjectManager $manager){
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
+        $repository = $this->getDoctrine()->getRepository(Activite::class);
+        $activite = $repository->findOneBy(['id'=>$id]);
+        
+        $form=$this->createForm(ActiviteType::class,$activite);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()){
+            //$manager->persist($activite);
+            $manager->flush();
+            return $this->redirectToRoute('reference_tables');
+        }
+        return $this->render('entreprise/activite/add.html.twig',['form'=>$form->createView()]);
+     }
+
 
      /**
      * @Route("tables_reference/ajouter_poste",name="reference_table_add_poste")
@@ -91,6 +112,28 @@ class ReferenceTableController extends AbstractController
         $manager->flush();
 
         return $this->redirectToRoute('reference_tables');
+     }
+
+
+     /**
+     * @Route("tables_reference/modifier_poste/{id}",name="reference_table_edit_poste")
+     */
+
+    public function edit_poste($id,Request $request, ObjectManager $manager){
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
+        $repository = $this->getDoctrine()->getRepository(Poste::class);
+        $poste = $repository->findOneBy(['id'=>$id]);
+        
+        $form=$this->createForm(PosteType::class,$poste);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()){
+            //$manager->persist($activite);
+            $manager->flush();
+            return $this->redirectToRoute('reference_tables');
+        }
+        return $this->render('entreprise/poste/add.html.twig',['form'=>$form->createView()]);
      }
 
      /**

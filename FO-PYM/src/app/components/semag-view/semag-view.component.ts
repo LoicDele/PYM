@@ -152,15 +152,15 @@ export class SemagViewComponent implements OnInit {
           // You can apply properties to object.
           pos(object[0], bat.x, bat.y, 0, bat.scale, bat.angle);
           object[0].actionManager = new BABYLON.ActionManager(this._scene);
-          object[0].actionManager.registerAction(
-            new BABYLON.InterpolateValueAction(
-              BABYLON.ActionManager.OnPickTrigger,
-              this._light,
-              'diffuse',
-              new BABYLON.Color3(Math.random(), Math.random(), Math.random()),
-              1000
-            )
-          );
+          // object[0].actionManager.registerAction(
+          //   new BABYLON.InterpolateValueAction(
+          //     BABYLON.ActionManager.OnPickTrigger,
+          //     this._light,
+          //     'diffuse',
+          //     new BABYLON.Color3(Math.random(), Math.random(), Math.random()),
+          //     1000
+          //   )
+          // );
           makeOverOut(object[0], bat.scale,bat.scale,bat.scale);
           object[0].actionManager.registerAction(
             new BABYLON.ExecuteCodeAction(

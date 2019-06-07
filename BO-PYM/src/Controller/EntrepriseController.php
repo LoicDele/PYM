@@ -77,9 +77,9 @@ class EntrepriseController extends AbstractController
                 }
             }
             $filename = $fileUploader->upload($file,$nom_entreprise);
-            $img=Image::make('uploads/logos/'.$filename);
-            $img->resize(500,500);
-            $img->save('uploads/logos/'.$filename);
+            //$img=Image::make('uploads/logos/'.$filename);
+            //$img->resize(500,500);
+            //$img->save('uploads/logos/'.$filename);
             $entreprise->setLogo($filename);
             
 

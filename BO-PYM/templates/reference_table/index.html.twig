@@ -83,8 +83,11 @@
                                             Action
                                         </button>
                                         <div class="dropdown-menu dropdown-menu-right">
+                                            <a class="dropdown-item" type="button" href="{{path('reference_table_edit_activite',{'id':activite.id})}}"
+                                                type="button">Modifier</a>
                                             <a class="dropdown-item" type="button" href="{{path('reference_table_delete_activite',{'id':activite.id})}}"
                                                 type="button">Supprimer</a>
+                                            
                                         </div>
                                     </div>
                                 </td>
@@ -132,6 +135,8 @@
                                             Action
                                         </button>
                                         <div class="dropdown-menu dropdown-menu-right">
+                                            <a class="dropdown-item" type="button" href="{{path('reference_table_edit_poste',{'id':poste.id})}}"
+                                                type="button">Modifier</a>
                                             <a class="dropdown-item" type="button" href="{{path('reference_table_delete_poste',{'id':poste.id})}}"
                                                 type="button">Supprimer</a>
                                         </div>
