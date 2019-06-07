@@ -132,8 +132,10 @@ class BatimentController extends AbstractController
                     }
                 }
                 if ($model != null ){
+                    unlink("uploads/modeles".$old_value);
                     $filename = $fileUploader->upload($model,$nom_batiment);
                     $batiment->setRepresentation3D($filename);
+                    
                 }
                 else{
                     $batiment->setRepresentation3D($old_value);
@@ -262,6 +264,9 @@ class BatimentController extends AbstractController
         $bureaux_to_delete = $repo->findBy(['Batiment'=>$batiment_to_delete]);
         for ($i=0,$size=sizeof($bureaux_to_delete)-1;$i<=$size;$i++){
             $manager->remove($bureaux_to_delete[$i]);
+        }
+        if ($batiment_to_delete->getTypeBatiment() == "Batiment"){
+            unlink("uploads/modeles/".$batiment_to_delete->getRepresentation3D());
         }
 
         $manager->remove($batiment_to_delete);

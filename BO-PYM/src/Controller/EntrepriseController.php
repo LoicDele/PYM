@@ -121,6 +121,7 @@ class EntrepriseController extends AbstractController
 
             $new_file = $form->get('Logo')->getData();
             if ($new_file != null){
+                unlink("uploads/logos/".$file);
                 $nom_entreprise = $entreprise_to_edit->getNom();
                 $filename = $fileUploader->upload($new_file,$nom_entreprise);
                 $entreprise_to_edit->setLogo($filename);
@@ -401,6 +402,8 @@ class EntrepriseController extends AbstractController
         for ($i=0,$size=sizeof($bureaux)-1;$i<=$size;$i++){
             $manager->remove($bureaux[$i]);
         }
+
+        unlink("uploads/logos/".$entreprise_to_delete->getLogo());
         
         $manager->remove($entreprise_to_delete);
         $manager->flush();
