@@ -70,3 +70,12 @@ border-left: none;
     width: calc(100% - 17px);
     margin-bottom: 2%;
 }
+
+.dropdown-menu a{
+    text-align: center;
+    
+}
+.dropdown-menu a:hover{
+    background: #343a40;
+    color: white;
+}
