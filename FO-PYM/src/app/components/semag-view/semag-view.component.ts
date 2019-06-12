@@ -153,6 +153,7 @@ export class SemagViewComponent implements OnInit {
         BABYLON.SceneLoader.ImportMesh("", PARAM_URL, bat.url, this._scene, (object)=>{
           // You can apply properties to object.
           pos(object[0], bat.x, bat.y, 0, bat.scale, bat.angle);
+          object[0].name = bat.id.toString();
           object[0].actionManager = new BABYLON.ActionManager(this._scene);
           // object[0].actionManager.registerAction(
           //   new BABYLON.InterpolateValueAction(
@@ -179,17 +180,17 @@ export class SemagViewComponent implements OnInit {
         let afficher = true;
         switch(bat.formeParamétrique){
           case "Cube":{    //cube
-            this._scene.meshes.push(BABYLON.MeshBuilder.CreateBox(bat.nom, {size : bat.longueur}, this._scene));
+            this._scene.meshes.push(BABYLON.MeshBuilder.CreateBox(bat.id.toString(), {size : bat.longueur}, this._scene));
             altitude = bat.longueur/2;
             break;
           }
           case "Pavé":{    //pave
-            this._scene.meshes.push(BABYLON.MeshBuilder.CreateBox(bat.nom, {height : bat.hauteur, width : bat.largeur, depth : bat.longueur}, this._scene));
+            this._scene.meshes.push(BABYLON.MeshBuilder.CreateBox(bat.id.toString(), {height : bat.hauteur, width : bat.largeur, depth : bat.longueur}, this._scene));
             altitude = bat.hauteur/2;
             break;
           }
           case "Cylindre":{    //cylindre
-            this._scene.meshes.push(BABYLON.MeshBuilder.CreateCylinder(bat.nom, {height : bat.hauteur, diameter : bat.rayon}, this._scene));
+            this._scene.meshes.push(BABYLON.MeshBuilder.CreateCylinder(bat.id.toString(), {height : bat.hauteur, diameter : bat.rayon}, this._scene));
             altitude = bat.hauteur/2;
             break;
           }
@@ -232,5 +233,12 @@ export class SemagViewComponent implements OnInit {
       this._canvas.width = window.innerWidth;
       this._engine.resize();
     });
+  }
+
+  zoom(id:string): void{
+    var target_zoom = this._scene.meshes.find(x=>x.name==id);
+    this._camera.target = new BABYLON.Vector3(target_zoom.position.x, target_zoom.position.y, target_zoom.position.z);
+    this._camera.beta = 1.15;
+    this._camera.radius = Math.max(target_zoom.getBoundingInfo().boundingBox.extendSize.x, target_zoom.getBoundingInfo().boundingBox.extendSize.y, target_zoom.getBoundingInfo().boundingBox.extendSize.z)*10/(Math.tan(this._camera.fov/2)*this._engine.getAspectRatio(this._camera));
   }
 }
