@@ -8,7 +8,7 @@
       <h3 class="strong">{{entreprise.nom}}</h3>
     </div>
     <a class="close col-2" data-dismiss="modal" aria-label="Close" [routerLink]="['']"
-      routerLinkActive="router-link-active">
+      routerLinkActive="router-link-active" (click)="deZoom()">
       <span aria-hidden="true">&times;</span>
     </a>
   </div>

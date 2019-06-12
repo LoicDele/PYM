@@ -17,7 +17,8 @@ export class SemagViewComponent implements OnInit {
   private batiments: Batiment[] = [];
   private focusBatiment: string;
   subscriptionBatiment: Subscription;
-  subscriptionFocus: Subscription;
+  subscriptionZoom: Subscription;
+  subscriptionDezoom: Subscription
   private formes: [{"forme": BABYLON.AbstractMesh, "altitude": any}];
   private _canvas: HTMLCanvasElement;
   private _engine: BABYLON.Engine;
@@ -28,9 +29,8 @@ export class SemagViewComponent implements OnInit {
   urlDomaine: string = environment.sharedfolder + "domaine/";
 
   constructor(private batimentService: BatimentService, private router: Router, private interactionService: InteractionService) {
-    this.subscriptionFocus = this.interactionService.batimentFocus.subscribe(res => this.zoom(res));
-
-    console.log(this.focusBatiment);
+    this.subscriptionZoom = this.interactionService.batimentZoom.subscribe(res => this.zoom(res));
+    this.subscriptionDezoom = this.interactionService.batimentDezoom.subscribe(res => this.dezoom());
   }
 
   ngOnInit() {
@@ -246,7 +246,7 @@ export class SemagViewComponent implements OnInit {
     var target_zoom = this._scene.meshes.find(x=>x.name==id);
     // this._camera.target = new BABYLON.Vector3(target_zoom.position.x, target_zoom.position.y, target_zoom.position.z);
     // this._camera.beta = 1.15;
-    // this._camera.radius = 
+    // this._camera.radius =
     var zoom_cam = new BABYLON.Animation("zoom", "target", 20, BABYLON.Animation.ANIMATIONTYPE_VECTOR3, BABYLON.Animation.ANIMATIONLOOPMODE_CONSTANT);
     var zoom_cam_keys = [];
     zoom_cam_keys.push({

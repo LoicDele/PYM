@@ -4,6 +4,7 @@ import { EntrepriseService } from 'src/app/services/entreprise-service/entrepris
 import { Entreprise } from 'src/app/class/entreprise/entreprise';
 import { Subscription } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { InteractionService } from '../../services/interaction-service/interaction.service';
 
 @Component({
   selector: 'app-entreprise-view',
@@ -15,7 +16,7 @@ export class EntrepriseViewComponent implements OnInit, OnDestroy {
   urlEntreprise: string = environment.sharedfolder + "logos/";
   subscriptionEntreprise: Subscription;
   idEnt: number;
-  constructor(private entrepriseService: EntrepriseService, private route: ActivatedRoute) {
+  constructor(private entrepriseService: EntrepriseService, private route: ActivatedRoute, private interactionService: InteractionService) {
 
   }
   ngOnInit() {
@@ -29,5 +30,9 @@ export class EntrepriseViewComponent implements OnInit, OnDestroy {
 ngOnDestroy() {
   this.subscriptionEntreprise.unsubscribe();
 
+}
+
+deZoom(){
+  this.interactionService.dezoomBatiment()
 }
 }
