@@ -7,14 +7,21 @@ import { Subject } from 'rxjs';
 export class InteractionService {
 
   //Observable string sources
-  private batimentFocusSource = new Subject<string>();
+  private batimentZoomSource = new Subject<string>();
+  private batimentDezoomSource = new Subject<any>();
+  private i: number = 0;
 
   //Observable string streams
-  batimentFocus = this.batimentFocusSource.asObservable();
-
+  batimentZoom = this.batimentZoomSource.asObservable();
+  batimentDezoom = this.batimentDezoomSource.asObservable();
   //Service message commands
-  focusBatiment(id:string){
-    this.batimentFocusSource.next(id);
+  zoomBatiment(id:string){
+    this.batimentZoomSource.next(id);
   }
+  dezoomBatiment(){
+    this.i= this.i +1;
+    this.batimentDezoomSource.next(this.i.toString());
+  }
+
   constructor() { }
 }

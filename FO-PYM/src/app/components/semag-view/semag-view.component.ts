@@ -17,7 +17,8 @@ export class SemagViewComponent implements OnInit {
   private batiments: Batiment[] = [];
   private focusBatiment: string;
   subscriptionBatiment: Subscription;
-  subscriptionFocus: Subscription;
+  subscriptionZoom: Subscription;
+  subscriptionDezoom: Subscription
   private formes: [{"forme": BABYLON.AbstractMesh, "altitude": any}];
   private _canvas: HTMLCanvasElement;
   private _engine: BABYLON.Engine;
@@ -28,7 +29,8 @@ export class SemagViewComponent implements OnInit {
   urlDomaine: string = environment.sharedfolder + "domaine/";
 
   constructor(private batimentService: BatimentService, private router: Router, private interactionService: InteractionService) {
-    this.subscriptionFocus = this.interactionService.batimentFocus.subscribe(res => this.zoom(res));
+    this.subscriptionZoom = this.interactionService.batimentZoom.subscribe(res => this.zoom(res));
+    this.subscriptionDezoom = this.interactionService.batimentDezoom.subscribe(res => this.dezoom());
   }
 
   ngOnInit() {
@@ -243,10 +245,10 @@ export class SemagViewComponent implements OnInit {
   zoom(id:string): void{
     var frameRate = 30;
     var target_zoom = this._scene.meshes.find(x=>x.name==id);
-    //this._camera.target = new BABYLON.Vector3(target_zoom.position.x, target_zoom.position.y, target_zoom.position.z);
-    //this._camera.beta = 1.15;
-    //this._camera.radius = Math.max(target_zoom.getBoundingInfo().boundingBox.extendSize.x, target_zoom.getBoundingInfo().boundingBox.extendSize.y, target_zoom.getBoundingInfo().boundingBox.extendSize.z)*10/(Math.tan(this._camera.fov/2)*this._engine.getAspectRatio(this._camera));
-    var zoom_cam = new BABYLON.Animation("zoom", "target", frameRate, BABYLON.Animation.ANIMATIONTYPE_VECTOR3, BABYLON.Animation.ANIMATIONLOOPMODE_CONSTANT);
+    // this._camera.target = new BABYLON.Vector3(target_zoom.position.x, target_zoom.position.y, target_zoom.position.z);
+    // this._camera.beta = 1.15;
+    // this._camera.radius = 
+    var zoom_cam = new BABYLON.Animation("zoom", "target", 20, BABYLON.Animation.ANIMATIONTYPE_VECTOR3, BABYLON.Animation.ANIMATIONLOOPMODE_CONSTANT);
     var zoom_cam_keys = [];
     zoom_cam_keys.push({
       frame: 0,
