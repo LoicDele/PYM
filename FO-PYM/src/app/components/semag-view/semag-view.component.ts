@@ -93,7 +93,7 @@ export class SemagViewComponent implements OnInit {
           BABYLON.ActionManager.OnPickTrigger,
           this._camera,
           'radius',
-          65,
+          Math.max(mesh.getBoundingInfo().boundingBox.extendSize.x, mesh.getBoundingInfo().boundingBox.extendSize.y, mesh.getBoundingInfo().boundingBox.extendSize.z)*10/(Math.tan(this._camera.fov/2)*this._engine.getAspectRatio(this._camera)),
           1000
         )
       );
