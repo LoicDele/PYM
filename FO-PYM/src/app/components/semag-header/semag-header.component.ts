@@ -31,9 +31,7 @@ export class SemagHeaderComponent implements OnInit {
     this.batimentService.getBatimentByHTTP();
   }
   focus(id: number){
-    console.log("next");
     this. interactionService.focusBatiment(id.toString());
-    console.log("next");
   }
 }
 
