@@ -19,7 +19,7 @@
           aria-expanded="false">Entreprises</a>
         <div class="dropdown-menu" aria-labelledby="dropdownEnt">
           <a [routerLink]="['/entreprise', elt.id]" routerLinkActive="router-link-active"
-            class="dropdown-item dropdown-picture" *ngFor="let elt of entreprises" (click)="toggleCollapse()">{{elt.nom}}</a>
+            class="dropdown-item dropdown-picture" *ngFor="let elt of entreprises" (click)="toggleCollapse(); focus(elt.idBatiment)">{{elt.nom}}</a>
         </div>
       </li>
       <li class="nav-item dropdown">

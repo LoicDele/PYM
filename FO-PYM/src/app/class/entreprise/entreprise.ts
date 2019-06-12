@@ -6,5 +6,6 @@ export class Entreprise {
   telephone: string;
   mail: string;
   logo: string;
+  idBatiment: number;
 }
 

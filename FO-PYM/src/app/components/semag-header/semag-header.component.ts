@@ -21,7 +21,7 @@ export class SemagHeaderComponent implements OnInit {
   toggleCollapse() {
     this.show = !this.show;
   }
-  constructor(private entrepriseService: EntrepriseService, private batimentService: BatimentService,private interactionService: InteractionService) {
+  constructor(private entrepriseService: EntrepriseService, private batimentService: BatimentService, private interactionService: InteractionService) {
   }
   ngOnInit() {
 
@@ -30,8 +30,8 @@ export class SemagHeaderComponent implements OnInit {
     this.entrepriseService.getEntrepriseByHTTP();
     this.batimentService.getBatimentByHTTP();
   }
-  focus(id: number){
-    this. interactionService.zoomBatiment(id.toString());
+  focus(id: number) {
+    this.interactionService.zoomBatiment(id.toString());
   }
 }
 

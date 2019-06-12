@@ -419,15 +419,30 @@ class EntrepriseController extends AbstractController
         $entreprises = $this->getDoctrine()->getRepository(Entreprise::class)->findAll();
         $arrayCollection = array();
         foreach($entreprises as $item) {
-            array_push($arrayCollection, array(
-                'id' => $item->getId(),
-                'nom' => $item->getNom(),
-                'site_internet' => $item->getSiteInternet(),
-                'nb_salaries' => $item->getNbSalaries(),
-                'telephone' => $item->getTelephone(),
-                'mail' => $item->getMail(),
-                'logo' => $item->getLogo()
-            ));
+            if($item->getBureaux()[0] == null){
+                array_push($arrayCollection, array(
+                    'id' => $item->getId(),
+                    'nom' => $item->getNom(),
+                    'site_internet' => $item->getSiteInternet(),
+                    'nb_salaries' => $item->getNbSalaries(),
+                    'telephone' => $item->getTelephone(),
+                    'mail' => $item->getMail(),
+                    'logo' => $item->getLogo(),
+                    'idBatiment' => 0, 
+                ));           
+            }
+            else{
+                array_push($arrayCollection, array(
+                    'id' => $item->getId(),
+                    'nom' => $item->getNom(),
+                    'site_internet' => $item->getSiteInternet(),
+                    'nb_salaries' => $item->getNbSalaries(),
+                    'telephone' => $item->getTelephone(),
+                    'mail' => $item->getMail(),
+                    'logo' => $item->getLogo(),
+                    'idBatiment' => $item->getBureaux()[0]->getBatiment()->getId(),
+                ));
+        }
         }
         $response = new JsonResponse($arrayCollection);
         $response->headers->set('Content-Type', 'application/json');
