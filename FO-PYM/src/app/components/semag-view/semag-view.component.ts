@@ -243,47 +243,49 @@ export class SemagViewComponent implements OnInit {
   }
 
   zoom(id:string): void{
-    var frameRate = 30;
-    var target_zoom = this._scene.meshes.find(x=>x.name==id);
-    // this._camera.target = new BABYLON.Vector3(target_zoom.position.x, target_zoom.position.y, target_zoom.position.z);
-    // this._camera.beta = 1.15;
-    // this._camera.radius = 
-    var zoom_cam = new BABYLON.Animation("zoom", "target", 20, BABYLON.Animation.ANIMATIONTYPE_VECTOR3, BABYLON.Animation.ANIMATIONLOOPMODE_CONSTANT);
-    var zoom_cam_keys = [];
-    zoom_cam_keys.push({
-      frame: 0,
-      value: this._camera.target
-    });
-    zoom_cam_keys.push({
-      frame: 1*frameRate,
-      value: new BABYLON.Vector3(target_zoom.position.x, target_zoom.position.y, target_zoom.position.z)
-    });
-    zoom_cam.setKeys(zoom_cam_keys);
+    if(id!="0"){
+      var frameRate = 30;
+      var target_zoom = this._scene.meshes.find(x=>x.name==id);
+      // this._camera.target = new BABYLON.Vector3(target_zoom.position.x, target_zoom.position.y, target_zoom.position.z);
+      // this._camera.beta = 1.15;
+      // this._camera.radius = 
+      var zoom_cam = new BABYLON.Animation("zoom", "target", 20, BABYLON.Animation.ANIMATIONTYPE_VECTOR3, BABYLON.Animation.ANIMATIONLOOPMODE_CONSTANT);
+      var zoom_cam_keys = [];
+      zoom_cam_keys.push({
+        frame: 0,
+        value: this._camera.target
+      });
+      zoom_cam_keys.push({
+        frame: 1*frameRate,
+        value: new BABYLON.Vector3(target_zoom.position.x, target_zoom.position.y, target_zoom.position.z)
+      });
+      zoom_cam.setKeys(zoom_cam_keys);
 
-    var zoom_pos_beta = new BABYLON.Animation("zoomposbeta", "beta", frameRate, BABYLON.Animation.ANIMATIONTYPE_FLOAT, BABYLON.Animation.ANIMATIONLOOPMODE_CONSTANT);
-    var zoom_pos_cam_beta_keys = [];
-    zoom_pos_cam_beta_keys.push({
-      frame: 0,
-      value: this._camera.beta
-    });
-    zoom_pos_cam_beta_keys.push({
-      frame: 1*frameRate,
-      value: 1.15
-    });
-    zoom_pos_beta.setKeys(zoom_pos_cam_beta_keys);
+      var zoom_pos_beta = new BABYLON.Animation("zoomposbeta", "beta", frameRate, BABYLON.Animation.ANIMATIONTYPE_FLOAT, BABYLON.Animation.ANIMATIONLOOPMODE_CONSTANT);
+      var zoom_pos_cam_beta_keys = [];
+      zoom_pos_cam_beta_keys.push({
+        frame: 0,
+        value: this._camera.beta
+      });
+      zoom_pos_cam_beta_keys.push({
+        frame: 1*frameRate,
+        value: 1.15
+      });
+      zoom_pos_beta.setKeys(zoom_pos_cam_beta_keys);
 
-    var zoom_pos_radius = new BABYLON.Animation("zoomposradius", "radius", frameRate, BABYLON.Animation.ANIMATIONTYPE_FLOAT, BABYLON.Animation.ANIMATIONLOOPMODE_CONSTANT);
-    var zoom_pos_cam_radius_keys = [];
-    zoom_pos_cam_radius_keys.push({
-      frame: 0,
-      value: this._camera.radius
-    });
-    zoom_pos_cam_radius_keys.push({
-      frame: 1*frameRate,
-      value: Math.max(target_zoom.getBoundingInfo().boundingBox.extendSize.x, target_zoom.getBoundingInfo().boundingBox.extendSize.y, target_zoom.getBoundingInfo().boundingBox.extendSize.z)*10/(Math.tan(this._camera.fov/2)*this._engine.getAspectRatio(this._camera))
-    });
-    zoom_pos_radius.setKeys(zoom_pos_cam_radius_keys);
-    this._scene.beginDirectAnimation(this._camera, [zoom_cam, zoom_pos_beta, zoom_pos_radius], 0, 1*frameRate, false);
+      var zoom_pos_radius = new BABYLON.Animation("zoomposradius", "radius", frameRate, BABYLON.Animation.ANIMATIONTYPE_FLOAT, BABYLON.Animation.ANIMATIONLOOPMODE_CONSTANT);
+      var zoom_pos_cam_radius_keys = [];
+      zoom_pos_cam_radius_keys.push({
+        frame: 0,
+        value: this._camera.radius
+      });
+      zoom_pos_cam_radius_keys.push({
+        frame: 1*frameRate,
+        value: Math.max(target_zoom.getBoundingInfo().boundingBox.extendSize.x, target_zoom.getBoundingInfo().boundingBox.extendSize.y, target_zoom.getBoundingInfo().boundingBox.extendSize.z)*10/(Math.tan(this._camera.fov/2)*this._engine.getAspectRatio(this._camera))
+      });
+      zoom_pos_radius.setKeys(zoom_pos_cam_radius_keys);
+      this._scene.beginDirectAnimation(this._camera, [zoom_cam, zoom_pos_beta, zoom_pos_radius], 0, 1*frameRate, false);
+    }
   }
 
   dezoom(): void{
