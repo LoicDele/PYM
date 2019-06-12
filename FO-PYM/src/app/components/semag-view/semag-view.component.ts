@@ -7,6 +7,7 @@ import { Subscription } from 'rxjs';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import 'pepjs';
+import { InteractionService } from 'src/app/services/interaction-service/interaction.service';
 @Component({
   selector: 'app-semag-view',
   templateUrl: './semag-view.component.html',
@@ -14,7 +15,9 @@ import 'pepjs';
 })
 export class SemagViewComponent implements OnInit {
   private batiments: Batiment[] = [];
+  private focusBatiment: string;
   subscriptionBatiment: Subscription;
+  subscriptionFocus: Subscription;
   private formes: [{"forme": BABYLON.AbstractMesh, "altitude": any}];
   private _canvas: HTMLCanvasElement;
   private _engine: BABYLON.Engine;
@@ -24,7 +27,10 @@ export class SemagViewComponent implements OnInit {
   urlBat: string = environment.sharedfolder + "modeles/";
   urlDomaine: string = environment.sharedfolder + "domaine/";
 
-  constructor(private batimentService: BatimentService, private router: Router) {
+  constructor(private batimentService: BatimentService, private router: Router, private interactionService: InteractionService) {
+    this.subscriptionFocus = this.interactionService.batimentFocus.subscribe(res => this.zoom(res));
+
+    console.log(this.focusBatiment);
   }
 
   ngOnInit() {
@@ -236,6 +242,7 @@ export class SemagViewComponent implements OnInit {
   }
 
   zoom(id:string): void{
+    console.log(id);
     var target_zoom = this._scene.meshes.find(x=>x.name==id);
     // this._camera.target = new BABYLON.Vector3(target_zoom.position.x, target_zoom.position.y, target_zoom.position.z);
     // this._camera.beta = 1.15;
