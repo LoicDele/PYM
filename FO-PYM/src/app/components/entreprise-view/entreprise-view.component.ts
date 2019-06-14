@@ -5,6 +5,7 @@ import { Entreprise } from 'src/app/class/entreprise/entreprise';
 import { Subscription } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { InteractionService } from '../../services/interaction-service/interaction.service';
+import * as $ from 'jquery';
 
 @Component({
   selector: 'app-entreprise-view',
@@ -16,6 +17,7 @@ export class EntrepriseViewComponent implements OnInit, OnDestroy {
   urlEntreprise: string = environment.sharedfolder + "logos/";
   subscriptionEntreprise: Subscription;
   idEnt: number;
+  toogle = true;
   constructor(private entrepriseService: EntrepriseService, private route: ActivatedRoute, private interactionService: InteractionService) {
 
   }
@@ -29,10 +31,35 @@ export class EntrepriseViewComponent implements OnInit, OnDestroy {
 
 ngOnDestroy() {
   this.subscriptionEntreprise.unsubscribe();
-
+  var newHeight = 0.05*$(window).height();
+  $(".data").animate({top: newHeight});
+  $(".arrow-data").removeClass('rotate');
 }
 
 deZoom(){
-  this.interactionService.dezoomBatiment()
+  this.interactionService.dezoomBatiment();
+  var newHeight = 0.05*$(window).height();
+  $(".data").animate({top: newHeight});
+  $(".arrow-data").removeClass('rotate');
+}
+
+hideInfos(){
+  if(this.toogle){
+    this.toogle = false;
+    var windowHeight = $(window).height();
+    var modalHeight = 0;
+    var offset = 150;
+
+    var newHeight = windowHeight - (modalHeight + offset);
+    $(".data").animate({top: newHeight});
+    $(".arrow-data").addClass('rotate');
+  }
+  else{
+    this.toogle = true;
+    var windowHeight = $(window).height();
+    var newHeight = 0.05*windowHeight;
+    $(".data").animate({top: newHeight});
+    $(".arrow-data").removeClass('rotate');
+  }
 }
 }

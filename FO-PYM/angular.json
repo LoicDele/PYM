@@ -24,6 +24,7 @@
             "tsConfig": "src/tsconfig.app.json",
             "assets": [
               "src/favicon.ico",
+              "src/arrow.png",
               "src/apple-touch-icon.png",
               "src/assets"
             ],
@@ -95,6 +96,7 @@
             "scripts": [],
             "assets": [
               "src/favicon.ico",
+              "src/arrow.png",
               "src/apple-touch-icon.png",
               "src/assets"
             ]
