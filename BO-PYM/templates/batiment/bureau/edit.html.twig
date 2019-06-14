@@ -4,37 +4,65 @@
 {% endblock %}
 {% block javascripts %}
     {{ encore_entry_script_tags('contactAdd') }}
+    <script>
+        function toggle() {
+            contentNumero = document.getElementById("numero");
+            contentEtage = document.getElementById("etage")
+            if (contentEtage.hidden == true) {
+                contentEtage.hidden = false;
+                contentEtage.height = "auto";
+                contentNumero.hidden = false;
+                contentNumero.height = "auto";
+            } else {
+                contentEtage.hidden = true;
+                contentEtage.height = "0";
+                contentNumero.hidden = true;
+                contentNumero.height = "0";
+            }
+        }
+    </script>
 {% endblock %}
 {% block body %}
-    {% if app.user %}         
-            <div class="col-lg-3 col-md-2"></div>
-            <div class="col-lg-6 col-md-8">
-                <div class="card">
-                    <div class="card-header bg-dark ">
-                        <h4>Modifier un bureau</h4> 
-                    </div>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-1"></div>
-                            <div class="col-10">
-                                {{ form_start(form) }}
-                                {{ form_widget(form)}}
-                            </div>
-                            <div class="col-1"></div>
+    {% if app.user %}
+        <div class="col-lg-3 col-md-2"></div>
+        <div class="col-lg-6 col-md-8">
+            <div class="card">
+                <div class="card-header bg-dark ">
+                    <h4>Modifier un bureau</h4>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-1"></div>
+                        <div class="col-10">
+                        <div class="form-check">
+                            <input class="form-check-input" id="checkbox" onclick="toggle()" type="checkbox">
+                            <label class="form-check-label" for="checkbox">Seule entreprise dans le bâtiment</label>
                         </div>
-                        <div class="btns row">
-                            <div class="col-1"></div>
-                            <a href="{{path('batiments')}}" class="btn btn-secondary btn-back col-3">Annuler</a>
-                            <div class="col-4"></div>
-                            <button type="submit" class="btn btn-success btn-add col-3">Ajouter</button>
-                            <div class="col-1"></div>
+                        {{ form_start(form) }}
+                        <div id="numero">
+                            {{form_row(form.Numero)}}
                         </div>
-                        {{form_end(form) }}
+                        <div id="etage">
+                            {{form_row(form.Etage)}}
+                        </div>
+                        {{form_row(form.Entreprise,{'id':'entreprise'})}}
+                        {{form_row(form._token) }}
+                        </div>
+                        <div class="col-1"></div>
                     </div>
+                    <div class="btns row">
+                        <div class="col-1"></div>
+                        <a href="{{path('batiments')}}" class="btn btn-secondary btn-back col-3">Annuler</a>
+                        <div class="col-4"></div>
+                        <button class="btn btn-success btn-add col-3" type="submit">Ajouter</button>
+                        <div class="col-1"></div>
+                    </div>
+                    {{form_end(form) }}
                 </div>
             </div>
-                
-    {% else %}   
+        </div>
+
+    {% else %}
         <h1>Vous n'avez pas accés à cette page.</h1>
     {% endif %}
 {% endblock %}
