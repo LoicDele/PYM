@@ -15,9 +15,9 @@ class BureauType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('Numero' ,NumberType::class,['attr' => ['class' => 'reg rounded form-control'] , 'label' => 'Numéro'])
-            ->add('Etage' ,NumberType::class,['attr' => ['class' => 'reg rounded form-control'] , 'label' => 'Étage'])
-            ->add('entreprise',EntityType::class,[
+            ->add('Numero' ,NumberType::class,[ 'required' => false, 'attr' => ['class' => 'reg rounded form-control', 'id' =>"numero"], 'label' => 'Numéro'])
+            ->add('Etage' ,NumberType::class,[ 'required' => false, 'attr' => ['class' => 'reg rounded form-control', 'id' =>"etage"], 'label' => 'Étage'])
+            ->add('Entreprise',EntityType::class,[
                 'class'=>Entreprise::class,
                 'attr' => ['class' => 'reg rounded form-control'],
                 'choice_label'=>'Nom',

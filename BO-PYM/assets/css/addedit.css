@@ -40,11 +40,14 @@
 }
 
 label{
-    margin-top: 20px;
+    margin-top: 0px;
 }
 
 .btns{
     margin-top: 30px;
+}
+.form-check{
+    margin-bottom: 10px;
 }
 @import '../../node_modules/bootstrap/dist/css/bootstrap.css';
 @import './layout.css';

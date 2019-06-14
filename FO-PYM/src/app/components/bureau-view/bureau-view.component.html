@@ -6,7 +6,7 @@
           <div class="row">
             {{item.entreprise}}
           </div>
-          <div class="row">
+          <div class="row" *ngIf="item.etage != null">
             étage: {{item.etage}} | numéro: {{item.numero}}
           </div>
         </div>

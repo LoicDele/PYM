@@ -140,7 +140,7 @@
                                     <div class="btn-group action">
                                         <button aria-expanded="false" aria-haspopup="true" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" type="button">Action</button>
                                         <div class="dropdown-menu dropdown-menu-right">
-                                            <a class="dropdown-item btn rounded" href="{{path('batiment_add_bureau',{'id':batiment.id})}}">Ajouter un bureau</a>
+                                            <a class="dropdown-item btn rounded" href="{{path('batiment_add_bureau',{'id':batiment.id})}}">Ajouter une entreprise</a>
                                             {% if app.user.role =="Admin" %}
                                                 <a class="dropdown-item btn rounded" href="{{path('batiment_edit',{'id':batiment.id})}}">Modifier</a>
                                                 <a class="dropdown-item btn rounded" onclick="return confirm('Êtes vous sûr de vouloir supprimer cet élèment?')" href="{{path('batiment_delete',{'id':batiment.id})}}">Supprimer</a>
@@ -154,18 +154,18 @@
                                     <table class="table table-stripped rounded">
                                         {% if batiment.Bureaux|length==0 %}
                                             <tr>
-                                                <td>Pas encore de bureau créé pour ce bâtiment</td>
+                                                <td>Pas encore d'entreprise ajoutée pour ce bâtiment</td>
                                                 <td>
                                                     <div class="btn-group action">
                                                         <button class="btn btn-secondary rounded" aria-expanded="false" aria-haspopup="true" type="button">
-                                                            <a class="btn rounded" href="{{path('batiment_add_bureau',{'id':batiment.id})}}">Ajouter un bureau</a>
+                                                            <a class="btn rounded" href="{{path('batiment_add_bureau',{'id':batiment.id})}}">Ajouter une entreprise</a>
                                                         </button>
                                                     </div>
                                                 </td>
                                             </tr>
                                         {% else %}
                                             <thead class="burHead">
-                                                <th scope="col">Bureaux</th class="bureaux-index">
+                                                <th scope="col">Entreprises</th class="bureaux-index">
                                                 <th scope="col">Nom</th>
                                                 <th scope="col">Etage</th>
                                                 <th scope="col">Numéro</th>
