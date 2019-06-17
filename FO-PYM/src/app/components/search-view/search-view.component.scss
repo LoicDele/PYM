@@ -13,7 +13,9 @@
 }
 
 .entreprises{
-  margin-top: 1%;
+  margin-top: 2%;
+  max-height: 30vh;
+  overflow-y: scroll;
 }
 
 .searchbar{

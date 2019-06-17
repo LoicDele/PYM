@@ -7,7 +7,7 @@
     </a>
     <div class="modal-title col-8">
       <!-- <img src="assets/icon/1259px-Twitter_Bird.svg.png" id="logo" class="img-fluid" alt="Responsive image" height="50%" width="50%"> -->
-      <h3 class="strong">Recherche d'entreprise</h3>
+      <h4 class="strong">Entreprises</h4>
     </div>
     <a class="close col-2" data-dismiss="modal" aria-label="Close" [routerLink]="['']"
       routerLinkActive="router-link-active" (click)="deZoom()">
@@ -15,7 +15,7 @@
     </a>
   </div>
   <div class="modal-body">
-    <input class="form-control mr-sm-2 searchbar" type="search" placeholder="Rechercher une entreprise" list="result"
+    <input class="form-control mr-sm-2 searchbar" type="search" placeholder="Rechercher" list="result"
       #searchbar>
     <ul class="list-group entreprises">
       <li *ngFor="let item of entreprises | searchbar : searchbar.value" class="list-group-item">

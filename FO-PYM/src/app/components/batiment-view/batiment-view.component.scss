@@ -7,6 +7,8 @@
   background: white;
   margin-left: 10%;
   margin-top: 5%;
+  padding-bottom: 30px;
+  margin-bottom: 20px;
 }
 
 .down{
@@ -24,7 +26,7 @@
 .arrow-data{
   background-image: url("/arrow.png");
   background-size: contain;
-  -webkit-transition: all 0.5s; 
+  -webkit-transition: all 0.5s;
   -moz-transition: all 0.5s;
   -ms-transition: all 0.5s;
   -o-transition: all 0.5s;
@@ -52,6 +54,8 @@
     float: none;
     margin: 0 auto;
     margin-top: 5%;
+    padding-bottom: 30px;
+    margin-bottom: 20px;
   }
   .down{
     text-align: left;

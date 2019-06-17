@@ -22,15 +22,17 @@ export class SearchViewComponent implements OnInit {
 
   }
   ngOnInit() {
-    this.subscriptionEntreprise = this.entrepriseService.subjectEntreprises.subscribe(res => { this.entreprises = res});
+    this.subscriptionEntreprise = this.entrepriseService.subjectEntreprises.subscribe(res => { this.entreprises = res });
     this.entrepriseService.getEntrepriseByHTTP();
+    $(".data").css('height', '100%');
   }
 
   ngOnDestroy() {
     this.subscriptionEntreprise.unsubscribe();
-    var newHeight = 0.05 * $(window).height();
+    var newHeight = 56;
     $(".data").animate({ top: newHeight });
     $(".arrow-data").removeClass('rotate');
+    $(".data").css('height', '');
   }
 
   focus(id: number) {
@@ -39,7 +41,7 @@ export class SearchViewComponent implements OnInit {
 
   deZoom() {
     this.interactionService.dezoomBatiment();
-    var newHeight = 0.05 * $(window).height();
+    var newHeight = 56;
     $(".data").animate({ top: newHeight });
     $(".arrow-data").removeClass('rotate');
   }
@@ -49,7 +51,7 @@ export class SearchViewComponent implements OnInit {
       this.toogle = false;
       var windowHeight = $(window).height();
       var modalHeight = 0;
-      var offset = 150;
+      var offset = 100;
 
       var newHeight = windowHeight - (modalHeight + offset);
       $(".data").animate({ top: newHeight });
@@ -58,7 +60,7 @@ export class SearchViewComponent implements OnInit {
     else {
       this.toogle = true;
       var windowHeight = $(window).height();
-      var newHeight = 0.05 * windowHeight;
+      var newHeight = 56;
       $(".data").animate({ top: newHeight });
       $(".arrow-data").removeClass('rotate');
     }
