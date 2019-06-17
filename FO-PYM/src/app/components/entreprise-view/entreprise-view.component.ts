@@ -27,28 +27,30 @@ export class EntrepriseViewComponent implements OnInit, OnDestroy {
       this.subscriptionEntreprise = this.entrepriseService.subjectEntreprise.subscribe(res => { this.entreprise = res; });
       this.entrepriseService.getEntrepriseById(+this.route.snapshot.params['id']);
     });
+    $(".data").css('height','100%');
   }
 
-  ngOnDestroy() {
-    this.subscriptionEntreprise.unsubscribe();
-    var newHeight = 0.05 * $(window).height();
-    $(".data").animate({ top: newHeight });
-    $(".arrow-data").removeClass('rotate');
-  }
+ngOnDestroy() {
+  this.subscriptionEntreprise.unsubscribe();
+  var newHeight = 56;
+  $(".data").animate({top: newHeight});
+  $(".arrow-data").removeClass('rotate');
+  $(".data").css('height','');
+}
 
-  deZoom() {
-    this.interactionService.dezoomBatiment();
-    var newHeight = 0.05 * $(window).height();
-    $(".data").animate({ top: newHeight });
-    $(".arrow-data").removeClass('rotate');
-  }
+deZoom(){
+  this.interactionService.dezoomBatiment();
+  var newHeight = 56;
+  $(".data").animate({top: newHeight});
+  $(".arrow-data").removeClass('rotate');
+}
 
-  hideInfos() {
-    if (this.toogle) {
-      this.toogle = false;
-      var windowHeight = $(window).height();
-      var modalHeight = 0;
-      var offset = 150;
+hideInfos(){
+  if(this.toogle){
+    this.toogle = false;
+    var windowHeight = $(window).height();
+    var modalHeight = 0;
+    var offset = 100;
 
       var newHeight = windowHeight - (modalHeight + offset);
       $(".data").animate({ top: newHeight });
@@ -61,5 +63,12 @@ export class EntrepriseViewComponent implements OnInit, OnDestroy {
       $(".data").animate({ top: newHeight });
       $(".arrow-data").removeClass('rotate');
     }
+  }
+  else{
+    this.toogle = true;
+    var windowHeight = $(window).height();
+    var newHeight = 56;
+    $(".data").animate({top: newHeight});
+    $(".arrow-data").removeClass('rotate');
   }
 }
