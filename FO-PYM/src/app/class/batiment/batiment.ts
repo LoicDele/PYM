@@ -17,4 +17,5 @@ export class Batiment {
   formeParamétrique: string;
   type: string;
   adresse: string;
+  accessoire: boolean;
 }
