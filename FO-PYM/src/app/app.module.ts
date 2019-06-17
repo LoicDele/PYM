@@ -22,6 +22,7 @@ import { ContactfilterPipe } from './pipes/contact/contactfilter.pipe';
 import { BureaufilterPipe } from './pipes/bureau/bureaufilter.pipe';
 import { BatimentfilterPipe } from './pipes/batiment/batimentfilter.pipe';
 import { SearchbarPipe } from './pipes/searchbar/searchbar.pipe';
+import { SearchViewComponent } from './components/search-view/search-view.component';
 
 
 @NgModule({
@@ -39,6 +40,7 @@ import { SearchbarPipe } from './pipes/searchbar/searchbar.pipe';
     FooterViewComponent,
     CGUComponent,
     SearchbarPipe,
+    SearchViewComponent,
   ],
   imports: [
     BrowserModule,

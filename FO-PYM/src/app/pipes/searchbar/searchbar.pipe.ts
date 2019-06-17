@@ -8,7 +8,7 @@ export class SearchbarPipe implements PipeTransform {
 
   transform(entreprises: Array<Entreprise>, text: string): Array<Entreprise> {
     if (!text) {
-      return [];
+      return entreprises;
     }
     if (!entreprises) {
       return [];

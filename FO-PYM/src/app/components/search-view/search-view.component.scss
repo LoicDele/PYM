@@ -1,0 +1,112 @@
+@import "../../../styles.scss";
+.modal-search{
+  position: relative;
+  width: 500px;
+  max-width: 90%;
+  background: white;
+  margin-left: 10%;
+  margin-top: 5%;
+}
+
+.modal-body{
+  margin-top: 2%;
+}
+
+.entreprises{
+  margin-top: 1%;
+}
+
+.searchbar{
+  border: 2px solid $semag-color-tertiary;
+  text-align: center;
+}
+
+.down{
+  text-align: left;
+  margin-left: 1%;
+  visibility: hidden;
+}
+
+.down button{
+  background: none;
+  border:none;
+  padding: 0;
+}
+
+.arrow-data{
+  background-image: url("/arrow.png");
+  background-size: contain;
+  -webkit-transition: all 0.5s;
+  -moz-transition: all 0.5s;
+  -ms-transition: all 0.5s;
+  -o-transition: all 0.5s;
+  transition: all 0.5s;
+}
+
+.down button:focus{
+  outline: none;
+}
+
+.rotate{
+  -webkit-transform: rotate(-180deg);
+  -moz-transform: rotate(-180deg);
+  -ms-transform: rotate(-180deg);
+  -o-transform: rotate(-180deg);
+  transform: rotate(-180deg);
+}
+
+@media only screen and (max-width: 1280px){
+  .modal-search{
+    position: relative;
+    width: 500px;
+    max-width: 90%;
+    background: white;
+    float: none;
+    margin: 0 auto;
+    margin-top: 5%;
+  }
+  .down{
+    text-align: left;
+    margin-left: 1%;
+    visibility: visible;
+  }
+}
+
+.modal-header{
+  background: whitesmoke;
+}
+
+.modal-title{
+  text-align: center;
+}
+.close{
+  text-align: right;
+  margin-right: 1%;
+}
+
+.list-group{
+  margin-bottom: 1%;
+}
+
+a{
+  color: black;
+
+}
+a:hover{
+  color: white;
+  font-size: 120%;
+  text-decoration: none;
+}
+
+li{
+  margin-top: 1px;
+}
+
+li:hover{
+  background: $semag-color-tertiary;
+}
+
+.logo-entreprise{
+  max-height: 32px;
+  max-width: 32px;
+}

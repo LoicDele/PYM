@@ -1,32 +1,29 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Router, ActivatedRoute, ParamMap } from '@angular/router';
-import { EntrepriseService } from 'src/app/services/entreprise-service/entreprise.service';
+import { Component, OnInit } from '@angular/core';
 import { Entreprise } from 'src/app/class/entreprise/entreprise';
 import { Subscription } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { InteractionService } from '../../services/interaction-service/interaction.service';
+import { EntrepriseService } from 'src/app/services/entreprise-service/entreprise.service';
+import { ActivatedRoute } from '@angular/router';
+import { InteractionService } from 'src/app/services/interaction-service/interaction.service';
 import * as $ from 'jquery';
 
 @Component({
-  selector: 'app-entreprise-view',
-  templateUrl: './entreprise-view.component.html',
-  styleUrls: ['./entreprise-view.component.scss']
+  selector: 'app-search-view',
+  templateUrl: './search-view.component.html',
+  styleUrls: ['./search-view.component.scss']
 })
-export class EntrepriseViewComponent implements OnInit, OnDestroy {
-  entreprise: Entreprise;
+export class SearchViewComponent implements OnInit {
+
+  entreprises: Entreprise[];
   urlEntreprise: string = environment.sharedfolder + "logos/";
   subscriptionEntreprise: Subscription;
-  idEnt: number;
   toogle = true;
-  constructor(private entrepriseService: EntrepriseService, private route: ActivatedRoute, private interactionService: InteractionService) {
+  constructor(private entrepriseService: EntrepriseService, private interactionService: InteractionService) {
 
   }
   ngOnInit() {
-    this.route.params.subscribe(param => {
-      this.idEnt = +this.route.snapshot.params['id'];
-      this.subscriptionEntreprise = this.entrepriseService.subjectEntreprise.subscribe(res => { this.entreprise = res; });
-      this.entrepriseService.getEntrepriseById(+this.route.snapshot.params['id']);
-    });
+    this.subscriptionEntreprise = this.entrepriseService.subjectEntreprises.subscribe(res => { this.entreprises = res});
+    this.entrepriseService.getEntrepriseByHTTP();
   }
 
   ngOnDestroy() {
@@ -34,6 +31,10 @@ export class EntrepriseViewComponent implements OnInit, OnDestroy {
     var newHeight = 0.05 * $(window).height();
     $(".data").animate({ top: newHeight });
     $(".arrow-data").removeClass('rotate');
+  }
+
+  focus(id: number) {
+    this.interactionService.zoomBatiment(id.toString());
   }
 
   deZoom() {
