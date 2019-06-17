@@ -15,19 +15,16 @@
     </a>
   </div>
   <div class="modal-body">
-    <input class="form-control mr-sm-2 searchbar" type="search" placeholder="Rechercher" list="result"
-      #searchbar>
+    <input class="form-control mr-sm-2 searchbar" type="search" placeholder="Rechercher" list="result" #searchbar>
     <ul class="list-group entreprises">
       <li *ngFor="let item of entreprises | searchbar : searchbar.value" class="list-group-item">
         <a [routerLink]="['/entreprise', item.id]" class="link" (click)="focus(item.idBatiment)">
           <div class="row">
-            <div class="col-sm-6">
+            <div class="col-xs-2 logo">
+              <img class="img-fluid logo-entreprise" src="{{urlEntreprise}}{{item.logo}}" />
+            </div>
+            <div class="col-xs-10">
               {{item.nom}}
-            </div>
-            <div class="col-sm-2">
-            </div>
-            <div class="col-sm-4">
-              <img class="img-fluid logo-entreprise" src="{{urlEntreprise}}{{item.logo}}"/>
             </div>
           </div>
         </a>
