@@ -11,18 +11,20 @@ import { ContactViewComponent } from './components/contact-view/contact-view.com
 import { BatimentViewComponent } from './components/batiment-view/batiment-view.component';
 import { BureauViewComponent } from './components/bureau-view/bureau-view.component';
 import { FooterViewComponent } from './components/footer-view/footer-view.component';
-import { CGUComponent } from './components/cgu/cgu.component';
+import { SearchViewComponent } from './components/search-view/search-view.component';
+import { InformationViewComponent } from './components/information-view/information-view.component';
+
 //Services
 import {EntrepriseService} from './services/entreprise-service/entreprise.service';
 import { ContactService } from './services/contact-service/contact.service';
 import { BatimentService } from './services/batiment-service/batiment.service';
 import { BureauService } from './services/bureau-service/bureau.service';
+
 //Pipes
 import { ContactfilterPipe } from './pipes/contact/contactfilter.pipe';
 import { BureaufilterPipe } from './pipes/bureau/bureaufilter.pipe';
 import { BatimentfilterPipe } from './pipes/batiment/batimentfilter.pipe';
 import { SearchbarPipe } from './pipes/searchbar/searchbar.pipe';
-import { SearchViewComponent } from './components/search-view/search-view.component';
 
 
 @NgModule({
@@ -38,9 +40,9 @@ import { SearchViewComponent } from './components/search-view/search-view.compon
     BureaufilterPipe,
     BatimentfilterPipe,
     FooterViewComponent,
-    CGUComponent,
     SearchbarPipe,
     SearchViewComponent,
+    InformationViewComponent,
   ],
   imports: [
     BrowserModule,

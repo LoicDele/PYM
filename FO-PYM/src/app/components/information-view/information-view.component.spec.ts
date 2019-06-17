@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CGUComponent } from './cgu.component';
+import { InformationViewComponent } from './information-view.component';
 
-describe('CGUComponent', () => {
-  let component: CGUComponent;
-  let fixture: ComponentFixture<CGUComponent>;
+describe('InformationViewComponent', () => {
+  let component: InformationViewComponent;
+  let fixture: ComponentFixture<InformationViewComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CGUComponent ]
+      declarations: [ InformationViewComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CGUComponent);
+    fixture = TestBed.createComponent(InformationViewComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
