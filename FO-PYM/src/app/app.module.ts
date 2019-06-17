@@ -10,6 +10,8 @@ import { EntrepriseViewComponent } from './components/entreprise-view/entreprise
 import { ContactViewComponent } from './components/contact-view/contact-view.component';
 import { BatimentViewComponent } from './components/batiment-view/batiment-view.component';
 import { BureauViewComponent } from './components/bureau-view/bureau-view.component';
+import { FooterViewComponent } from './components/footer-view/footer-view.component';
+import { CGUComponent } from './components/cgu/cgu.component';
 //Services
 import {EntrepriseService} from './services/entreprise-service/entreprise.service';
 import { ContactService } from './services/contact-service/contact.service';
@@ -19,6 +21,7 @@ import { BureauService } from './services/bureau-service/bureau.service';
 import { ContactfilterPipe } from './pipes/contact/contactfilter.pipe';
 import { BureaufilterPipe } from './pipes/bureau/bureaufilter.pipe';
 import { BatimentfilterPipe } from './pipes/batiment/batimentfilter.pipe';
+import { SearchbarPipe } from './pipes/searchbar/searchbar.pipe';
 
 
 @NgModule({
@@ -33,6 +36,9 @@ import { BatimentfilterPipe } from './pipes/batiment/batimentfilter.pipe';
     BureauViewComponent,
     BureaufilterPipe,
     BatimentfilterPipe,
+    FooterViewComponent,
+    CGUComponent,
+    SearchbarPipe,
   ],
   imports: [
     BrowserModule,

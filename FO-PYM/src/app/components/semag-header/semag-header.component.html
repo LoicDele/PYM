@@ -32,9 +32,12 @@
         </div>
       </li>
     </ul>
-    <form class="form-inline my-2 my-lg-0 ">
-      <input class="form-control mr-sm-2 searchbar" type="text" id="searchEnt" placeholder="rechercher une entreprise">
-      <button class="btn btn-semag my-2 my-sm-0" type="submit">Rechercher</button>
-    </form>
+    <div class="form-inline my-2 my-lg-0 search">
+      <input class="form-control mr-sm-2 searchbar" type="search" placeholder="Rechercher une entreprise" list="result" #searchbar>
+      <datalist id="result">
+        <option *ngFor="let elt of entreprises | searchbar : searchbar.value" value="{{elt.nom}}" (click)="go(elt.id)">
+        </option>
+      </datalist>
+    </div>
   </div>
 </nav>

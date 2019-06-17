@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 import { BatimentService } from '../../services/batiment-service/batiment.service';
 import { Batiment } from 'src/app/class/batiment/batiment';
 import { InteractionService } from '../../services/interaction-service/interaction.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-semag-header',
@@ -17,11 +18,11 @@ export class SemagHeaderComponent implements OnInit {
   subscriptionEntreprise: Subscription;
   subscriptionBatiment: Subscription;
   show: boolean = false;
-
+  searchtext: string;
   toggleCollapse() {
     this.show = !this.show;
   }
-  constructor(private entrepriseService: EntrepriseService, private batimentService: BatimentService, private interactionService: InteractionService) {
+  constructor(private entrepriseService: EntrepriseService, private batimentService: BatimentService, private interactionService: InteractionService, private router:Router) {
   }
   ngOnInit() {
 
@@ -32,6 +33,9 @@ export class SemagHeaderComponent implements OnInit {
   }
   focus(id: number) {
     this.interactionService.zoomBatiment(id.toString());
+  }
+  go(id: number) {
+    this.router.navigate(['/entreprise',id])
   }
 }
 
