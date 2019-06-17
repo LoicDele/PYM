@@ -12,7 +12,9 @@
 .data{
   z-index: 1;
   position: fixed;
-  margin-top: 50px;
+  // margin-top: 50px;
   width: 100%;
+  top: 56px;
+  overflow-y: scroll;
 }
 

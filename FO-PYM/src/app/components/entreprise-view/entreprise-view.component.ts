@@ -27,18 +27,20 @@ export class EntrepriseViewComponent implements OnInit, OnDestroy {
       this.subscriptionEntreprise = this.entrepriseService.subjectEntreprise.subscribe(res => { this.entreprise = res; });
       this.entrepriseService.getEntrepriseById(+this.route.snapshot.params['id']);
     });
+    $(".data").css('height','100%');
   }
 
 ngOnDestroy() {
   this.subscriptionEntreprise.unsubscribe();
-  var newHeight = 0.05*$(window).height();
+  var newHeight = 56;
   $(".data").animate({top: newHeight});
   $(".arrow-data").removeClass('rotate');
+  $(".data").css('height','');
 }
 
 deZoom(){
   this.interactionService.dezoomBatiment();
-  var newHeight = 0.05*$(window).height();
+  var newHeight = 56;
   $(".data").animate({top: newHeight});
   $(".arrow-data").removeClass('rotate');
 }
@@ -48,7 +50,7 @@ hideInfos(){
     this.toogle = false;
     var windowHeight = $(window).height();
     var modalHeight = 0;
-    var offset = 150;
+    var offset = 100;
 
     var newHeight = windowHeight - (modalHeight + offset);
     $(".data").animate({top: newHeight});
@@ -57,7 +59,7 @@ hideInfos(){
   else{
     this.toogle = true;
     var windowHeight = $(window).height();
-    var newHeight = 0.05*windowHeight;
+    var newHeight = 56;
     $(".data").animate({top: newHeight});
     $(".arrow-data").removeClass('rotate');
   }
