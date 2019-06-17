@@ -171,15 +171,17 @@ export class SemagViewComponent implements OnInit {
           //     1000
           //   )
           // );
-          makeOverOut(object[0], bat.scale,bat.scale,bat.scale);
-          object[0].actionManager.registerAction(
-            new BABYLON.ExecuteCodeAction(
-              {
-                trigger: BABYLON.ActionManager.OnPickTrigger
-              },
-              () => {this.router.navigate(['/batiment',bat.id]);}
-            )
-          );
+          if(!bat.accessoire){
+            makeOverOut(object[0], bat.scale,bat.scale,bat.scale);
+            object[0].actionManager.registerAction(
+              new BABYLON.ExecuteCodeAction(
+                {
+                  trigger: BABYLON.ActionManager.OnPickTrigger
+                },
+                () => {this.router.navigate(['/batiment',bat.id]);}
+              )
+            );
+          };
         });
       }
       else{
@@ -213,15 +215,17 @@ export class SemagViewComponent implements OnInit {
           this._scene.meshes[this._scene.meshes.length-1].material = texture;
           this._scene.meshes[this._scene.meshes.length-1].actionManager = new BABYLON.ActionManager(this._scene);
           pos(this._scene.meshes[this._scene.meshes.length-1], bat.x, bat.y, altitude, bat.scale, bat.angle);
-          makeOverOut(this._scene.meshes[this._scene.meshes.length-1], bat.scale, bat.scale, bat.scale);
-          this._scene.meshes[this._scene.meshes.length-1].actionManager.registerAction(
-            new BABYLON.ExecuteCodeAction(
-              {
-                trigger: BABYLON.ActionManager.OnPickTrigger
-              },
-              () => {this.router.navigate(['/batiment',bat.id]);}
-            )
-          );
+          if(!bat.accessoire){
+            makeOverOut(this._scene.meshes[this._scene.meshes.length-1], bat.scale, bat.scale, bat.scale);
+            this._scene.meshes[this._scene.meshes.length-1].actionManager.registerAction(
+              new BABYLON.ExecuteCodeAction(
+                {
+                  trigger: BABYLON.ActionManager.OnPickTrigger
+                },
+                () => {this.router.navigate(['/batiment',bat.id]);}
+              )
+            );
+          }
         }
         //console.log(this._scene.meshes);
       }

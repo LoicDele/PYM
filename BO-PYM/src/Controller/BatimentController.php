@@ -305,6 +305,7 @@ class BatimentController extends AbstractController
                         'type' => $item->getTypeBatiment()->getNom(),
                         'formeParamétrique' => $item->getFormeParametrique()->getNom(),
                         'adresse' => $item->getAdresse(),
+                        'accessoire' => $item->getAccessoire(),
                     ));
                 }
                 else{
@@ -326,6 +327,7 @@ class BatimentController extends AbstractController
                         'type' => $item->getTypeBatiment()->getNom(),
                         'formeParamétrique' => null,
                         'adresse' => $item->getAdresse(),
+                        'accessoire' => $item->getAccessoire(),
                     ));
 
                 }
