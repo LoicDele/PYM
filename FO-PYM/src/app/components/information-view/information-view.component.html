@@ -1,0 +1,31 @@
+<div class="modal-info rounded">
+  <div class="modal-header col-12">
+    <a class="infosHide down col-2" data-dismiss="modal" aria-label="Down" (click)="hideInfos()">
+      <button class="infosHide" type="button" aria-controls="collapsibleNavId" aria-expanded="false">
+        <span class="arrow-data navbar-toggler-icon" aria-hidden="true"></span>
+      </button>
+    </a>
+    <div class="modal-title col-8">
+      <!-- <img src="assets/icon/1259px-Twitter_Bird.svg.png" id="logo" class="img-fluid" alt="Responsive image" height="50%" width="50%"> -->
+      <h4 class="strong">Informations</h4>
+    </div>
+    <a class="close col-2" data-dismiss="modal" aria-label="Close" [routerLink]="['']"
+      routerLinkActive="router-link-active" (click)="deZoom()">
+      <span aria-hidden="true">&times;</span>
+    </a>
+  </div>
+  <div class="modal-body">
+    <div class="contact">Nous contacter:</div>
+    <a href="mailto:contact@map-pym.com" class="btn btn-contact">contact@map-pym.com</a>
+    <a class="btn cgu" href="#">Conditions générales d'utilisation</a>
+    <div class="info">
+      <p>
+        Ce site a été développé par un groupe d'élèves de l'école d'ingénieur des Mines de Saint Étienne dans le cadre d'un projet commun avec la SEMAG.
+      </p>
+      <div class="authors">
+        <h5 class="authors-title">Auteurs</h5>
+        <p>Adrien BENDIMERAD<br>  Loïc DELEFORTERIE<br> Yuan FENG<br> Paul GRANDAMME<br>  Florian TÉSOR</p>
+      </div>
+    </div>
+  </div>
+</div>
