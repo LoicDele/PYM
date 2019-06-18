@@ -99,7 +99,8 @@ export class SemagViewComponent implements OnInit {
           BABYLON.ActionManager.OnPickTrigger,
           this._camera,
           'radius',
-          Math.max(mesh.getBoundingInfo().boundingBox.extendSize.x, mesh.getBoundingInfo().boundingBox.extendSize.y, mesh.getBoundingInfo().boundingBox.extendSize.z)*10/(Math.tan(this._camera.fov/2)*this._engine.getAspectRatio(this._camera)),
+          //Math.max(mesh.getBoundingInfo().boundingBox.extendSize.x, mesh.getBoundingInfo().boundingBox.extendSize.y, mesh.getBoundingInfo().boundingBox.extendSize.z)*10/(Math.tan(this._camera.fov/2)*this._engine.getAspectRatio(this._camera)),
+          65,
           1000
         )
       );
@@ -260,7 +261,7 @@ export class SemagViewComponent implements OnInit {
         value: this._camera.target
       });
       zoom_cam_keys.push({
-        frame: 1*frameRate,
+        frame: 2*frameRate,
         value: new BABYLON.Vector3(target_zoom.position.x, target_zoom.position.y, target_zoom.position.z)
       });
       zoom_cam.setKeys(zoom_cam_keys);
@@ -272,7 +273,7 @@ export class SemagViewComponent implements OnInit {
         value: this._camera.beta
       });
       zoom_pos_cam_beta_keys.push({
-        frame: 1*frameRate,
+        frame: 2*frameRate,
         value: 1.15
       });
       zoom_pos_beta.setKeys(zoom_pos_cam_beta_keys);
@@ -284,11 +285,12 @@ export class SemagViewComponent implements OnInit {
         value: this._camera.radius
       });
       zoom_pos_cam_radius_keys.push({
-        frame: 1*frameRate,
-        value: Math.max(target_zoom.getBoundingInfo().boundingBox.extendSize.x, target_zoom.getBoundingInfo().boundingBox.extendSize.y, target_zoom.getBoundingInfo().boundingBox.extendSize.z)*10/(Math.tan(this._camera.fov/2)*this._engine.getAspectRatio(this._camera))
+        frame: 2*frameRate,
+        //value: Math.max(target_zoom.getBoundingInfo().boundingBox.extendSize.x, target_zoom.getBoundingInfo().boundingBox.extendSize.y, target_zoom.getBoundingInfo().boundingBox.extendSize.z)*10/(Math.tan(this._camera.fov/2)*this._engine.getAspectRatio(this._camera))
+        value: 65,
       });
       zoom_pos_radius.setKeys(zoom_pos_cam_radius_keys);
-      this._scene.beginDirectAnimation(this._camera, [zoom_cam, zoom_pos_beta, zoom_pos_radius], 0, 1*frameRate, false);
+      this._scene.beginDirectAnimation(this._camera, [zoom_cam, zoom_pos_beta, zoom_pos_radius], 0, 2*frameRate, false);
     }
   }
 
@@ -301,7 +303,7 @@ export class SemagViewComponent implements OnInit {
       value: this._camera.target
     });
     dezoom_cam_keys.push({
-      frame: 1*frameRate,
+      frame: 2*frameRate,
       value: new BABYLON.Vector3(0,0,0)
     });
     dezoom_cam.setKeys(dezoom_cam_keys);
@@ -313,11 +315,11 @@ export class SemagViewComponent implements OnInit {
       value: this._camera.position
     });
     pos_cam_keys.push({
-      frame: 1*frameRate,
+      frame: 2*frameRate,
       value: new BABYLON.Vector3(160,162,-195)
     });
     pos_cam.setKeys(pos_cam_keys);
 
-    this._scene.beginDirectAnimation(this._camera, [dezoom_cam, pos_cam], 0, 1*frameRate, false);
+    this._scene.beginDirectAnimation(this._camera, [dezoom_cam, pos_cam], 0, 2*frameRate, false);
   }
 }

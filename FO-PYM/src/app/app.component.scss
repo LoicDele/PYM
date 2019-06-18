@@ -16,6 +16,12 @@
   // width: 100%;
   top: 56px;
   overflow-y: scroll;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.data::-webkit-scrollbar{
+  visibility: hidden;
 }
 
 @media only screen and (max-width: 1280px){
@@ -26,6 +32,8 @@
     width: 100%;
     top: 56px;
     overflow-y: scroll;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
   }
 }
 .footer{
