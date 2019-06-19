@@ -10,7 +10,7 @@ export class BatimentfilterPipe implements PipeTransform {
     if (!batiments) {
       return null;
     }
-    return batiments.filter(item => item.type.includes("Batiment") || item.type.includes("Forme Paramétrique"));
+    return batiments.filter(item => (item.type.includes("Batiment") || item.type.includes("Forme Paramétrique")) && (item.accessoire == false));
   }
 
 }

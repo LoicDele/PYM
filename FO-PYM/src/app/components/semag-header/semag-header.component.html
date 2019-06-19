@@ -26,9 +26,9 @@
         <a class="nav-link dropdown-toggle" href="#" id="dropdownEqui" data-toggle="dropdown" aria-haspopup="true"
           aria-expanded="false">Equipements</a>
         <div class="dropdown-menu" aria-labelledby="dropdownEqui">
-          <a href="" class="dropdown-item dropdown-picture">Arrêt de bus</a>
-          <a href="" class="dropdown-item dropdown-picture">IRVE</a>
-          <a href="" class="dropdown-item dropdown-picture">PAV</a>
+          <button  class="dropdown-item dropdown-picture" (click)="equipement(0)" *ngIf="this.routertab[0] != 0">Arrêt de bus</button>
+          <button class="dropdown-item dropdown-picture" (click)="equipement(1)" *ngIf="this.routertab[1] != 0">IRVE</button>
+          <button  class="dropdown-item dropdown-picture" (click)="equipement(2)" *ngIf="this.routertab[2] != 0">PAV</button>
         </div>
       </li>
     </ul>

@@ -19,23 +19,42 @@ export class SemagHeaderComponent implements OnInit {
   subscriptionBatiment: Subscription;
   show: boolean = false;
   searchtext: string;
+  routertab = [0,0,0];
   toggleCollapse() {
     this.show = !this.show;
   }
-  constructor(private entrepriseService: EntrepriseService, private batimentService: BatimentService, private interactionService: InteractionService, private router:Router) {
+  constructor(private entrepriseService: EntrepriseService, private batimentService: BatimentService, private interactionService: InteractionService, private router: Router) {
   }
   ngOnInit() {
 
     this.subscriptionEntreprise = this.entrepriseService.subjectEntreprises.subscribe(res => { this.entreprises = res; });
-    this.subscriptionBatiment = this.batimentService.subjectBatiments.subscribe(res => { this.batiments = res; });
+    this.subscriptionBatiment = this.batimentService.subjectBatiments.subscribe(res => { this.batiments = res; this.initroutertab(); });
     this.entrepriseService.getEntrepriseByHTTP();
     this.batimentService.getBatimentByHTTP();
+
   }
   focus(id: number) {
     this.interactionService.zoomBatiment(id.toString());
   }
   go(id: number) {
-    this.router.navigate(['/entreprise',id])
+    this.router.navigate(['/entreprise', id])
+  }
+  equipement(id: number) {
+    this.router.navigate(['/batiment', this.routertab[id]])
+    this.focus(this.routertab[id]);
+  }
+  initroutertab(){
+    for (let bat of this.batiments) {
+      if(bat.type == "IRVE"){
+        this.routertab[1] = bat.id;
+      }
+      if(bat.type == "PAV"){
+        this.routertab[2] = bat.id;
+      }
+      if(bat.type == "Arret de bus"){
+        this.routertab[0] = bat.id;
+      }
+    }
   }
 }
 
