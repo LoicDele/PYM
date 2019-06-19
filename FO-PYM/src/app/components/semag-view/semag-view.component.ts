@@ -130,7 +130,6 @@ export class SemagViewComponent implements OnInit {
 
     // Attach the camera to the canvas.
     this._camera.attachControl(this._canvas, false);
-    console.log(this._camera.position);
 
     // Create a basic light, aiming 0,1,0, light intensity 0.7
     //this._light = new BABYLON.HemisphericLight('light1', new BABYLON.Vector3(0, 10, 0), this._scene);
