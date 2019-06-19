@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
-  api: 'http://admin.map-pym.com/api/',
-  sharedfolder: 'http://map-pym.com/sharedfolder/',
+  api: 'https://admin.map-pym.com/api/',
+  sharedfolder: 'https://map-pym.com/sharedfolder/',
 };
