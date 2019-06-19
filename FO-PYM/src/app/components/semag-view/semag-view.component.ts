@@ -181,6 +181,9 @@ export class SemagViewComponent implements OnInit {
                 () => {this.router.navigate(['/batiment',bat.id]);}
               )
             );
+          }
+          else{
+            object[0].freezeWorldMatrix();
           };
         });
       }
@@ -225,6 +228,9 @@ export class SemagViewComponent implements OnInit {
                 () => {this.router.navigate(['/batiment',bat.id]);}
               )
             );
+          }
+          else{
+            this._scene.meshes[this._scene.meshes.length-1].freezeWorldMatrix();
           }
         }
         //console.log(this._scene.meshes);
