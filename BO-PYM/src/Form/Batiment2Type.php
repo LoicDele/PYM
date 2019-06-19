@@ -23,7 +23,6 @@ class Batiment2Type extends AbstractType
         $builder
             ->add('Nom',TextType::class, ['attr' => ['class'=> 'form-control reg rounded']])
             ->add('Nb_etage',NumberType::class,[
-                'data'=>'0',
                 'attr' => ['class'=> 'reg form-control'],
                 'label' => "Nombre d'étages"
             ])
