@@ -18,17 +18,17 @@
     <div class="root description">
         {{batiment.description}}
     </div>
-    <div class="root adress">
+    <div class="root adress" *ngIf="batiment.type == 'Batiment' || batiment.type == 'Forme Paramétrique'">
       Adresse: {{batiment.adresse}}
     </div>
-    <div class="root floor">
+    <div class="root floor" *ngIf="batiment.type == 'Batiment' || batiment.type == 'Forme Paramétrique'">
       Nombre d'étages: {{batiment.nbEtage}}
     </div>
-    <div class="root handicap">
+    <div class="root handicap" *ngIf="batiment.type == 'Batiment' || batiment.type == 'Forme Paramétrique'">
         <div *ngIf="batiment.accesHandicape == true; else elseBlock">Accès handicapés: oui</div>
         <ng-template #elseBlock>Accès handicapés: non</ng-template>
     </div>
-    <div class="root entreprise">
+    <div class="root entreprise" *ngIf="batiment.type == 'Batiment' || batiment.type == 'Forme Paramétrique'">
       <app-bureau-view [idBat]="idBat"></app-bureau-view>
     </div>
   </div>
