@@ -23,7 +23,7 @@
     "babylonjs-loaders": "^3.3.0",
     "bootstrap": "^4.3.1",
     "core-js": "^2.5.4",
-    "jquery": "^3.3.1",
+    "jquery": "^3.5.0",
     "ngfor-pipe": "^1.0.0",
     "ngx-popover": "0.0.16",
     "ngx-smart-popover": "^1.0.5",
